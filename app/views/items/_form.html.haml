@@ -1,0 +1,28 @@
+= form_with scope: :item, url: items_path do |f|
+  = render "shared/errors", object: @item
+  %p
+    = f.label :Item
+    = f.text_field :title
+  %br
+    = f.label :Brand
+    = f.text_field :text
+  %br
+    = f.label :Name
+    = f.text_field :name
+  %br
+    = f.label :Color
+    = f.text_field :color
+  %br
+    = f.label :Size
+    = f.text_field :size
+  %br
+    = f.label :EAN
+    = f.text_field :ean
+  %br
+    = f.label :Article
+    = f.text_field :art
+  %br
+    = f.label :ItemPrice
+    = f.text_field :price
+  %br
+    =f.submit "Добавить"

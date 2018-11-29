@@ -1,0 +1,14 @@
+.container
+  %h1
+    All items
+    - @items.each do |item|
+      %tr
+        %td= item.item
+        %td= item.brand
+        %td= item.name
+        %td= item.color
+        %td= item.size
+        %td= item.art
+        %td= item.price
+        %a= link_to 'Show', item_path(item)
+        %hr
