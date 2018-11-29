@@ -1,11 +1,30 @@
-.container
-  %h1 Items
-  %p Name:
-  = @item.item
-  = @item.brand
-  = @item.name
-  = @item.color
-  = @item.size
-  = @item.art
-  = @item.price
+.jumbotron
+  .comtainer
+  .row
+    .col-md-3
+      %p
+        Item
+      %h2= @item.item
+    .col-sm-3
+      %p
+        Band
+      %h2= @item.brand
+    .col-sm-3
+      %p
+        Model
+      %h2= @item.name
+    .col-sm-3
+      color
+      = @item.color
+      size
+      = @item.size
+      article
+      = @item.art
+      price
+      = @item.price
+  .row
+    .col
+      = image_tag("furla_julia_bag.jpeg", size: "480x640")
+      = image_tag(@item.photo.url)
   = link_to 'back', items_path
+  %hr

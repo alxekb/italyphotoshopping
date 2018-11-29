@@ -9,6 +9,9 @@ gem 'tabler-rubygem'
 gem 'popper_js', '~> 1.9', '>= 1.9.9'
 gem 'high_voltage', '~> 3.1'
 gem "aws-sdk-s3", require: false
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick', '~> 4.3'
+gem 'rails_responsive_images'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use postgresql as the database for Active Record

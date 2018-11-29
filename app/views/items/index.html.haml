@@ -1,14 +1,11 @@
 .container
   %h1
     All items
+  .block
     - @items.each do |item|
-      %tr
-        %td= item.item
-        %td= item.brand
-        %td= item.name
-        %td= item.color
-        %td= item.size
-        %td= item.art
-        %td= item.price
-        %a= link_to 'Show', item_path(item)
-        %hr
+      = image_tag("furla_julia_bag.jpeg", size: "90x120")
+      = item.item
+      = item.brand
+      = item.name
+      = link_to 'Show', item_path(item)
+      %hr
