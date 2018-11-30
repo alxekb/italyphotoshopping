@@ -3,4 +3,6 @@
     = link_to "Italyphotoshopping", root_path, id: "logo"
     %nav
       %ul.nav.navbar-nav.navbar-right
-        = link_to "Товары", items_path
+        = link_to "Товары", items_path, class: 'nav-link'
+        = link_to "О нас", page_path('about'), class: 'nav-link'
+        = link_to "Контакты", page_path('contacts'), class: 'nav-link'

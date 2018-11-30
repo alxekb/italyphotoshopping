@@ -25,8 +25,8 @@
     = f.label :ItemPrice
     = f.text_field :price
   .field
-    = f.label :Image
-    = f.file_field :photo, multiple: true
+    = f.label :photo
+    = f.file_field :photos, multiple: true
     = f.hidden_field :photo_cache
   %br
-    =f.submit "Сохранить"
+    =f.submit "Сохранить", class: "btn btn-primary"
