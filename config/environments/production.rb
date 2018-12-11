@@ -5,7 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
   # If you want to use the credentials in the production environment, add the following to config/environments/production.rb
   config.require_master_key = true
-  
+
   # Set your active storage service to amazon:
   config.active_storage.service = :amazon
   # Eager load code on boot. This eager loads most of Rails and
@@ -46,7 +46,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  # config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
