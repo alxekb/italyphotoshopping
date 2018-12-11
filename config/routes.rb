@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  root 'welcome#index'
+  resources :bulletins
+  get 'order/show'
+  get 'order/create'
+  get 'order/new'
+  root 'items#index'
+  devise_for :models
   resources :items
-  get 'items/show'
-  get 'items/create'
-  get 'items/update'
+  resources :shop
+  resources :reviews
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

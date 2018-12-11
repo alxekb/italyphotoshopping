@@ -1,0 +1,10 @@
+.section
+  %h3 Отзыв Екатерины
+  %p Все было так круто, что вообще афигеть!
+.section
+  %h3 Отзыв Маррии
+  %p Наконец-то я смогла купить сумочку моей мечты!
+-#.section
+  - @reviews.each do |review|
+    %h2= review.author
+    %p= review.text

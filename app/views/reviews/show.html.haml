@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Index:
+  = @review.index
+%p
+  %b New:
+  = @review.new
+%p
+  %b Edit:
+  = @review.edit
+%p
+  %b Show:
+  = @review.show
+
+= link_to 'Edit', edit_review_path(@review)
+\|
+= link_to 'Back', reviews_path

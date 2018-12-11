@@ -3,7 +3,11 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-
+  # If you want to use the credentials in the production environment, add the following to config/environments/production.rb
+  config.require_master_key = true
+  
+  # Set your active storage service to amazon:
+  config.active_storage.service = :amazon
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -13,6 +17,9 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  # Devise gem needs to be configured with the actual host of the app.
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).

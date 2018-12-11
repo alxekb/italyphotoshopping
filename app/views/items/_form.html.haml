@@ -2,10 +2,10 @@
   = render "shared/errors", object: @item
   %p
     = f.label :Item
-    = f.text_field :title
+    = f.text_field :item
   %br
     = f.label :Brand
-    = f.text_field :text
+    = f.text_field :brand
   %br
     = f.label :Name
     = f.text_field :name
@@ -25,8 +25,7 @@
     = f.label :ItemPrice
     = f.text_field :price
   .field
-    = f.label :photo
-    = f.file_field :photos, multiple: true
-    = f.hidden_field :photo_cache
+    = f.label :image
+    = f.file_field :image
   %br
     =f.submit "Сохранить", class: "btn btn-primary"

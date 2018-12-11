@@ -1,3 +1,4 @@
 class Item < ApplicationRecord
-  mount_uploaders :photos, PhotoUploader
+  has_one_attached :image
+  belongs_to :model
 end

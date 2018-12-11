@@ -1,0 +1,19 @@
+%h1 Listing bulletins
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @bulletins.each do |bulletin|
+      %tr
+        %td= link_to 'Show', bulletin
+        %td= link_to 'Edit', edit_bulletin_path(bulletin)
+        %td= link_to 'Destroy', bulletin, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Bulletin', new_bulletin_path

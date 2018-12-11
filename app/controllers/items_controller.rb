@@ -31,8 +31,12 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+#    @bulletin = Bulletin.new()
+#    @bulletin.attachment(params[:bulletin][:attachment])
+#    @bulletin.save!
+    @item = current_model.items.build(item_params)
     @item.save
+#    @item.image.attach(params[:image])
     redirect_to @item
   end
 
@@ -40,12 +44,13 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @item = current_model.items.build
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:item, :brand, :name, :color, :size, :art, :price, :string, {photos: []})
+    params.require(:item).permit(:item, :brand, :name, :color,:size, :art, :ean, :price, :string, :image)
   end
 
 end
