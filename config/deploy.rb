@@ -1,42 +1,42 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+# lock "~> 3.11.0"
 
-set :application, 'italyphotoshopping'
-set :repo_url, 'git@github.com:alxekb/italyphotoshopping.git'
-set :puma_threads, [1, 2]
-set :puma_workers, 0
-set :deploy_to, "/home/ipsdeploy/#{fetch(:application)}"
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.error.log"
-set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :puma_preload_app, true
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/ckeditor_assets', 'node_modules', 'client/node_modules')
-set :keep_releases, 3
-set :bundle_gemfile, -> { release_path.join("Gemfile") }
+# set :application, 'italyphotoshopping'
+# set :repo_url, 'git@github.com:alxekb/italyphotoshopping.git'
+# set :puma_threads, [1, 2]
+# set :puma_workers, 0
+# set :deploy_to, "/home/ipsdeploy/#{fetch(:application)}"
+# set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+# set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+# set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+# set :puma_access_log, "#{release_path}/log/puma.error.log"
+# set :puma_error_log,  "#{release_path}/log/puma.access.log"
+# set :puma_preload_app, true
+# set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key')
+# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/ckeditor_assets', 'node_modules', 'client/node_modules')
+# set :keep_releases, 3
+# set :bundle_gemfile, -> { release_path.join("Gemfile") }
 
 set :rvm_ruby_version, '2.5.3'
 
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-    end
-  end
-
-  before :start, :make_dirs
-end
-namespace :deploy do
-
-#  before :restart, 'elastic:import'
-  after :publishing, :restart
-
-end
+# namespace :puma do
+#   desc 'Create Directories for Puma Pids and Socket'
+#   task :make_dirs do
+#     on roles(:app) do
+#       execute "mkdir #{shared_path}/tmp/sockets -p"
+#       execute "mkdir #{shared_path}/tmp/pids -p"
+#     end
+#   end
+#
+#   before :start, :make_dirs
+# end
+# namespace :deploy do
+#
+# #  before :restart, 'elastic:import'
+#   after :publishing, :restart
+#
+# end
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
