@@ -19,7 +19,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Devise gem needs to be configured with the actual host of the app.
-  config.action_mailer.default_url_options = { host: 'cryptic-hollows-47024.herokuapp.com', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'cryptic-hollows-47024.herokuapp.com' }
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
