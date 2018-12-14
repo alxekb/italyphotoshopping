@@ -59,14 +59,3 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-
-set :ec2_access_key_id, "AKIAJQPBVNOJMJNXAK2A"
-set :ec2_secret_access_key, "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"
-set :ec2_region, ["us-east-1"]
-
-ec2_role :web, {user: "italyphotoshopping"}
-ec2_role :app, {user: 'italyphotoshopping'}
-ec2_role :db,  {user: 'italyphotoshopping'}
-
-set :rails_env, :production
-set :branch, :master
