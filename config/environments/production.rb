@@ -5,7 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
   # If you want to use the credentials in the production environment, add the following to config/environments/production.rb
   config.require_master_key = true
-
+  config.config.read_encrypted_secrets = true
   # Set your active storage service to amazon:
   config.active_storage.service = :amazon
   # Eager load code on boot. This eager loads most of Rails and
@@ -19,11 +19,11 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Devise gem needs to be configured with the actual host of the app.
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'cryptic-hollows-47024.herokuapp.com', port: 3000 }
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
