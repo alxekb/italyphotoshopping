@@ -1,0 +1,27 @@
+%h1 Listing packages
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Item
+      %th Shipping type
+      %th Pup code
+      %th
+      %th
+      %th
+
+  %tbody
+    - @packages.each do |package|
+      %tr
+        %td= package.user_id
+        %td= package.item_id
+        %td= package.shipping_type
+        %td= package.pup_code
+        %td= link_to 'Show', package
+        %td= link_to 'Edit', edit_package_path(package)
+        %td= link_to 'Destroy', package, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Package', new_package_path

@@ -4,12 +4,12 @@ one:
   id: MyString
   integer: MyString
   item_id: 1
-  model_id: MyString
+  user_id: MyString
   integer: MyString
 
 two:
   id: MyString
   integer: MyString
   item_id: 1
-  model_id: MyString
+  user_id: MyString
   integer: MyString

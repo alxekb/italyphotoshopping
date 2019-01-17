@@ -1,0 +1,10 @@
+.container
+  %p Добро пожаловать в личный кабинет!
+  %h2
+    Hi
+    = @profile.name
+    !
+    %br
+    = link_to 'show profile', profile_path(@profile), class: 'btn btn-success'
+    = link_to 'show orders', orders_path, class: 'btn btn-info'
+    = link_to 'log out', destroy_user_session_path, class: 'btn btn-warning'

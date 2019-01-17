@@ -22,29 +22,51 @@
 #
 
 class ItemsController < ApplicationController
+  # validates :image, presence: true
+
   def index
     @items = Item.all
   end
 
   def show
     @item = Item.find(params[:id])
+    # if current.user.image.attached? @item.image
+    # else @item.image = image_tag ''
   end
 
   def create
 #    @bulletin = Bulletin.new()
 #    @bulletin.attachment(params[:bulletin][:attachment])
 #    @bulletin.save!
-    @item = current_model.items.build(item_params)
+    @item = current_user.items.build(item_params)
     @item.save
 #    @item.image.attach(params[:image])
     redirect_to @item
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
   def update
+    @item = Item.find(params[:id])
+    if @item.update_attributes(params[:item])
+      format.html  { redirect_to(@item,
+                    :notice => 'Item was successfully updated.') }
+    else
+      render :action => "edit"
+    end
+
   end
 
   def new
-    @item = current_model.items.build
+    @item = current_user.items.build
+  end
+
+  def destroy
+    @item = Item.find(params:[:id])
+    @item.destroy
+    redirect_to item_path(@item)
   end
 
   private

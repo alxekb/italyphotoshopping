@@ -1,4 +1,4 @@
 class Item < ApplicationRecord
   has_one_attached :image
-  belongs_to :model
+  belongs_to :order
 end

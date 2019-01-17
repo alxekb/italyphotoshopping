@@ -11,6 +11,7 @@ gem 'high_voltage', '~> 3.1'
 gem "aws-sdk-s3", require: false
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick', '~> 4.3'
+gem "factory_bot_rails", "~> 4.0"
 # https://rubygems.org/gems/devise
 gem 'devise', '~> 4.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -25,6 +26,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
+# https://www.rubydoc.info/github/stympy/faker#installing
+gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -34,7 +37,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
+# Use ActiveUser has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
@@ -52,9 +55,14 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+  gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => 'master'
+  end
   # gem 'capistrano-rails'
   # gem 'capistrano-bundler'
   # gem 'capistrano-rbenv'

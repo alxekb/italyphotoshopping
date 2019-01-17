@@ -1,6 +1,5 @@
 .jumbotron
   .container
-
     .row
       .col-sm-3.order-2.m-4
         = link_to '< back', items_path, class: "btn btn-primary"
@@ -19,7 +18,7 @@
         = image_tag(@item.image, size: "480x640")
         -#= image_tag @item.photos[0].url, size: "480x640"
       .col-sm-3.order-3.m-4
-        = link_to "купить >", order_create_path, class: "btn btn-info"
+        = link_to "купить >", new_order_path, class: "btn btn-info"
 
         %h3
           = @item.price

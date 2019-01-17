@@ -1,0 +1,45 @@
+.container
+  .card
+    = form_for profile, url: profile_path, method: :patch, html: { class: 'form-group' } do |f|
+      - if profile.errors.any?
+        #errors_explaination
+          %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"
+          %ul
+            - @profile.errors.full_messages.each do |message|
+              %li
+                *
+                = message
+      .form.row
+        .form-group.col-md-6
+          = f.label :'Имя'
+          = f.text_field :name, class: 'form-control'
+          = f.label :'Отчество'
+          = f.text_field :second_name
+          = f.label :'Фамилия'
+          = f.text_field :surname
+        .form-group.col-md-6
+          = f.label :'Телефон'
+          = f.text_field :phone
+          = f.label :email
+          = f.text_field :email
+          = f.label :'ИНН'
+          = f.text_field :inn
+          = f.label :'дата рождения'
+          = f.date_field :dob
+        .form-group.col-md-6
+          = f.label :'Код страны'
+          = f.text_field :country_code
+          = f.label :'код страны выдавшей паспорт'
+          = f.text_field :passport_code
+          = f.label :'Номер паспорта'
+          = f.text_field :passport_number
+          = f.label :'паспорт выдан'
+          = f.text_field :passport_issuer
+          = f.label :'Дата выдачи паспорта'
+          = f.date_field :passport_date_issue
+          = f.label :'номер извещения'
+          = f.text_field :notification_number
+          = f.label :'код извещения'
+          = f.text_field :notification_code
+        .form-group.col-6.text-right
+          = f.submit

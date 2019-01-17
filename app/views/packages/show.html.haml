@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @package.user_id
+%p
+  %b Item:
+  = @package.item_id
+%p
+  %b Shipping type:
+  = @package.shipping_type
+%p
+  %b Pup code:
+  = @package.pup_code
+
+= link_to 'Edit', edit_package_path(@package)
+\|
+= link_to 'Back', packages_path

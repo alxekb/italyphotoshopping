@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  item_id: one
+  shipping_type: 1
+  pup_code: 1
+
+two:
+  user_id: 
+  item_id: two
+  shipping_type: 1
+  pup_code: 1
