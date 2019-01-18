@@ -1,3 +1,5 @@
 .container
-  = render 'form', profile: @profile
-  = link_to '< Back', profile_path
+  .section
+    = render 'form', profile: @profile
+  .section
+    = link_to '< назад', profile_path, class: 'btn btn-success'

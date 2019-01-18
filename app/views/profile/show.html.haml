@@ -1,31 +1,32 @@
 .container
-  .card
-    %p
-      ФИО:
-      = @profile.name
-      = @profile.second_name
-      = @profile.surname
-    %p
-      Дата рождения
-      = @profile.dob
-    %p
-      Паспортные данные:
-      паспорт
-      = @profile.passport_number
-      выдан
-      = @profile.passport_date_issue
-      = @profile.passport_issuer
-      , код
-      = @profile.passport_code
-    %p
-      ИНН
-      = @profile.inn
-    %p
-      Контактные данные
-      = @profile.phone
-      = @profile.email
+  .section
+    .card
+      %p
+        ФИО:
+        = @profile.name
+        = @profile.second_name
+        = @profile.surname
+      %p
+        Дата рождения
+        = @profile.dob
+      %p
+        Паспортные данные:
+        паспорт
+        = @profile.passport_number
+        выдан
+        = @profile.passport_date_issue
+        = @profile.passport_issuer
+        , код
+        = @profile.passport_code
+      %p
+        ИНН
+        = @profile.inn
+      %p
+        Контактные данные
+        = @profile.phone
+        = @profile.email
 
+  .section
+    = link_to '< назад в кабинет', profile_index_path, class: 'btn btn-info'
 
-  = link_to '< Back to profile', profile_index_path
-  |
-  = link_to 'edit profile >', edit_profile_path
+    = link_to 'редактировать профиль >', edit_profile_path, class: 'btn btn-success'
