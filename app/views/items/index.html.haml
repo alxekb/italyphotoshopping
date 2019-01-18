@@ -6,9 +6,9 @@
       - @items.each do |item|
         .card
           - if item.image.blank?
-            = image_tag('/ek.jpg', size: "192x288")
+            = image_tag('/ek.jpg', size: "170x240")
           - else
-            = image_tag(item.image, size: "192x288")
+            = image_tag(item.image, size: "170x240")
           %h2
             = item.item
             %span= item.brand

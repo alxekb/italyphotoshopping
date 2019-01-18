@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_user.orders.build
-    @item = Item.find(params[:id])
+    @items = Item.all
   end
 
   def create

@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   def init_profile
     self.create_profile! unless profile
-    flash[:success] = "Your profile has been created!"
+    # flash[:success] = "Your profile has been created!"
+    redirect_to profile_path
   end
 end

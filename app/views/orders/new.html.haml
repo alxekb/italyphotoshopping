@@ -1,3 +1,5 @@
-%h1 Order#new
-%p Find me in app/views/order/new.html.haml
-= @item.item
+.container
+  %h1 Order#new
+  %p Find me in app/views/order/new.html.haml
+  = @order.id
+  = render 'form'
