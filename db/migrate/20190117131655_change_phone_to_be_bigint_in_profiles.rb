@@ -11,7 +11,7 @@ class ChangePhoneToBeBigintInProfiles < ActiveRecord::Migration[5.2]
 
   def down
     change_column :profiles, :phone, :integer
-    change_column :profiles, :passport_nimber, :integer
+    change_column :profiles, :passport_number, :integer
   end
 
 end
