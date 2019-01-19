@@ -31,15 +31,17 @@
           = f.text_field :country_code
           = f.label :'код страны выдавшей паспорт'
           = f.text_field :passport_code
+        .form-group
           = f.label :'Номер паспорта'
           = f.text_field :passport_number
           = f.label :'паспорт выдан'
           = f.text_field :passport_issuer
           = f.label :'Дата выдачи паспорта'
           = f.date_field :passport_date_issue
+        .form-group
           = f.label :'номер извещения'
           = f.text_field :notification_number
           = f.label :'код извещения'
           = f.text_field :notification_code
         .form-group.col-6.text-right
-          = f.submit
+          = f.submit 'сохранить', class: 'btn btn-success'

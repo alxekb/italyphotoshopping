@@ -4,8 +4,6 @@
     = @profile.name
     !
   %p Добро пожаловать в личный кабинет!
-  .section
-    = link_to 'мой профиль', profile_path(@profile), class: 'btn btn-success'
-    = link_to 'мои заказы', orders_path, class: 'btn btn-info'
-  .section
-    = link_to 'выйти', destroy_user_session_path, class: 'btn btn-warning'
+  = link_to 'мой профиль', profile_path(@profile), class: 'btn btn-success'
+  = link_to 'мои заказы', orders_path, class: 'btn btn-info'
+  = link_to 'выйти', destroy_user_session_path, class: 'btn btn-warning align-self-end'
