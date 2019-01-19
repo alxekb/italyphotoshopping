@@ -22,7 +22,7 @@
 #
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show, :index]
   # validates :image, presence: true
 
   def index
