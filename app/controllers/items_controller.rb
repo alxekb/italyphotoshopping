@@ -22,6 +22,7 @@
 #
 
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
   # validates :image, presence: true
 
   def index
