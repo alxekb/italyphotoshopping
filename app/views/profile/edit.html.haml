@@ -1,5 +1,5 @@
 .container
-  .section
-    = render 'form', profile: @profile
-  .section
-    = link_to '< назад', profile_path, class: 'btn btn-success'
+  %h2 Заполните данные для таможенного оформления посылки
+  %p  Внимательно проверьте все данные перед сохранением!
+  = render 'form', profile: @profile
+  = link_to '< назад', profile_path, class: 'btn btn-success'

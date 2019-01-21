@@ -1,47 +1,62 @@
 .container
-  .card
-    = form_for profile, url: profile_path, method: :patch, html: { class: 'form-group' } do |f|
-      - if profile.errors.any?
-        #errors_explaination
-          %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"
-          %ul
-            - @profile.errors.full_messages.each do |message|
-              %li
-                *
-                = message
-      .form.row
-        .form-group.col-md-6
-          = f.label :'Имя'
-          = f.text_field :name, class: 'form-control'
-          = f.label :'Отчество'
-          = f.text_field :second_name
-          = f.label :'Фамилия'
-          = f.text_field :surname
-        .form-group.col-md-6
-          = f.label :'Телефон'
-          = f.text_field :phone
-          = f.label :email
-          = f.text_field :email
-          = f.label :'ИНН'
-          = f.text_field :inn
-          = f.label :'дата рождения'
-          = f.date_field :dob
-        .form-group.col-md-6
-          = f.label :'Код страны'
-          = f.text_field :country_code
-          = f.label :'код страны выдавшей паспорт'
-          = f.text_field :passport_code
-        .form-group
-          = f.label :'Номер паспорта'
-          = f.text_field :passport_number
-          = f.label :'паспорт выдан'
-          = f.text_field :passport_issuer
-          = f.label :'Дата выдачи паспорта'
-          = f.date_field :passport_date_issue
-        .form-group
-          = f.label :'номер извещения'
-          = f.text_field :notification_number
-          = f.label :'код извещения'
-          = f.text_field :notification_code
-        .form-group.col-6.text-right
-          = f.submit 'сохранить', class: 'btn btn-success'
+  = form_for profile, url: profile_path, method: :patch, html: { class: 'form-group', role: 'form' } do |f|
+    - if profile.errors.any?
+      #errors_explaination
+        %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"
+        %ul
+          - @profile.errors.full_messages.each do |message|
+            %li
+              *
+              = message
+    .form-row
+      .form-group.col-md-6
+        = f.label :'Имя', class: 'form-inline'
+        = f.text_field :name, class: 'form-control'
+        = f.label :'Отчество'
+        = f.text_field :second_name, class: 'form-control'
+        = f.label :'Фамилия'
+        = f.text_field :surname, class: 'form-control'
+
+      .form-group.col-md-6
+        = f.label :'Телефон'
+        = f.text_field :phone, class: 'form-control'
+        = f.label :email
+        = f.text_field :email, class: 'form-control'
+        = f.label :'ИНН'
+        = f.text_field :inn, class: 'form-control'
+        = f.label :'дата рождения ГГГГ-ММ-ДД'
+        = f.date_field :dob, class: 'form-control'
+      %p
+        Информацию о вашем ИНН вы сможете найти на сайте
+        %span= link_to 'http://nalog.ru', 'https://service.nalog.ru/inn.do', target: '_blank', class: 'btn btn-info'
+      %br
+    .form-row
+      .form-group.col-md-4
+        = f.label :'Код страны доставки'
+        = f.text_field :country_code, class: 'form-control'
+        = f.select :country_code, set_iso_code, {}, prompt: 'выберите'
+        = f.label :'код страны выдавшей паспорт'
+        = f.text_field :passport_code, class: 'form-control'
+        = f.select :passport_code, set_iso_code, {}, prompt: 'Выберите'
+        = f.label :'Отделение Boxberry, куда доставить посылку'
+        = f.text_field :boxberry_office_id, class: 'form-control'
+        %p код отделения выберите на сайте
+        %a= link_to 'boxberry.ru', 'https://boxberry.ru/find_an_office/', target: '_blank', class: 'btn btn-info'
+        %span.p  ссылка должна содержать номер отделения, там есть кнопочка скопировать: boxberry.ru/find_an_office/99631/
+
+
+      .form-group.col-md-4
+        = f.label :'Номер паспорта'
+        = f.text_field :passport_number, class: 'form-control'
+        = f.label :'паспорт выдан'
+        = f.text_field :passport_issuer, class: 'form-control'
+        = f.label :'Дата выдачи паспорта  ГГГГ-ММ-ДД'
+        = f.date_field :passport_date_issue, class: 'form-control'
+      .form-group.col-md-4
+        = f.label :'номер извещения (не заполнять)'
+        = f.text_field :notification_number, class: 'form-control'
+        = f.label :'код извещения (не заполнять)'
+        = f.text_field :notification_code, class: 'form-control'
+    .form-row
+      .form-group.col.text-right
+        = f.submit 'сохранить', class: 'btn btn-success'

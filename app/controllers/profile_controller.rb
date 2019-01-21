@@ -39,7 +39,7 @@ class ProfileController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(
-      :name, :second_name, :surname, :country_code, :email, :passport_code, :passport_number, :passport_date_issue, :passport_issuer, :notification_number, :notification_code, :inn, :phone, :dob
+      :name, :second_name, :surname, :country_code, :email, :passport_code, :passport_number, :passport_date_issue, :passport_issuer, :notification_number, :notification_code, :inn, :phone, :dob, :boxberry_office_id
     )
   end
 end
