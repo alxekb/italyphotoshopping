@@ -13,7 +13,6 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick', '~> 4.3'
 gem "factory_bot_rails", "~> 4.0"
 #
-gem 'bugsnag', '~> 6.11'
 # https://rubygems.org/gems/devise
 gem 'devise', '~> 4.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -85,5 +84,9 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+group :production do
+  gem 'bugsnag', '~> 6.11'
+
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:x64_mingw, :jruby]

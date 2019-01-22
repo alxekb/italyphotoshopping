@@ -41,7 +41,7 @@
         = f.select :passport_code, set_iso_code, {}, prompt: 'Выберите'
         = f.label :'Отделение Boxberry, куда доставить посылку'
         = f.text_field :boxberry_office_id, class: 'form-control'
-        %p код отделения выберите на сайте
+        %p адрес отделения выберите на сайте
         %a= link_to 'boxberry.ru', 'https://boxberry.ru/find_an_office/', target: '_blank', class: 'btn btn-info'
         %span.p  ссылка должна содержать номер отделения, там есть кнопочка скопировать: boxberry.ru/find_an_office/99631/
 
