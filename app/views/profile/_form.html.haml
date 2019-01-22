@@ -1,4 +1,5 @@
 .container
+  %p Заполняем русскими буквами (кириллицей).
   = form_for profile, url: profile_path, method: :patch, html: { class: 'form-group', role: 'form' } do |f|
     - if profile.errors.any?
       #errors_explaination

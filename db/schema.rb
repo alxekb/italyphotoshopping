@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_203639) do
     t.string "passport_issuer"
     t.integer "notification_number"
     t.integer "notification_code"
-    t.integer "inn"
+    t.bigint "inn"
     t.date "dob"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
