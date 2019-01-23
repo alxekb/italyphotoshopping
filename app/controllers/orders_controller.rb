@@ -4,15 +4,20 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+    @profile = Profile.find_by(id: @orders.pluck(:user_id))
+    @items = Item.find_by(id: @orders.pluck(:item_id))
+
   end
 
   def new
-    @order = current_user.orders.build
+    @order = Order.new
     @items = Item.all
   end
 
   def create
-    @order = current_user.orders.build(order_params)
+    @order = Order.new(order_params)
+    @order.save
+    redirect_to @order
   end
 
   def show
@@ -31,8 +36,8 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:item).permit(
-      :item_id
+    params.require(:order).permit(
+      :item_id, :user_id
     )
   end
 

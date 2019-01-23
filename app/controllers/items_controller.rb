@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = Item.friendly.find(params[:id])
     # if current.user.image.attached? @item.image
     # else @item.image = image_tag ''
   end

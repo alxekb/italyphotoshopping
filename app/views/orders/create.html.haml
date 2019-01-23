@@ -1,7 +1,7 @@
 %h1 Order#create
 %p Find me in app/views/order/create.html.haml
 .section
-  = form_for @order, url: URL, html: { class: 'card' } do |f|
+  = form_for @order, html: { class: 'card' } do |f|
     - if @photo_session.errors.any?
       #error_explanation
         %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"

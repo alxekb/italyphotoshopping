@@ -1,3 +1,8 @@
-= form_for @order, html: { class: 'form'} do |f|
-  
-  =f.submit
+.form-row
+  .form-group.col-md-6
+    = form_with scope: :order, url: orders_path, html: { class: 'form'} do |f|
+      = f.label :item_id
+      = f.text_field :item_id, class: 'form-control'
+      = f.label :user_id
+      = f.text_field :user_id, class: 'form-control'
+      = f.submit
