@@ -15,7 +15,11 @@
           article
           %span= @item.art
       .col-sm-6.order-1
-        = image_tag(@item.image, size: "480x640")
+        - if @item.image.valid?
+          = image_tag(@item.image, size: "480x640")
+        - else
+          = image_tag('/ek.jpg', size: "480x640")
+
         -#= image_tag @item.photos[0].url, size: "480x640"
       .col-sm-3.order-3.m-4
         = link_to "добавить к заказу >", new_order_path, class: "btn btn-info"

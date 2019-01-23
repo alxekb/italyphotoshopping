@@ -12,9 +12,11 @@ gem "aws-sdk-s3", require: false
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick', '~> 4.3'
 gem "factory_bot_rails", "~> 4.0"
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
 #
 # https://rubygems.org/gems/devise
 gem 'devise', '~> 4.5'
+gem 'bugsnag', '~> 6.11'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.2.rc1'
 # Use postgresql as the database for Active Record
@@ -84,9 +86,5 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-group :production do
-  gem 'bugsnag', '~> 6.11'
-
-end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:x64_mingw, :jruby]

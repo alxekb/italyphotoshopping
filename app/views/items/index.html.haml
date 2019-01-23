@@ -5,10 +5,10 @@
     .cards
       - @items.each do |item|
         .card
-          - if item.image.blank?
-            = image_tag('/ek.jpg', size: "170x240")
+          - if item.image.attachment.nil?
+            = image_tag('/ek.jpg', size: "170x230")
           - else
-            = image_tag(item.image, size: "170x240")
+            = image_tag(item.image.variant(resize:"170x230"))
           %h2
             = item.item
             %span= item.brand

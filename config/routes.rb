@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  root 'items#index'
-  # get 'profile/new'
-  # get 'profile/index'
-  # get 'profile/show'
-  # get 'profile/edit'
-  # get 'profile/update'
-  # get 'order/show'
-  # get 'order/create'
-  # get 'order/new'
+  # get 'users/index'
+  # get 'users/show'
+  # get 'users/edit'
+  # root 'items#index'
+  root 'welcome#index'
   devise_for :admins
   devise_for :users
     as :user do
