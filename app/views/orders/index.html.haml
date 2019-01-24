@@ -7,7 +7,8 @@
         %h4
           Заказ:
           = link_to(order.id, order_path(order), class: 'btn btn-success')
-          = order.user_id
+          %p
+            ips_#{order.user_id}
         -# %p
         -#   = order.user.profile.phone
         -# %p
