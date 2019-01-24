@@ -22,6 +22,9 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @user = User.find_by(id: @order.user_id)
+    @profile = Profile.find_by(id:[@user.id])
+    @item = Item.find_by(id: @order.item_id)
   end
 
   def edit

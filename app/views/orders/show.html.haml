@@ -1,4 +1,39 @@
 %h1 Order#show
 %p Find me in app/views/order/show.html.haml
 %p= @order.id
-= link_to '< Back', profile_index_path
+%p
+  = @user.profile.phone
+%p
+  = @user.profile.passport_number
+%p
+  = @user.profile.passport_date_issue
+%p
+  = @user.profile.passport_issuer
+%p
+  = @user.profile.name
+%p
+  = @user.profile.second_name
+%p
+  = @user.profile.surname
+%p
+  = @user.profile.email
+%p
+  = @user.profile.inn
+
+%h4
+  Лот:
+  = @item.id
+%p
+  = @item.art
+  = @item.brand
+  = @item.name
+  = @item.price
+  -# = @order.user.profile.boxberry_office_id
+%p
+  = @item.item
+  = @item.color
+  = @item.size
+%p
+  = @item.price
+
+= link_to '< Back', orders_path
