@@ -1,31 +1,35 @@
-= form_with scope: :item, url: items_path do |f|
-  = render "shared/errors", object: @item
-  %p
-    = f.label :Item
-    = f.text_field :item
-  %br
-    = f.label :Brand
-    = f.text_field :brand
-  %br
-    = f.label :Name
-    = f.text_field :name
-  %br
-    = f.label :Color
-    = f.text_field :color
-  %br
-    = f.label :Size
-    = f.text_field :size
-  %br
-    = f.label :EAN
-    = f.text_field :ean
-  %br
-    = f.label :Article
-    = f.text_field :art
-  %br
-    = f.label :ItemPrice
-    = f.text_field :price
-  .field
-    = f.label :image
-    = f.file_field :image
-  %br
-    =f.submit "Сохранить", class: "btn btn-primary"
+.item-form
+  = form_with scope: :item, url: items_path do |f|
+    = render "shared/errors", object: @item
+    %p
+      = f.label :Item
+      = f.text_field :item, class: 'form-control'
+
+      = f.label :Brand
+      = f.text_field :brand, class: 'form-control'
+
+      = f.label :Name
+      = f.text_field :name, class: 'form-control'
+
+      = f.label :Color
+      = f.text_field :color, class: 'form-control'
+
+      = f.label :Size
+      = f.text_field :size, class: 'form-control'
+
+      = f.label :EAN
+      = f.text_field :ean, class: 'form-control'
+
+      = f.label :Article
+      = f.text_field :art, class: 'form-control'
+
+      = f.label :ItemPrice
+      = f.text_field :price, class: 'form-control'
+
+      = f.label :ItemEuroPrice
+      = f.text_field :eur_price, class: 'form-control'
+    .field
+      = f.label :image
+      = f.file_field :image, class: 'form-control'
+    %br
+      =f.submit "Сохранить", class: "btn btn-primary"

@@ -15,9 +15,9 @@
 %p
   = @user.profile.name
 %p
-  = @user.profile.second_name
-%p
   = @user.profile.surname
+%p
+  = @user.profile.second_name
 %p
   = @user.profile.phone
 %p
@@ -32,6 +32,7 @@
   ips_#{@order.id}
 %p
   = @item.price
+  = @item.eur_price
 %p
   = @order.user.profile.boxberry_office_id
 %p
@@ -45,8 +46,8 @@
   = @item.color
   = @item.size
 %p
-  http://shop.ekaterinaivanova.com
-  = url_for item_path(@item)
+  http://shop.ekaterinaivanova.com#{url_for item_path(@item)}
+
 %p
   = @item.item
   = @item.brand
