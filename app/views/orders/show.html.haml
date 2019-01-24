@@ -1,5 +1,6 @@
 %h2
   Order
+  = @order.id
 %h4
   User
   = @user.id
@@ -28,7 +29,7 @@
   Лот:
   = @item.id
 %p
-  ips_#{@order.user_id}
+  ips_#{@order.id}
 %p
   = @item.price
 %p
