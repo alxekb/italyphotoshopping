@@ -1,11 +1,14 @@
-%h1 Order#show
-%p Find me in app/views/order/show.html.haml
+%h2
+  Order
+%h4
+  User
+  = @user.id
 %p
   = @user.profile.phone
 %p
   = @user.profile.passport_number
 %p
-  = @user.profile.passport_date_issue
+  = @user.profile.passport_date_issue.strftime("%d.%m.%Y")
 %p
   = @user.profile.passport_issuer
 %p
@@ -36,8 +39,8 @@
 %p
   = @item.brand
 %p
-  = @item.name
   = @item.item
+  = @item.name
   = @item.color
   = @item.size
 %p
