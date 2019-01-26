@@ -1,0 +1,12 @@
+.container
+  %h1
+    Editing Order
+    = @order.id
+
+  = render 'form'
+.container
+  = link_to 'Show', @order
+  \|
+  = link_to 'Back', orders_path
+  \|
+  = link_to 'Destroy', @order, method: :delete, data: { confirm: 'Are you sure?' }, style: 'text-color:red'

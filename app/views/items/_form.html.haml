@@ -1,7 +1,9 @@
-.item-form
-  = form_with scope: :item, url: items_path do |f|
-    = render "shared/errors", object: @item
-    %p
+
+= form_with scope: :item, url: items_path, html: { class: 'form'} do |f|
+  = render "shared/errors", object: @item
+  .form-fow
+    .form-col.col-md-4.col-sm-6
+      %h4 Item details
       = f.label :Item
       = f.text_field :item, class: 'form-control'
 
@@ -16,20 +18,22 @@
 
       = f.label :Size
       = f.text_field :size, class: 'form-control'
-
-      = f.label :EAN
+    .form-col.col-md-4.col-sm-6
+      %h4 Merchant data
+      = f.label :EAN, class: 'control-label'
       = f.text_field :ean, class: 'form-control'
 
       = f.label :Article
       = f.text_field :art, class: 'form-control'
-
+    .form-row.col-md-4.col-sm-6
+      %h4 Price section
       = f.label :ItemPrice
       = f.text_field :price, class: 'form-control'
 
       = f.label :ItemEuroPrice
       = f.text_field :eur_price, class: 'form-control'
-    .field
-      = f.label :image
-      = f.file_field :image, class: 'form-control'
-    %br
-      =f.submit "Сохранить", class: "btn btn-primary"
+      .field
+        = f.label :image
+        = f.file_field :image, class: 'form-control'
+      %br
+        =f.submit "Сохранить", class: "btn btn-primary"

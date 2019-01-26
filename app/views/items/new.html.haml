@@ -1,7 +1,7 @@
 .container
   .eyebrow
+    = link_to '< back', items_path, class: 'btn btn-info'
     %h4
       Create the new item
-      = link_to 'back', items_path, class: 'btn btn-info'
 
   = render 'form', item: @item

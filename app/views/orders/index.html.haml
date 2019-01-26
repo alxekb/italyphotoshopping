@@ -1,48 +1,52 @@
 .container
-  %h2
-    orders index
-    = link_to 'create order', new_order_path
+  .eyebrow.text-center
+    %h2
+      Список заказов
+      = link_to 'create order', new_order_path, class: 'btn btn-success'
+    .row
     - @orders.each do |order|
-      .order
-        %h4
-          Заказ:
-          = link_to(order.id, order_path(order), class: 'btn btn-success')
-          %p
-            ips_#{order.user_id}
-        -# %p
-        -#   = order.user.profile.phone
-        -# %p
-        -#   = order.user.profile.passport_number
-        -# %p
-        -#   = order.user.profile.passport_date_issue
-        -# %p
-        -#   = order.user.profile.passport_issuer
-        -# %p
-        -#   = order.user.profile.name
-        -# %p
-        -#   = order.user.profile.second_name
-        -# %p
-        -#   = order.user.profile.surname
-        -# %p
-        -#   = order.user.profile.email
-        -# %p
-        -#   = order.user.profile.inn
+      .col-md-4.col-sm-6
+        .order
+          %h4
+            Заказ:
+            = link_to(order.id, order_path(order))
+            = link_to 'Edit', edit_order_path(order)
 
-        %h4
-          Лот:
-          = @items.id
-        -# %p
-        -#   = @items.art
-        -#   = @items.brand
-        -#   = @items.name
-        -#   = @items.price
-        -#   -# = order.user.profile.boxberry_office_id
-        -# %p
-        -#   = @items.item
-        -#   = @items.color
-        -#   = @items.size
-        -# %p
-        -#   = @items.price
+            %p
+              ips_#{order.user_id}
+            %p
+              = order.user.profile.name
+              = order.user.profile.second_name
+              = order.user.profile.surname
+            %p
+              статус
+              = order.status
+            %p
+              оплата
+              = order.payment_status
+            %p
+              = order.user.profile.phone
+            %p
+              = link_to order.user.profile.boxberry_office_id, order.user.profile.boxberry_office_id
+
+            %p
+              = order.user.profile.email
+          -# %p
+          -#   = order.user.profile.inn
+          %h4
+            Лот:
+            = @items.id
+          -# %p
+          -#   = @items.art
+          -#   = @items.brand
+          -#   = @items.name
+          -#   = @items.price
+          -# %p
+          -#   = @items.item
+          -#   = @items.color
+          -#   = @items.size
+          -# %p
+          -#   = @items.price
 
 
-        %br
+          %br

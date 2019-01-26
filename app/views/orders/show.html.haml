@@ -1,58 +1,66 @@
-%h2
-  Order
-  = @order.id
-%h4
-  User
-  = @user.id
-%p
-  = @user.profile.phone
-%p
-  = @user.profile.passport_number
-%p
-  = @user.profile.passport_date_issue.strftime("%d.%m.%Y")
-%p
-  = @user.profile.passport_issuer
-%p
-  = @user.profile.name
-%p
-  = @user.profile.surname
-%p
-  = @user.profile.second_name
-%p
-  = @user.profile.phone
-%p
-  = @user.profile.email
-%p
-  = @user.profile.inn
+.order
+  .row
+    .col-12
+      .text-center
+        %h2
+          Order
+          = @order.id
+    .col-sm-6
+      %h4
+        User
+        = @user.id
+      %p= @user.profile.phone
+      %p= @user.profile.passport_number
+      %p= @user.profile.passport_date_issue.strftime("%d.%m.%Y")
+      %p= @user.profile.passport_issuer
+      %p= @user.profile.name
+      %p= @user.profile.surname
+      %p= @user.profile.second_name
+      %p= @user.profile.phone
+      %p= @user.profile.email
+      %p= @user.profile.inn
+    .col-sm-6
+      %h4
+        Лот:
+        = @item.id
+      %p
+        ips_#{@order.id}
+      %p
+        = @item.price
+        = @item.eur_price
+      %p
+        = @order.user.profile.boxberry_office_id
+      %p
+        art:
+        = @item.art
+      %p
+        = @item.brand
+      %p
+        = @item.item
+        = @item.name
+        = @item.color
+        = @item.size
+      %p
+        http://shop.ekaterinaivanova.com#{url_for item_path(@item)}
 
-%h4
-  Лот:
-  = @item.id
-%p
-  ips_#{@order.id}
-%p
-  = @item.price
-  = @item.eur_price
-%p
-  = @order.user.profile.boxberry_office_id
-%p
-  art:
-  = @item.art
-%p
-  = @item.brand
-%p
-  = @item.item
-  = @item.name
-  = @item.color
-  = @item.size
-%p
-  http://shop.ekaterinaivanova.com#{url_for item_path(@item)}
-
-%p
-  = @item.item
-  = @item.brand
-  = @item.name
-  = @item.color
-  = @item.size
-
-= link_to '< Back', orders_path
+      %p
+        = @item.item
+        = @item.brand
+        = @item.name
+        = @item.color
+        = @item.size
+    .col-sm-6
+      %h4 Status info
+      %p
+        Tracking bumber
+        = @order.tracking_number
+      %p
+        Payment status
+        = @order.payment_status
+      %p
+        Order status
+        = @order.status
+.eyebrow.text-center
+  = link_to '< Back', orders_path
+  \|
+  = link_to 'Edit >', edit_order_path(@order)
