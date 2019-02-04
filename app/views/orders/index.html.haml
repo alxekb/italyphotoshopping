@@ -1,9 +1,10 @@
 .container
   .eyebrow.text-center
-    %h2
-      Список заказов
-      = link_to 'create order', new_order_path, class: 'btn btn-success'
-    .row
+    .order-section
+      %h2
+        Список заказов
+      = link_to '+ Add new order', new_order_path, class: 'btn btn-success'
+    .row.eyebrow
     - @orders.each do |order|
       .col-md-4.col-sm-6
         .order
@@ -27,6 +28,9 @@
             %p
               = order.user.profile.phone
             %p
+              = link_to "отправить трек код >", ("https://api.whatsapp.com/send?phone=" + "#{order.user.profile.phone}" + "&text=" + "Привет!%20Вот%20трек-код%20отслеживания%20посылки:%20#{order.tracking_number}" + "%20https://boxberry.ru/tracking/" + "&source=&data=")
+              -# = link_to order.user.profile.phone "https://api.whatsapp.com/send?phone=79122406229&text=&source=&data=
+            %p
               = link_to order.user.profile.boxberry_office_id, order.user.profile.boxberry_office_id
 
             %p
@@ -35,18 +39,23 @@
           -#   = order.user.profile.inn
           %h4
             Лот:
-            = @items.id
-          -# %p
-          -#   = @items.art
-          -#   = @items.brand
-          -#   = @items.name
-          -#   = @items.price
-          -# %p
-          -#   = @items.item
-          -#   = @items.color
-          -#   = @items.size
-          -# %p
-          -#   = @items.price
+            -# = @orders.all.ids
+            = order.item_id
+            -# = @items.all
+          -# - @items.order.item_id  do |item|
+            %p
+              = item.art
+              = item.brand
+              = item.name
+              = item.price
+            %p
+              = item.item
+              = item.color
+              = item.size
+            %p
+              = item.price
 
+          .button
+            = link_to('Show order', order_path(order), class: 'btn btn-success')
 
           %br
