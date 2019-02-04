@@ -28,7 +28,7 @@
             %p
               = order.user.profile.phone
             %p
-              = link_to "отправить трек код >", ("https://api.whatsapp.com/send?phone=" + "#{order.user.profile.phone}" + "&text=" + "Привет!%20Вот%20трек-код%20отслеживания%20посылки:%20#{order.tracking_number}" + "%20https://boxberry.ru/tracking/" + "&source=&data=")
+              = link_to "отправить трек код >", ("https://api.whatsapp.com/send?phone=" + "#{order.user.profile.phone}" + "&text=" + "Привет!%20Вот%20трек-код%20отслеживания%20посылки:%20#{order.tracking_number}" + "%20https://boxberry.ru/tracking/" + "&source=&data="), target: "_blank"
               -# = link_to order.user.profile.phone "https://api.whatsapp.com/send?phone=79122406229&text=&source=&data=
             %p
               = link_to order.user.profile.boxberry_office_id, order.user.profile.boxberry_office_id
