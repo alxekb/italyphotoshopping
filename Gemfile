@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 gem 'jquery-rails'
 gem 'haml-rails'
+gem 'administrate'
 gem 'bootstrap-sass'
 gem 'tabler-rubygem'
 gem 'popper_js', '~> 1.9', '>= 1.9.9'

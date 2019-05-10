@@ -1,6 +1,6 @@
 .container
   %p Заполняем русскими буквами (кириллицей).
-  = form_for profile, url: profile_path, method: :patch, html: { class: 'form-group', role: 'form' } do |f|
+  = form_for profile, url: profile_dashboard_path, method: :patch, html: { class: 'form-group', role: 'form' } do |f|
     - if profile.errors.any?
       #errors_explaination
         %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"

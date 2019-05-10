@@ -8,7 +8,7 @@
         %li.nav-item
           = link_to "Информация", page_path('terms'), class: 'nav-link'
         %li.nav-item
-          -if user_signed_in?
-            = link_to "Кабинет", profile_index_path, class: 'nav-link'
+          - if user_signed_in?
+            = link_to "Кабинет", profile_dashboard_index_path, class: 'nav-link'
           - else
             = link_to "Войти", new_user_session_path, class: 'nav-link'
