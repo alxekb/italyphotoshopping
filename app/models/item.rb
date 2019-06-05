@@ -3,4 +3,5 @@ class Item < ApplicationRecord
   belongs_to :order
   extend FriendlyId
   friendly_id :name, use: :slugged
+  has_many :profile_deals
 end

@@ -1,0 +1,25 @@
+= form_for @profile_item do |f|
+  - if @profile_item.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@profile_item.errors.count, "error")} prohibited this profile_item from being saved:"
+      %ul
+        - @profile_item.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :item
+    = f.text_field :item
+  .field
+    = f.label :brand
+    = f.text_field :brand
+  .field
+    = f.label :color
+    = f.text_field :color
+  .field
+    = f.label :price
+    = f.number_field :price
+  .field
+    = f.label :cost
+    = f.number_field :cost
+  .actions
+    = f.submit 'Save'

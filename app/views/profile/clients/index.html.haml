@@ -1,0 +1,16 @@
+= render 'shared/profile/navbar'
+.container
+  %h2 profile::admin::clients#index
+  = link_to 'добавить клиента', new_profile_client_path, class: 'button btn btn-warning'
+  - @clients.each do |client|
+    .card
+      %h2.card-header= client.name
+      .card-body
+        %p
+          WA
+          = client.wa
+        %p
+          Insta
+          = client.ig
+      .card-body
+        = link_to 'Edit', profile_client_path(client), class: 'button btn btn-primary'

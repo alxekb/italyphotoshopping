@@ -11,6 +11,7 @@ class Profile::DashboardController < ProfileController
 
 
   def show
+    set_profile
   end
 
   def edit

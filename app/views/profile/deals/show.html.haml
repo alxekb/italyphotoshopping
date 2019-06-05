@@ -1,0 +1,22 @@
+= render 'shared/profile/navbar'
+
+%p#notice= notice
+.card
+  .card-header
+    %h2
+      %span
+        = @profile_deal.id
+        = @profile_deal.client.name
+        = @profile_deal.messenger
+  .card-body
+    = @profile_deal.item.item
+  .card-body
+    = @profile_deal.sell - @profile_deal.buy
+    = @profile_deal.byed
+    = @profile_deal.paid
+
+
+= link_to 'Edit', edit_profile_deal_path(@profile_deal)
+\|
+= link_to 'Back', profile_deals_path
+= link_to 'Destroy', profile_deal_path(@profile_deal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button btn btn-warning float-right'

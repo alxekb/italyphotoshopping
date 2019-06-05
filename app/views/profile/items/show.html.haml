@@ -1,0 +1,23 @@
+= render 'shared/profile/navbar'
+
+%p#notice= notice
+
+%p
+  %b Item:
+  = @profile_item.item
+%p
+  %b Brand:
+  = @profile_item.brand
+%p
+  %b Color:
+  = @profile_item.color
+%p
+  %b Price:
+  = @profile_item.price
+%p
+  %b Cost:
+  = @profile_item.cost
+
+= link_to 'Edit', edit_profile_item_path(@profile_item)
+\|
+= link_to 'Back', profile_items_path

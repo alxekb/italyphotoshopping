@@ -1,0 +1,8 @@
+= render 'shared/profile/navbar'
+.container
+  %h2
+    client
+    = @client.name
+    = @client.wa
+    = @client.ig
+    = link_to 'edit', edit_profile_client_path(@client)

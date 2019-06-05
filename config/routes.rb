@@ -1,17 +1,23 @@
 Rails.application.routes.draw do
-  namespace :admin do
-      # resources :admins
-      resources :users
-      resources :brands
-      resources :bulletins
-      resources :items
-      resources :orders
-      resources :packages
-      resources :profiles
-      # resources :reviews
+  namespace :profile do
+    resources :items
+  end
+  namespace :profile do
+    resources :deals
+  end
+  # namespace :admin do
+  #     # resources :admins
+  #     resources :users
+  #     resources :brands
+  #     resources :bulletins
+  #     resources :items
+  #     resources :orders
+  #     resources :packages
+  #     resources :profiles
+  #     # resources :reviews
 
-      root to: "users#index"
-    end
+    #   root to: "users#index"
+    # end
   root 'welcome#index'
   devise_for :users
     as :user do
@@ -23,6 +29,7 @@ Rails.application.routes.draw do
     # get 'dashboard', to: 'dashboard#index', as: :dashboard
     resources :admin
     resources :dashboard
+    resources :clients
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
