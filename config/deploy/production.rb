@@ -22,7 +22,7 @@
 # role :db,  %w{deploy@example.com}
 
 
-
+Uglifier.new(:harmony => true)
 # Configuration
 # =============
 # You can set any configuration variable like in config/deploy.rb
