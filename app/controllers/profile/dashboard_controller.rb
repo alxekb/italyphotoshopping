@@ -22,7 +22,7 @@ class Profile::DashboardController < ProfileController
     respond_to do |format|
       if @profile.save
         flash[:success] = "Profile Saved"
-        format.html { redirect_to profile_url }
+        format.html { redirect_to profile_dashboard_path }
       else
         flash[:error] = "Error saving profile!"
         format.html { render :show }

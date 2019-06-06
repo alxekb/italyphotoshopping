@@ -1,5 +1,5 @@
-.container
+.section
   %h2 Заполните данные для таможенного оформления посылки
   %p  Внимательно проверьте все данные перед сохранением!
   = render 'form', profile: @profile
-  = link_to '< назад', profile_dashboard_index_path, class: 'btn btn-success'
+  = link_to '< назад', profile_dashboard_path, class: 'btn btn-outline-success my-4'

@@ -16,6 +16,8 @@ gem 'mini_magick', '~> 4.3'
 gem "factory_bot_rails", "~> 4.0"
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'friendly_id', '~> 5.2.4'
+gem 'faraday', '~> 0.15.4'
+gem 'faraday_middleware', '~> 0.13.1'
 #
 # https://rubygems.org/gems/devise
 gem 'devise', '~> 4.5'

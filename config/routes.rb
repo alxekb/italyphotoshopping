@@ -1,36 +1,25 @@
 Rails.application.routes.draw do
+
+  resources :packages, :bulletins, :items, :shop, :reviews, :orders
+
   namespace :profile do
     resources :items
-  end
-  namespace :profile do
     resources :deals
   end
-  # namespace :admin do
-  #     # resources :admins
-  #     resources :users
-  #     resources :brands
-  #     resources :bulletins
-  #     resources :items
-  #     resources :orders
-  #     resources :packages
-  #     resources :profiles
-  #     # resources :reviews
 
-    #   root to: "users#index"
-    # end
-  root 'welcome#index'
   devise_for :users
     as :user do
       get '/users/sign_out' => 'devise/sessions#destroy'
     end
-  resources :packages, :bulletins, :items, :shop, :reviews, :orders
 
   scope module: :profile, as: :profile, path: 'profile' do
-    # get 'dashboard', to: 'dashboard#index', as: :dashboard
+    get 'dashboard', to: 'dashboard#index', as: :dashboard
+    get 'dashboard/edit', to: 'dashboard#edit'
+    patch 'dashboard', to: 'dashboard#update'
     resources :admin
-    resources :dashboard
+    # resources :dashboard
     resources :clients
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'welcome#index'
 end

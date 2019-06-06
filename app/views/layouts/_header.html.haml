@@ -1,4 +1,4 @@
-.header.navbar.fixed-top.navbar-transparent.navbar-expand-md
+.header.navbar.navbar-transparent.navbar-expand-md
   .container
     = link_to "Italy photo shopping", root_path, id: "logo"
     %nav
@@ -9,6 +9,6 @@
           = link_to "Информация", page_path('terms'), class: 'nav-link'
         %li.nav-item
           - if user_signed_in?
-            = link_to "Кабинет", profile_dashboard_index_path, class: 'nav-link'
+            = link_to "Кабинет", profile_dashboard_path, class: 'nav-link'
           - else
             = link_to "Войти", new_user_session_path, class: 'nav-link'
