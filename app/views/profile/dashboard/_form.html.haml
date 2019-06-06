@@ -10,25 +10,25 @@
               *
               = message
     .form-row.align-items-center.form-group
-      .col-auto
+      .col-auto.form-group
         -# = f.label :'Имя', class: 'form-inline'
         = f.text_field :name, class: 'form-control', placeholder: 'Имя'
-      .col-auto
+      .col-auto.form-group
         -# = f.label :'Отчество'
         = f.text_field :second_name, class: 'form-control', placeholder: 'Отчество'
-      .col-auto
+      .col-auto.form-group
         -# = f.label :'Фамилия'
         = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
 
     .form-row.align-items-center.form-group
-      .col-auto
+      .col-auto.form-group
         -# = f.label :'Телефон'
         = f.phone_field :phone, class: 'form-control', placeholder: 'телефон'
-      .col-auto
+      .col-auto.form-group
         -# = f.label :email
         = f.email_field :email, class: 'form-control', placeholder: 'email'
         -# = f.label :'дата рождения ГГГГ-ММ-ДД'
-      .col-auto
+      .col-auto.form-group
         = f.date_field :dob, class: 'form-control', placeholder: 'ГГГГ-ММ-ДД'
     .form-row.mt-4.form-group
       .form-group
