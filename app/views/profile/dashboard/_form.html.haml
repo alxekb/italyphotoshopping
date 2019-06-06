@@ -27,8 +27,8 @@
       .col-auto.form-group
         -# = f.label :email
         = f.email_field :email, class: 'form-control', placeholder: 'email'
-        -# = f.label :'дата рождения ГГГГ-ММ-ДД'
       .col-auto.form-group
+        = f.label :'дата рождения ГГГГ-ММ-ДД'
         = f.date_field :dob, class: 'form-control', placeholder: 'ГГГГ-ММ-ДД'
     .form-row.mt-4.form-group
       .form-group

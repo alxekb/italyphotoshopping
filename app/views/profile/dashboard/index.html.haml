@@ -20,12 +20,12 @@
       %p Мы пакуем посылку и взвешиваем ее. После взвешивания мы сможем узнать стоимость доставки (она расчитывается от веса и размера посылки). В среднем доставка сумки обходится в 1400-1500 рублей.
       %p Вы оплачиваете доставку.
       %p Мы отправляем вам трек-код отслеживания вашей посылки.
-      = link_to 'мои заказы', orders_path, class: 'btn btn-outline-info'
+      -# = link_to 'мои заказы', orders_path, class: 'btn btn-outline-info'
       %p Вы получаете уведомление о поступлении посылки в пункт выдачи заказа.
       %p Вы забираете посылку, открываете ее и ...
       %p Счастье охватывает вас. Вы улыбаетесь и смеетесь!
     .text-block
-      = link_to 'выйти из ЛК', destroy_user_session_path, class: 'btn btn-warning align-self-end'
+      = link_to 'выйти из ЛК', destroy_user_session_path, class: 'btn btn-outline-warning align-self-end'
     .text-block
       - if current_user.admin?
-        = link_to 'пользователи', users_index_path, class: 'btn btn-danger'
+        = link_to 'пользователи', users_index_path, class: 'btn btn-outline-danger'
