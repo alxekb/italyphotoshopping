@@ -30,6 +30,22 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    tls: true,
+    openssl_verify_mode: 'none',
+    address: 'mail.ekaterinaivanova.com',
+    port: 587,
+    domain: 'ekaterinaivanova.com',
+    authentication: 'plain',
+    user_name: Rails.application.credentials.dig(:email, :mailbox),
+    password: Rails.application.credentials.dig(:email, :password),
+    enable_starttls_auto: true
+  }
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon
 
