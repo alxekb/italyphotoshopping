@@ -25,7 +25,7 @@ class PackageDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :user,
-    :items,
+    # :items,
     :id,
     # :item_id,
   ].freeze
