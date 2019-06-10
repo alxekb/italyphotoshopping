@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :profile do
     resources :items
     resources :deals
+    resources :clients
   end
 
   devise_for :users, controllers: { confirmations: 'confirmations' }

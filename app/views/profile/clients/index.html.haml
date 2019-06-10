@@ -1,16 +1,51 @@
 = render 'shared/profile/navbar'
 .container
-  %h2 profile::admin::clients#index
-  = link_to 'добавить клиента', new_profile_client_path, class: 'button btn btn-warning'
-  - @clients.each do |client|
-    .card
-      %h2.card-header= client.name
-      .card-body
-        %p
-          WA
-          = client.wa
-        %p
-          Insta
-          = client.ig
-      .card-body
-        = link_to 'Edit', profile_client_path(client), class: 'button btn btn-primary'
+  .section
+    %h2 profile::admin::clients#index
+    = link_to 'добавить клиента', new_profile_client_path
+  %table.table
+    %thead
+      %tr
+        %th{:scope => 'col'} #
+        %th{:scope => 'col'} name
+        %th{:scope => 'col'} WA
+        %th{:scope => 'col'} IG
+        %th{:scope => 'col'} action
+    - @clients.each do |client|
+      %tbody
+        %tr
+          %th{:scope => "row"}
+            = client.id
+          %td
+            = client.profile.name
+            = client.email
+          %td
+            = client.profile.phone
+          %td
+            %p
+              -# = client.profile.ig
+          %td
+            = link_to 'Edit', profile_client_path(client), class: 'button btn btn-outline-primary'
+-# %table.table
+-#   %thead
+-#     %tr
+-#       %th{:scope => "col"} #
+-#       %th{:scope => "col"} First
+-#       %th{:scope => "col"} Last
+-#       %th{:scope => "col"} Handle
+-#   %tbody
+-#     %tr
+-#       %th{:scope => "row"} 1
+-#       %td Mark
+-#       %td Otto
+-#       %td @mdo
+-#     %tr
+-#       %th{:scope => "row"} 2
+-#       %td Jacob
+-#       %td Thornton
+-#       %td @fat
+-#     %tr
+-#       %th{:scope => "row"} 3
+-#       %td Larry
+-#       %td the Bird
+-#       %td @twitter

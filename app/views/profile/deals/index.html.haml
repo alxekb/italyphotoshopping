@@ -1,37 +1,38 @@
 = render 'shared/profile/navbar'
 
-%h1 Список сделок
+.container
+  %h1 Список сделок
 
-%table
-  %thead
-    %tr
-      %th №
-      %th Клиент
-      %th Лот
-      %th MSG
-      %th Купил
-      %th Продал
-      %th Выручка
-      %th Выкуплено
-      %th Оплачено
-      %th Ссылки
-
-  %tbody
-    - @profile_deals.each do |profile_deal|
+  %table
+    %thead
       %tr
-        %td.p.lead=link_to profile_deal.id, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.client.name, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.item.item, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.messenger, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.buy, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.sell, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.sell-profile_deal.buy, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.byed, profile_deal_path(profile_deal)
-        %td.p.lead= link_to profile_deal.paid, profile_deal_path(profile_deal)
+        %th №
+        %th Клиент
+        %th Лот
+        %th MSG
+        %th Купил
+        %th Продал
+        %th Выручка
+        %th Выкуплено
+        %th Оплачено
+        %th Ссылки
 
-        %td
-          = link_to 'Edit', edit_profile_deal_path(profile_deal)
+    %tbody
+      - @profile_deals.each do |profile_deal|
+        %tr
+          %td.p.lead{:scope => 'col' }=link_to profile_deal.id, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.client.name, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.item.item, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.messenger, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.buy, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.sell, profile_deal_path(profile_deal)
+          -# %td.p.lead= link_to profile_deal.sell - profile_deal.buy, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.byed, profile_deal_path(profile_deal)
+          %td.p.lead= link_to profile_deal.paid, profile_deal_path(profile_deal)
 
-%br
+          %td
+            = link_to 'Edit', edit_profile_deal_path(profile_deal)
 
-= link_to 'New Deal', new_profile_deal_path
+  %br
+
+  = link_to 'New Deal', new_profile_deal_path

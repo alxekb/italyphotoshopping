@@ -1,4 +1,4 @@
-= form_for @profile_item do |f|
+= form_for @profile_item, class: 'form mx-auto' do |f|
   - if @profile_item.errors.any?
     #error_explanation
       %h2= "#{pluralize(@profile_item.errors.count, "error")} prohibited this profile_item from being saved:"
@@ -8,18 +8,18 @@
 
   .field
     = f.label :item
-    = f.text_field :item
+    = f.text_field :item, class: 'form-control'
   .field
     = f.label :brand
-    = f.text_field :brand
+    = f.text_field :brand, class: 'form-control'
   .field
     = f.label :color
-    = f.text_field :color
+    = f.text_field :color, class: 'form-control'
   .field
-    = f.label :price
-    = f.number_field :price
+    = f.label :'selling price'
+    = f.number_field :price, class: 'form-control'
   .field
-    = f.label :cost
-    = f.number_field :cost
+    = f.label :'cost price'
+    = f.number_field :cost, class: 'form-control'
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'button btn btn-outline-primary btn-block mt-4'

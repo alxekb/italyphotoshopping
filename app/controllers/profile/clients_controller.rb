@@ -1,6 +1,6 @@
 class Profile::ClientsController < ProfileController
   def index
-    @clients = Client.all
+    @clients = User.all
   end
 
   def show
@@ -36,7 +36,7 @@ class Profile::ClientsController < ProfileController
   private
 
   def client
-    @client = Client.find_by(id: params[:id])
+    @client = User.find_by(id: params[:id])
   end
 
   def client_params
