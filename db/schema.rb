@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_09_173156) do
+ActiveRecord::Schema.define(version: 2019_06_10_200106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 2019_06_09_173156) do
     t.integer "user_id"
     t.string "slug"
     t.integer "eur_price"
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["slug"], name: "index_items_on_slug", unique: true
   end
 
@@ -200,5 +202,6 @@ ActiveRecord::Schema.define(version: 2019_06_09_173156) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "items", "brands"
   add_foreign_key "packages", "items"
 end

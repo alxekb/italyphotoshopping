@@ -11,7 +11,7 @@
     = f.text_field :item, class: 'form-control'
   .field
     = f.label :brand
-    = f.text_field :brand, class: 'form-control'
+    = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id] },  class: 'form-control'
   .field
     = f.label :color
     = f.text_field :color, class: 'form-control'
