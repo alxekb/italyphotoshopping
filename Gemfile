@@ -19,6 +19,7 @@ gem 'friendly_id', '~> 5.2.4'
 gem 'faraday', '~> 0.15.4'
 gem 'faraday_middleware', '~> 0.13.1'
 gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.4.1'
+gem 'administrate'
 #
 # https://rubygems.org/gems/devise
 gem 'devise', '~> 4.5'
