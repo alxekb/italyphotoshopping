@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PackageDashboard < Administrate::BaseDashboard
+class ReviewDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,11 @@ class PackageDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    items: Field::HasMany,
     id: Field::Number,
-    # item_id: Field::Number,
-    shipping_type: Field::Number,
-    pup_code: Field::Number,
+    index: Field::String,
+    new: Field::String,
+    edit: Field::String,
+    show: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,20 +25,20 @@ class PackageDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :user,
-    :items,
     :id,
-    # :item_id,
+    :index,
+    :new,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
-    :items,
     :id,
-    # :item_id,
-    :shipping_type,
-    :pup_code,
+    :index,
+    :new,
+    :edit,
+    :show,
     :created_at,
     :updated_at,
   ].freeze
@@ -48,16 +48,16 @@ class PackageDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :items,
-    # :item_id,
-    :shipping_type,
-    :pup_code,
+    :index,
+    :new,
+    :edit,
+    :show,
   ].freeze
 
-  # Overwrite this method to customize how packages are displayed
+  # Overwrite this method to customize how reviews are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(package)
-  #   "Package ##{package.id}"
+  # def display_resource(review)
+  #   "Review ##{review.id}"
   # end
 end

@@ -11,7 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
     items: Field::HasMany,
     packages: Field::HasMany,
     orders: Field::HasMany,
-    # review: Field::HasMany,
+    review: Field::HasMany,
     profile: Field::HasOne,
     id: Field::Number,
     email: Field::String,
@@ -27,6 +27,9 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     admin: Field::Boolean,
+    confirmation_token: Field::String,
+    confirmed_at: Field::DateTime,
+    confirmation_sent_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -47,7 +50,7 @@ class UserDashboard < Administrate::BaseDashboard
     :items,
     :packages,
     :orders,
-    # :review,
+    :review,
     :profile,
     :id,
     :email,
@@ -63,6 +66,9 @@ class UserDashboard < Administrate::BaseDashboard
     :created_at,
     :updated_at,
     :admin,
+    :confirmation_token,
+    :confirmed_at,
+    :confirmation_sent_at,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -85,12 +91,15 @@ class UserDashboard < Administrate::BaseDashboard
     :current_sign_in_ip,
     :last_sign_in_ip,
     :admin,
+    :confirmation_token,
+    :confirmed_at,
+    :confirmation_sent_at,
   ].freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.email}#{user.profile.name}"
+  end
 end

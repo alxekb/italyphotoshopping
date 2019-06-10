@@ -11,6 +11,7 @@ class ItemDashboard < Administrate::BaseDashboard
     image_attachment: Field::HasOne,
     image_blob: Field::HasOne,
     order: Field::BelongsTo,
+    profile_deals: Field::HasMany,
     id: Field::Number,
     item: Field::String,
     brand: Field::String,
@@ -41,7 +42,7 @@ class ItemDashboard < Administrate::BaseDashboard
     :image_attachment,
     :image_blob,
     :order,
-    :id,
+    :profile_deals,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -50,6 +51,7 @@ class ItemDashboard < Administrate::BaseDashboard
     :image_attachment,
     :image_blob,
     :order,
+    :profile_deals,
     :id,
     :item,
     :brand,
@@ -78,6 +80,7 @@ class ItemDashboard < Administrate::BaseDashboard
     :image_attachment,
     :image_blob,
     :order,
+    :profile_deals,
     :item,
     :brand,
     :name,
@@ -99,7 +102,7 @@ class ItemDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how items are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(item)
-  #   "Item ##{item.id}"
-  # end
+  def display_resource(item)
+    "#{item.item} #{item.brand} #{item.name} #{item.size}"
+  end
 end

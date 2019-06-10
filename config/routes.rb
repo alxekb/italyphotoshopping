@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+      resources :users
+      resources :profiles
+      resources :brands
+      resources :bulletins
+      resources :clients
+      resources :items
+      resources :orders
+      resources :packages
+      # resources :reviews
+
+      root to: "brands#index"
+    end
   resources :packages, :bulletins, :items, :shop, :reviews, :orders
 
   namespace :profile do

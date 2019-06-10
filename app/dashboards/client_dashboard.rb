@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PackageDashboard < Administrate::BaseDashboard
+class ClientDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,12 +8,11 @@ class PackageDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
-    items: Field::HasMany,
+    profile_deals: Field::HasMany,
     id: Field::Number,
-    # item_id: Field::Number,
-    shipping_type: Field::Number,
-    pup_code: Field::Number,
+    name: Field::String,
+    wa: Field::String,
+    ig: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -24,21 +23,20 @@ class PackageDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :user,
-    :items,
+    :profile_deals,
     :id,
-    # :item_id,
+    :name,
+    :wa,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :user,
-    :items,
+    :profile_deals,
     :id,
-    # :item_id,
-    :shipping_type,
-    :pup_code,
+    :name,
+    :wa,
+    :ig,
     :created_at,
     :updated_at,
   ].freeze
@@ -47,17 +45,16 @@ class PackageDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :user,
-    :items,
-    # :item_id,
-    :shipping_type,
-    :pup_code,
+    :profile_deals,
+    :name,
+    :wa,
+    :ig,
   ].freeze
 
-  # Overwrite this method to customize how packages are displayed
+  # Overwrite this method to customize how clients are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(package)
-  #   "Package ##{package.id}"
+  # def display_resource(client)
+  #   "Client ##{client.id}"
   # end
 end
