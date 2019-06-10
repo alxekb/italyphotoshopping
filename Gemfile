@@ -2,27 +2,27 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
-gem 'jquery-rails'
-gem 'haml-rails'
+gem "aws-sdk-s3", require: false
 gem 'administrate'
+gem 'haml-rails'
 gem 'bootstrap'
 gem 'bootstrap_form'
-gem 'tabler-rubygem'
-gem 'popper_js', '~> 1.9', '>= 1.9.9'
-gem 'high_voltage', '~> 3.1'
-gem "aws-sdk-s3", require: false
+gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.4.1'
 gem 'carrierwave', '~> 1.0'
-gem 'mini_magick', '~> 4.3'
+gem 'devise', '~> 4.5'
 gem "factory_bot_rails", "~> 4.0"
-gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'friendly_id', '~> 5.2.4'
 gem 'faraday', '~> 0.15.4'
 gem 'faraday_middleware', '~> 0.13.1'
-gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.4.1'
-gem 'administrate'
+gem 'high_voltage', '~> 3.1'
+gem 'jquery-rails'
+gem 'mini_magick', '~> 4.3'
+gem 'popper_js', '~> 1.9', '>= 1.9.9'
+gem "pundit"
+gem 'tabler-rubygem'
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
 #
 # https://rubygems.org/gems/devise
-gem 'devise', '~> 4.5'
 gem 'bugsnag', '~> 6.11'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.2.rc1'
