@@ -4,7 +4,8 @@ class Profile::ItemsController < ApplicationController
   # GET /profile/items
   # GET /profile/items.json
   def index
-    @profile_items = Profile::Item.all
+    # @profile_items = Profile::Item.all
+    @profile_items = Item.all
   end
 
   # GET /profile/items/1
@@ -14,7 +15,8 @@ class Profile::ItemsController < ApplicationController
 
   # GET /profile/items/new
   def new
-    @profile_item = Profile::Item.new
+    # @profile_item = Profile::Item.new
+    @item = Item.new
   end
 
   # GET /profile/items/1/edit
@@ -24,7 +26,8 @@ class Profile::ItemsController < ApplicationController
   # POST /profile/items
   # POST /profile/items.json
   def create
-    @profile_item = Profile::Item.new(profile_item_params)
+    # @profile_item = Profile::Item.new(profile_item_params)
+    @profile_item = Item.new(profile_item_params)
 
     respond_to do |format|
       if @profile_item.save
@@ -64,7 +67,8 @@ class Profile::ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile_item
-      @profile_item = Profile::Item.find(params[:id])
+      # @profile_item = Profile::Item.find(params[:id])
+      @profile_item = Item.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

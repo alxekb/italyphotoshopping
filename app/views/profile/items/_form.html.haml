@@ -1,9 +1,9 @@
-= form_for @profile_item, class: 'form mx-auto' do |f|
-  - if @profile_item.errors.any?
+= form_for @item, class: 'form mx-auto' do |f|
+  - if @item.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@profile_item.errors.count, "error")} prohibited this profile_item from being saved:"
+      %h2= "#{pluralize(@item.errors.count, "error")} prohibited this profile_item from being saved:"
       %ul
-        - @profile_item.errors.full_messages.each do |message|
+        - @item.errors.full_messages.each do |message|
           %li= message
 
   .field

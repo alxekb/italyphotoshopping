@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :packages, :bulletins, :items, :shop, :reviews, :orders
 
   namespace :profile do
-    resources :items
+    resources :items, controller: 'item'
     resources :deals
     resources :clients
   end
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     patch 'dashboard', to: 'dashboard#update'
     resources :admin
     # resources :dashboard
-    resources :clients
+    # resources :clients
   end
 
   root 'welcome#index'
