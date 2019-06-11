@@ -8,7 +8,7 @@
       = f.text_field :item, class: 'form-control'
 
       = f.label :Brand
-      = f.text_field :brand, class: 'form-control'
+      = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id]  }, prompt: true, class: 'form-control'
 
       = f.label :Name
       = f.text_field :name, class: 'form-control'
