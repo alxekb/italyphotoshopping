@@ -12,9 +12,9 @@
               = image_tag(item.image.variant(resize:"170x230"))
             %h2
               = item.item
-              %span= item.brand
-              %span= item.name
+              %span= item.brand.name if item.brand_id?
+              %span= item.name if item.name?
             %h3
-              = item.price
+              = item.price if item.price?
               %span РУБ.
             %h3= link_to 'Show >', item_path(item), class: "btn btn-success"

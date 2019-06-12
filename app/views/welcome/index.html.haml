@@ -4,7 +4,7 @@
       %h2 Привет всем любителям качественных и стильных вещей made in Italy.
     .col-md-6
       Мы рады приветствовать вас в нашем магазине!
-  %h2= link_to 'Показать товары', controller: 'items', class: 'btn btn-success'
+  %h2= link_to 'Показать товары', controller: 'items', class: 'btn btn-outline-success'
   - if current_user.try(:admin?)
-    %h2= link_to 'new item', new_item_path, class: 'btn btn-info'
-    = link_to 'заказы', orders_path, class: 'btn btn-info'
+    %h2= link_to 'new item', new_item_path, class: 'btn btn-outline-primary'
+    = link_to 'заказы', orders_path, class: 'btn btn-outline-info'

@@ -2,15 +2,20 @@
   .container
     .row
       .col-sm-3.order-2.m-4
-        = link_to '< back', items_path, class: "btn btn-primary"
-        %p
-          Item name
+        .form-inline.justify-content-between
+          = link_to '< back', items_path, class: "btn btn-outline-primary"
+          = link_to "добавить к заказу >", new_order_path, class: "btn btn-outline-success" if current_user.admin?
+
         %h2
           = @item.item
-          %span= @item.brand
-          %span= @item.name
-          %span= @item.color
-          %span= @item.size
+          %span= @item.item_name.name if @item.item_name_id?
+          %span= @item.brand.name if @item.brand_id?
+          %span= @item.name if @item.name?
+          %span= @item.color.name if @item.color_id?
+          %span= @item.size.name if @item.size_id?
+        %p
+          = @item.price
+          %span rub
         %p
           article
           %span= @item.art
@@ -21,9 +26,3 @@
           = image_tag('/ek.jpg', size: "480x640")
 
         -#= image_tag @item.photos[0].url, size: "480x640"
-      .col-sm-3.order-3.m-4
-        = link_to "добавить к заказу >", new_order_path, class: "btn btn-info" if current_user.admin?
-
-        %h3
-          = @item.price
-          %spam rub

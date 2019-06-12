@@ -36,15 +36,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-#    @bulletin = Bulletin.new()
-#    @bulletin.attachment(params[:bulletin][:attachment])
-#    @bulletin.save!
     @item = current_user.items.new(item_params)
-                                  # name: params[:name],
-                                  # color: params[:color],
-                                  # brand: Brand.find_by(id: params[:brand_id]).name
-    if @item.save!
-#    @item.image.attach(params[:image])
+    if @item.save
       redirect_to @item
       flash[:success] = 'Лот успешно создан.'
     else
