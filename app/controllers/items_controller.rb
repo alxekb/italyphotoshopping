@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
 #    @bulletin = Bulletin.new()
 #    @bulletin.attachment(params[:bulletin][:attachment])
 #    @bulletin.save!
-    @item = Item.new(item_params)
+    @item = current_user.items.new(item_params)
                                   # name: params[:name],
                                   # color: params[:color],
                                   # brand: Brand.find_by(id: params[:brand_id]).name
@@ -81,7 +81,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item, :brand_id, :name, :color,:size, :art, :ean, :price, :eur_price, :string, :image)
+    params.require(:item).permit(:item, :brand_id, :model_id, :name, :color,:size, :art, :ean, :price, :eur_price, :string, :image)
   end
 
 end

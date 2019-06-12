@@ -1,39 +1,28 @@
 
-= form_with scope: :item, url: items_path, html: { class: 'form'} do |f|
+= bootstrap_form_with scope: :item, url: items_path, html: { class: 'form'} do |f|
   = render "shared/errors", object: @item
-  .form-fow
+  .form-fow.form-group
     .form-col.col-md-4.col-sm-6
       %h4 Item details
-      = f.label :Item
-      = f.text_field :item, class: 'form-control'
+      .form-group
+        = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id] }, prompt: true, class: 'custom-select'
+        = f.select :item_id,  ItemName.order(:name).map { |i| [i.name, i.id] }, prompt: true, class: 'form-control'
+        = f.text_field :name, class: 'form-control'
+        = f.select :model_id, Model.order(:name).map { |m| [m.name, m.id] }, prompt: true, class: 'form-control'
+        = f.select :color_id, Color.order(:name).map { |c| [c.name, c.id] }, prompt:true, class: 'form-control'
+        = f.select :size_id, Size.order(:name).map { |s| [s.name, s.id] }, prompt:true, class: 'form-control'
 
-      = f.label :Brand
-      = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id]  }, prompt: true, class: 'form-control'
-
-      = f.label :Name
-      = f.text_field :name, class: 'form-control'
-
-      = f.label :Color
-      = f.text_field :color, class: 'form-control'
-
-      = f.label :Size
-      = f.text_field :size, class: 'form-control'
     .form-col.col-md-4.col-sm-6
       %h4 Merchant data
-      = f.label :EAN, class: 'control-label'
-      = f.text_field :ean, class: 'form-control'
+      .form-group
+        = f.text_field :ean, class: 'form-control'
+        = f.text_field :art, class: 'form-control'
 
-      = f.label :Article
-      = f.text_field :art, class: 'form-control'
     .form-row.col-md-4.col-sm-6
       %h4 Price section
-      = f.label :ItemPrice
-      = f.text_field :price, class: 'form-control'
-
-      = f.label :ItemEuroPrice
-      = f.text_field :eur_price, class: 'form-control'
-      .field
-        = f.label :image
+      .form-group
+        = f.number_field :price, class: 'form-control'
+        = f.number_field :eur_price, class: 'form-control'
         = f.file_field :image, class: 'form-control'
       %br
-        =f.submit "Сохранить", class: "btn btn-primary"
+        =f.submit "Сохранить", class: "btn btn-outline-primary btn-block"

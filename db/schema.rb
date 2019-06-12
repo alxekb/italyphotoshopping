@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_200106) do
+ActiveRecord::Schema.define(version: 2019_06_12_103241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(version: 2019_06_10_200106) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -76,6 +82,12 @@ ActiveRecord::Schema.define(version: 2019_06_10_200106) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "item_names", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
@@ -98,8 +110,18 @@ ActiveRecord::Schema.define(version: 2019_06_10_200106) do
     t.string "slug"
     t.integer "eur_price"
     t.bigint "brand_id"
+    t.bigint "size_id"
+    t.bigint "color_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["color_id"], name: "index_items_on_color_id"
+    t.index ["size_id"], name: "index_items_on_size_id"
     t.index ["slug"], name: "index_items_on_slug", unique: true
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -180,6 +202,12 @@ ActiveRecord::Schema.define(version: 2019_06_10_200106) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sizes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -203,5 +231,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_200106) do
   end
 
   add_foreign_key "items", "brands"
+  add_foreign_key "items", "colors"
+  add_foreign_key "items", "sizes"
   add_foreign_key "packages", "items"
 end

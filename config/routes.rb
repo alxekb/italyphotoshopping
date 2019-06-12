@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       resources :items
       resources :orders
       resources :packages
+      resources :models
+      resources :item_names
+      resources :colors
+      resources :sizes
+
       # resources :reviews
 
       root to: "brands#index"
