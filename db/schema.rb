@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_103241) do
+ActiveRecord::Schema.define(version: 2019_06_12_154050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,8 +112,10 @@ ActiveRecord::Schema.define(version: 2019_06_12_103241) do
     t.bigint "brand_id"
     t.bigint "size_id"
     t.bigint "color_id"
+    t.bigint "item_name_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["color_id"], name: "index_items_on_color_id"
+    t.index ["item_name_id"], name: "index_items_on_item_name_id"
     t.index ["size_id"], name: "index_items_on_size_id"
     t.index ["slug"], name: "index_items_on_slug", unique: true
   end
@@ -232,6 +234,7 @@ ActiveRecord::Schema.define(version: 2019_06_12_103241) do
 
   add_foreign_key "items", "brands"
   add_foreign_key "items", "colors"
+  add_foreign_key "items", "item_names"
   add_foreign_key "items", "sizes"
   add_foreign_key "packages", "items"
 end

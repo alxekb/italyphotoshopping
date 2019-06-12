@@ -5,7 +5,7 @@
       %h4 Item details
 
       = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id] }, prompt: true
-      = f.select :item_id,  ItemName.order(:name).map { |i| [i.name, i.id] }, prompt: true
+      = f.select :item_name_id,  ItemName.order(:name).map { |i| [i.name, i.id] }, prompt: true
       = f.text_field :name
       = f.select :model_id, Model.order(:name).map { |m| [m.name, m.id] }, prompt: true
       = f.select :color_id, Color.order(:name).map { |c| [c.name, c.id] }, prompt:true

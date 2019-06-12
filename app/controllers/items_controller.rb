@@ -46,6 +46,7 @@ class ItemsController < ApplicationController
     if @item.save!
 #    @item.image.attach(params[:image])
       redirect_to @item
+      flash[:success] = 'Лот успешно создан.'
     else
       render action: 'edit'
       flash[:warning] = 'Error, item not saved!'
@@ -81,7 +82,10 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item, :brand_id, :model_id, :name, :color,:size, :art, :ean, :price, :eur_price, :string, :image)
+    params.require(:item).permit(:item, :brand_id, :model_id, :item_name_id,
+                                 :color_id, :size_id, :name, :color,:size,
+                                 :art, :ean, :price, :eur_price, :string,
+                                 :image)
   end
 
 end
