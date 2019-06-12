@@ -1,6 +1,6 @@
 = bootstrap_form_with scope: :item, url: items_path, html: { class: 'form'} do |f|
   = render "shared/errors", object: @item
-  .form-fow.form-group
+  .form-row.form-group
     .form-col.col-md-4.col-sm-12
       %h4 Item details
       .form-group
@@ -17,7 +17,7 @@
         = f.text_field :ean, class: 'form-control'
         = f.text_field :art, class: 'form-control'
 
-    .form-row.col-md-4.col-sm-12
+    .form-col.col-md-4.col-sm-12
       %h4 Price section
       .form-group
         = f.number_field :price, class: 'form-control'
