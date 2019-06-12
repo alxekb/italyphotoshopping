@@ -9,9 +9,9 @@ class OrderDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    items: Field::HasMany,
+    items: Field::BelongsTo,
     id: Field::Number,
-    item_id: Field::Number,
+    # item_id: Field::Number,
     status: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
