@@ -1,7 +1,10 @@
-.header.navbar.navbar-transparent.navbar-expand-md
-  .container
-    = link_to "Italy photo shopping", root_path, id: "logo"
-    %nav
+.navbar.navbar-expand-lg.navbar-light.bg-light
+  = link_to "Italy photo shopping", root_path, class: 'navbar-brand'
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button", :role => "navigation"}
+    %span.navbar-toggler-icon
+
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
       %ul.nav.navbar-nav.navbar-right
         %li.nav-item
           = link_to "Товары", items_path, class: 'nav-link'

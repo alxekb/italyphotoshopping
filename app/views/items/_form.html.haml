@@ -1,8 +1,7 @@
-
 = bootstrap_form_with scope: :item, url: items_path, html: { class: 'form'} do |f|
   = render "shared/errors", object: @item
   .form-fow.form-group
-    .form-col.col-md-4.col-sm-6
+    .form-col.col-md-4.col-sm-12
       %h4 Item details
       .form-group
         = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id] }, prompt: true, class: 'custom-select'
@@ -12,17 +11,17 @@
         = f.select :color_id, Color.order(:name).map { |c| [c.name, c.id] }, prompt:true, class: 'form-control'
         = f.select :size_id, Size.order(:name).map { |s| [s.name, s.id] }, prompt:true, class: 'form-control'
 
-    .form-col.col-md-4.col-sm-6
+    .form-col.col-md-4.col-sm-12
       %h4 Merchant data
       .form-group
         = f.text_field :ean, class: 'form-control'
         = f.text_field :art, class: 'form-control'
 
-    .form-row.col-md-4.col-sm-6
+    .form-row.col-md-4.col-sm-12
       %h4 Price section
       .form-group
         = f.number_field :price, class: 'form-control'
         = f.number_field :eur_price, class: 'form-control'
         = f.file_field :image, class: 'form-control'
-      %br
+      .form-group
         =f.submit "Сохранить", class: "btn btn-outline-primary btn-block"
