@@ -1,27 +1,28 @@
-%form
-  = bootstrap_form_with scope: :item, url: items_path do |f|
-    = render "shared/errors", object: @item
-    .form-row
-      .form-group.col-md-12
-        %h4 Item details
+= bootstrap_form_with scope: :item, url: items_path do |f|
+  = render "shared/errors", object: @item
+  .row
+    .col-12
+      %h4 Item details
 
-        = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id] }, prompt: true
-        = f.select :item_id,  ItemName.order(:name).map { |i| [i.name, i.id] }, prompt: true
-        = f.text_field :name
-        = f.select :model_id, Model.order(:name).map { |m| [m.name, m.id] }, prompt: true
-        = f.select :color_id, Color.order(:name).map { |c| [c.name, c.id] }, prompt:true
-        = f.select :size_id, Size.order(:name).map { |s| [s.name, s.id] }, prompt:true
-      .form-group.col-md-12
-        %h4 Merchant data
+      = f.select :brand_id, Brand.order(:name).map { |b| [b.name, b.id] }, prompt: true
+      = f.select :item_id,  ItemName.order(:name).map { |i| [i.name, i.id] }, prompt: true
+      = f.text_field :name
+      = f.select :model_id, Model.order(:name).map { |m| [m.name, m.id] }, prompt: true
+      = f.select :color_id, Color.order(:name).map { |c| [c.name, c.id] }, prompt:true
+      = f.select :size_id, Size.order(:name).map { |s| [s.name, s.id] }, prompt:true
+  .row
+    .col-12
+      %h4 Merchant data
 
-        = f.text_field :ean
-        = f.text_field :art
+      = f.text_field :ean
+      = f.text_field :art
+  .row
+    .col-12
+      %h4 Price section
 
-      .form-group.col-md-12
-        %h4 Price section
-
-        = f.number_field :price
-        = f.number_field :eur_price
-        = f.file_field :image
-      .form-group.col-md-12
-        =f.submit "Сохранить", class: "btn btn-outline-primary btn-block"
+      = f.number_field :price
+      = f.number_field :eur_price
+      = f.file_field :image
+  .row
+    .col-12
+      =f.submit "Сохранить", class: "btn btn-outline-primary btn-block"

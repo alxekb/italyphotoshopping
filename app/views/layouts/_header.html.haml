@@ -1,17 +1,16 @@
-.navbar.navbar-expand-lg.navbar-light.bg-light
+%nav.navbar.navbar-expand-md.navbar-light.bg-light
   = link_to "Italy photo shopping", root_path, class: 'navbar-brand'
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button", :role => "navigation"}
     %span.navbar-toggler-icon
 
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      %ul.nav.navbar-nav.navbar-right
-        %li.nav-item
-          = link_to "Товары", items_path, class: 'nav-link'
-        %li.nav-item
-          = link_to "Информация", page_path('terms'), class: 'nav-link'
-        %li.nav-item
-          - if user_signed_in?
-            = link_to "Кабинет", profile_dashboard_path, class: 'nav-link'
-          - else
-            = link_to "Войти", new_user_session_path, class: 'nav-link'
+      %li.nav-item
+        = link_to "Товары", items_path, class: 'nav-link'
+      %li.nav-item
+        = link_to "Информация", page_path('terms'), class: 'nav-link'
+      %li.nav-item
+        - if user_signed_in?
+          = link_to "Кабинет", profile_dashboard_path, class: 'nav-link'
+        - else
+          = link_to "Войти", new_user_session_path, class: 'nav-link'
