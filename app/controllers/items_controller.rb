@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.friendly.find(params[:id])
+    @item = Item.find(params[:id])
     # if current.user.image.attached? @item.image
     # else @item.image = image_tag ''
   end
@@ -39,14 +39,21 @@ class ItemsController < ApplicationController
 #    @bulletin = Bulletin.new()
 #    @bulletin.attachment(params[:bulletin][:attachment])
 #    @bulletin.save!
-    @item = current_user.items.build(item_params)
-    @item.save
+    @item = Item.new(item_params)
+                                  # name: params[:name],
+                                  # color: params[:color],
+                                  # brand: Brand.find_by(id: params[:brand_id]).name
+    if @item.save!
 #    @item.image.attach(params[:image])
-    redirect_to @item
+      redirect_to @item
+    else
+      render action: 'edit'
+      flash[:warning] = 'Error, item not saved!'
+    end
   end
 
   def edit
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
   end
 
   def update
@@ -74,7 +81,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item, :brand, :name, :color,:size, :art, :ean, :price, :eur_price, :string, :image)
+    params.require(:item).permit(:item, :brand_id, :name, :color,:size, :art, :ean, :price, :eur_price, :string, :image)
   end
 
 end
