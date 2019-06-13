@@ -1,39 +1,41 @@
-%h1 Listing deals
+.container
+  %h1 Listing deals
 
-%table
-  %thead
-    %tr
-      %th Profile
-      %th Item
-      %th Bye
-      %th Sell
-      %th Status
-      %th Messenger
-      %th Paid
-      %th Ransom
-      %th Comment
-      %th Payment method
-      %th
-      %th
-      %th
-
-  %tbody
-    - @deals.each do |deal|
+  %table.table
+    %thead
       %tr
-        %td= deal.profile
-        %td= deal.item
-        %td= deal.bye
-        %td= deal.sell
-        %td= deal.status
-        %td= deal.messenger
-        %td= deal.paid
-        %td= deal.ransom
-        %td= deal.comment
-        %td= deal.payment_method
-        %td= link_to 'Show', deal
-        %td= link_to 'Edit', edit_deal_path(deal)
-        %td= link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' }
+        %th Profile
+        %th Item
+        %th Bye
+        %th Sell
+        %th Status
+        %th Messenger
+        %th Paid
+        %th Ransom
+        %th Comment
+        %th Payment method
+        %th
+        %th
+        %th
 
-%br
+    %tbody
+      - @deals.each do |deal|
+        %tr
+          %td= link_to deal.profile.name, deal
+          %td= deal.item.name
+          %td= link_to deal.bye, deal
+          %td= link_to deal.sell, deal
+          %td= link_to deal.status, deal
+          %td= deal.messenger
+          %td= deal.paid
+          %td= deal.ransom
+          %td= deal.comment
+          %td= deal.payment_method
+          %td
+            -# = link_to 'Show', deal
+            = link_to 'Edit', edit_deal_path(deal)
 
-= link_to 'New Deal', new_deal_path
+
+  %br
+
+  = link_to 'New Deal', new_deal_path

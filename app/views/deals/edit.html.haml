@@ -1,7 +1,10 @@
-%h1 Editing deal
+.section
+  %h4 Редактируем сделку
 
-= render 'form'
+  = render 'form'
 
-= link_to 'Show', @deal
-\|
-= link_to 'Back', deals_path
+  = link_to 'Show', @deal
+  \|
+  = link_to 'Back', deals_path
+
+  = link_to 'Destroy', @deal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'float-right'
