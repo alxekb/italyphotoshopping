@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_154050) do
+ActiveRecord::Schema.define(version: 2019_06_13_113259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,23 @@ ActiveRecord::Schema.define(version: 2019_06_12_154050) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "deals", force: :cascade do |t|
+    t.bigint "profile_id"
+    t.bigint "item_id"
+    t.decimal "bye"
+    t.decimal "sell"
+    t.string "status"
+    t.string "messenger"
+    t.boolean "paid"
+    t.boolean "ransom"
+    t.text "comment"
+    t.string "payment_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_deals_on_item_id"
+    t.index ["profile_id"], name: "index_deals_on_profile_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -232,6 +249,8 @@ ActiveRecord::Schema.define(version: 2019_06_12_154050) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "deals", "items"
+  add_foreign_key "deals", "profiles"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "colors"
   add_foreign_key "items", "item_names"

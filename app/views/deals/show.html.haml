@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Profile:
+  = @deal.profile
+%p
+  %b Item:
+  = @deal.item
+%p
+  %b Bye:
+  = @deal.bye
+%p
+  %b Sell:
+  = @deal.sell
+%p
+  %b Status:
+  = @deal.status
+%p
+  %b Messenger:
+  = @deal.messenger
+%p
+  %b Paid:
+  = @deal.paid
+%p
+  %b Ransom:
+  = @deal.ransom
+%p
+  %b Comment:
+  = @deal.comment
+%p
+  %b Payment method:
+  = @deal.payment_method
+
+= link_to 'Edit', edit_deal_path(@deal)
+\|
+= link_to 'Back', deals_path

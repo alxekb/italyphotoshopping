@@ -13,12 +13,13 @@ Rails.application.routes.draw do
       resources :item_names
       resources :colors
       resources :sizes
+      resources :deals
 
       # resources :reviews
 
       root to: "brands#index"
     end
-  resources :packages, :bulletins, :items, :shop, :reviews, :orders
+  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals
 
   namespace :profile do
     resources :items, controller: 'item'
