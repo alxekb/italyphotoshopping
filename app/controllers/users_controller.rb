@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :user_is_admin
+  
   def index
     @users = User.all
   end
@@ -13,8 +15,9 @@ class UsersController < ApplicationController
   private
 
   def user_is_admin
-    if current_user.try(:admin?)
-      redirect_to users_index_path
+    if user_signed_in? && current_user.admin?
+      # redirect_to users_path
+      render 'index'
     else
       redirect_to root_path
     end

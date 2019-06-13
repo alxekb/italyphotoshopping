@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_152750) do
+ActiveRecord::Schema.define(version: 2019_06_13_215247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,7 +168,16 @@ ActiveRecord::Schema.define(version: 2019_06_13_152750) do
     t.integer "pup_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "h"
+    t.integer "w"
+    t.integer "l"
+    t.integer "weight"
+    t.bigint "package_id"
+    t.string "tracking_code"
+    t.string "shipping_status"
+    t.boolean "active"
     t.index ["item_id"], name: "index_packages_on_item_id"
+    t.index ["package_id"], name: "index_packages_on_package_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
   end
 
@@ -263,4 +272,5 @@ ActiveRecord::Schema.define(version: 2019_06_13_152750) do
   add_foreign_key "items", "item_names"
   add_foreign_key "items", "sizes"
   add_foreign_key "packages", "items"
+  add_foreign_key "packages", "packages"
 end

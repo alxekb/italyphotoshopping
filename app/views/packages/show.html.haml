@@ -1,22 +1,23 @@
-%p#notice= notice
+.container
+  %p#notice= notice
 
-%p
-  %b User:
-  -# = @package.user_id
-  = @profile.name
-%p
-  %b Item:
-  -# = @package.item_id
-  = @item.item
-  = @item.brand
-  = @user.email
-%p
-  %b Shipping type:
-  = @package.shipping_type
-%p
-  %b Pup code:
-  = @package.pup_code
+  %p
+    %b User:
+    -# = @package.user_id
+    = @profile.name
+  %p
+    %b Item:
+    -# = @package.item_id
+    = @item.item
+    = @item.brand
+    = @user.email
+  %p
+    %b Shipping type:
+    = @package.shipping_type
+  %p
+    %b Pup code:
+    = @package.pup_code
 
-= link_to 'Edit', edit_package_path(@package)
-\|
-= link_to 'Back', packages_path
+  = link_to 'Edit', edit_package_path(@package)
+  \|
+  = link_to 'Back', packages_path

@@ -11,29 +11,31 @@
   .field
     = f.select :item_id, Item.order(:name).map { |i| [[i.item_name.name, i.name, i.brand.name, i.color.name, i.size.name].join(' '), i.id] }, prompt: true
   .field
-    = f.text_field :bye
+    = f.number_field :bye, placeholder: '100 (EUR)'
   .field
-    = f.text_field :sell
+    = f.number_field :sell, placeholder: '200 (EUR)'
   .field
-    = f.text_field :status
+    = f.text_field :status, placeholder: 'выкуплен'
   .field
-    = f.text_field :messenger
+    = f.text_field :messenger, placeholder: 'телефон или инста'
   .field
     = f.check_box :paid
   .field
     = f.check_box :ransom
   .field
-    = f.text_area :comment
+    = f.text_area :comment, placeholder: 'ждем еще что-то'
   .field
-    = f.text_field :payment_method
+    = f.text_field :payment_method, placeholder: 'Tinkoff'
   .form-row
     .col
-      = f.number_field :h
+      = f.number_field :h, placeholder: '15 (cm)'
     .col
-      = f.number_field :w
+      = f.number_field :w, placeholder: '15 (cm)'
     .col
-      = f.number_field :l
+      = f.number_field :l, placeholder: '15 (cm)'
   .field
-    = f.number_field :weight
+    = f.number_field :weight, placeholder: '1200 (gr)'
+  .fiels
+    = f.select :package_id, Package.order(:id).map { |p| [p.id, p.id]}, prompt: true
   .actions
     = f.submit 'Save', class: 'button btn btn-secondary btn-block'

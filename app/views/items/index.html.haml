@@ -1,4 +1,6 @@
 .container
+  - if user_signed_in? && current_user.admin?
+    %h2= link_to 'new item', new_item_path, class: 'btn btn-outline-primary'
   %h5
     Товары
   .block
