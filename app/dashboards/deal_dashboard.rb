@@ -72,7 +72,7 @@ class DealDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how deals are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(deal)
-  #   "Deal ##{deal.id}"
-  # end
+  def display_resource(deal)
+    "Deal ##{deal.id} #{deal.item.name}/#{deal.profile.name} #{deal.profile.phone}"
+  end
 end

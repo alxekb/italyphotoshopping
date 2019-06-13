@@ -7,7 +7,7 @@
           %li= message
 
   .field
-    = f.select :profile_id, Profile.order(:name).map { |p| [[p.name, p.surname, p.phone].join(' '), p.id] }, prompt: true
+    = f.select :profile_id, Profile.order(:name).map { |p| [[p.name, p.surname, p.phone, p.email].join(' '), p.id] }, prompt: true
   .field
     = f.select :item_id, Item.order(:name).map { |i| [[i.item_name.name, i.name, i.brand.name, i.color.name, i.size.name].join(' '), i.id] }, prompt: true
   .field
@@ -26,5 +26,14 @@
     = f.text_area :comment
   .field
     = f.text_field :payment_method
+  .form-row
+    .col
+      = f.number_field :h
+    .col
+      = f.number_field :w
+    .col
+      = f.number_field :l
+  .field
+    = f.number_field :weight
   .actions
     = f.submit 'Save', class: 'button btn btn-secondary btn-block'

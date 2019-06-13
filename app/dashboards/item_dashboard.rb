@@ -103,6 +103,6 @@ class ItemDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(item)
-    "#{item.item} #{item.brand} #{item.name} #{item.size}"
+    "#{item.item} #{item.brand.name} #{item.item_name.name} #{item.size.name}"
   end
 end

@@ -45,7 +45,7 @@ class ItemNameDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how item names are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(item_name)
-  #   "ItemName ##{item_name.id}"
-  # end
+  def display_resource(item_name)
+    "ItemName ##{item_name.name}"
+  end
 end

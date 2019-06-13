@@ -100,6 +100,6 @@ class UserDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(user)
-    "#{user.email}#{user.profile.name}"
+    "#{user.email} #{user.profile.name}"
   end
 end

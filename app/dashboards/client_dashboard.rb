@@ -54,7 +54,7 @@ class ClientDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how clients are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(client)
-  #   "Client ##{client.id}"
-  # end
+  def display_resource(client)
+    "#{client.name}"
+  end
 end

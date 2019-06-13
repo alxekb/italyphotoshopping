@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_113259) do
+ActiveRecord::Schema.define(version: 2019_06_13_152750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,13 @@ ActiveRecord::Schema.define(version: 2019_06_13_113259) do
     t.string "payment_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "h"
+    t.integer "w"
+    t.integer "l"
+    t.integer "weight"
+    t.bigint "package_id"
     t.index ["item_id"], name: "index_deals_on_item_id"
+    t.index ["package_id"], name: "index_deals_on_package_id"
     t.index ["profile_id"], name: "index_deals_on_profile_id"
   end
 
@@ -250,6 +256,7 @@ ActiveRecord::Schema.define(version: 2019_06_13_113259) do
   end
 
   add_foreign_key "deals", "items"
+  add_foreign_key "deals", "packages"
   add_foreign_key "deals", "profiles"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "colors"
