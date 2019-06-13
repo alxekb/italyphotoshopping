@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
-    @orders = Order.all
+    @orders = Order.where('status = ?', 'active')
     @profile = Profile.find_by(id: @orders.pluck(:user_id))
     @items = Item.find_by(id: @orders.pluck(:item_id))
   end

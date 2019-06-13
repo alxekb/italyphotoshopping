@@ -70,6 +70,6 @@ class Profile::DealsController < ProfileController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_deal_params
       params.fetch(:profile_deal, {}).permit(:paid, :byed, :messenger, :buy,
-                                             :sell, :client_id, :item_id)
+                                             :sell, :profile_id, :item_id)
     end
 end

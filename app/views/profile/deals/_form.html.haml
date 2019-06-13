@@ -8,8 +8,8 @@
 
   .actions
     .form-group
-      = f.select :item_id, options_for_select(Profile::Item.order(:brand).map { |i| [ ['#', i.id, '-',i.item, i.brand, i.color].join(" "), i.id ] } ) # TODO: ADD SIZE
-      = f.select :client_id, options_for_select(Client.all.collect { |c| [ c.name, c.id ] } )
+      = f.select :item_id, Item.order(:brand_id).map { |i| [ [i.id, '-',i.item, i.brand_id, i.color_id, i.size_id].join(" "), i.id ] }, prompt: true  # TODO: ADD SIZE
+      = f.select :profile_id, Profile.all.collect { |c| [ [c.name, c.second_name, c.surname, c.phone].join(" "), c.id ] }, prompt: true
     .form-group
       .form-check-inline
         = f.number_field :buy

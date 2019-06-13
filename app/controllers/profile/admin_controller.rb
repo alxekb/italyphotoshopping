@@ -3,9 +3,7 @@ class Profile::AdminController < ProfileController
 
   def index; end
 
-  def new_client
-  end
+  def new_client; end
 
-  def show
-  end
+  def show; end
 end
