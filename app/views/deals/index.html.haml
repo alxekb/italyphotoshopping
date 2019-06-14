@@ -22,7 +22,7 @@
       - @deals.each do |deal|
         %tr
           %td= link_to "##{deal.id} #{deal.profile.name} #{deal.profile.surname}", deal
-          %td= link_to "#{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.model.name} #{deal.item.color.name} #{deal.item.size.name}" , item_path(deal.item)
+          %td= link_to "#{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.model.name} #{deal.item.color.name} #{deal.item.size.name}" , item_path(deal.item), target: '_blank'
           %td= link_to deal.bye, deal
           %td= link_to deal.sell, deal
           %td= link_to deal.status, deal
