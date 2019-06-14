@@ -78,7 +78,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'ekaterinaivanova.com' }
@@ -87,7 +86,7 @@ Rails.application.configure do
     tls: true,
     openssl_verify_mode: 'none',
     address: 'mail.ekaterinaivanova.com',
-    port: 587,
+    port: 25,
     domain: 'ekaterinaivanova.com',
     authentication: 'plain',
     user_name: Rails.application.credentials.dig(:email, :mailbox),
