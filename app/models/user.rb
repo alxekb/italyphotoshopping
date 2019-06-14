@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :packages
   has_many :orders
   has_many :review
-  has_many :profiles, dependent: :destroy
+  has_one :profile, dependent: :destroy
   after_create :init_profile
 
   def init_profile
