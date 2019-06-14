@@ -7,26 +7,26 @@
           %li= message
 
   .field
-    = f.select :user_id, Profile.order(:name).map { |p| [p.name, p.id]}, prompt: true
+    = f.select :user_id, Profile.order(:name).map { |p| [p.name, p.id]}, prompt: true, label: 'Профиль пользователя'
   .field
-    = f.select :item_id, Deal.order(:id).map { |d| [[d.id, d.profile.name, d.item.name].join(' '), d.id] }, prompt: true
+    = f.select :item_id, Deal.order(:id).map { |d| [[d.id, d.profile.name, d.item.name].join(' '), d.id] }, prompt: true, label: 'Лот'
   .field
-    = f.number_field :shipping_type, placeholder: 'boxberry'
+    = f.number_field :shipping_type, placeholder: 'boxberry', label: 'Тип отправления'
   .field
-    = f.number_field :pup_code
+    = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
   .field
-    = f.number_field :h, placeholder: '21 (cm)'
+    = f.number_field :h, placeholder: '21 (cm)', label: 'Высота в см'
   .field
-    = f.number_field :w, placeholder: '18 (cm)'
+    = f.number_field :w, placeholder: '18 (cm)', label: 'Ширина в см'
   .field
-    = f.number_field :l, placeholder: '12 (cm)'
+    = f.number_field :l, placeholder: '12 (cm)', label: 'Длина в см'
   .field
-    = f.number_field :weight, placeholder: '1200 (gr)'
+    = f.number_field :weight, placeholder: '1200 (gr)', label: 'Вес в гр'
   .field
-    = f.text_field :tracking_code
+    = f.text_field :tracking_code, label: 'Трек код', placeholder: '1234567890'
   .field
-    = f.text_field :shipping_status
+    = f.text_field :shipping_status, label: 'Статус отправления', placeholder: 'Подготовка документов'
   .field
-    = f.check_box :active
+    = f.check_box :active, label: 'Статус'
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'button btn btn-outline-secondary btn-block'
