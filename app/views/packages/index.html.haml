@@ -16,6 +16,7 @@
             %thead
               %tr
                 %td Покупка
+                %td
                 %td Лот
                 %td Статус
                 %td Ссылка
@@ -24,6 +25,8 @@
                 %tr
                   %td
                     = link_to "##{deal.id} ", deal_path(deal), target: '_blank'
+                  %td
+                    = image_tag deal.item.image.variant(resize: '120x120')
                   %td
                     = link_to "Лот #{deal.item.name} #{deal.item.color.name} #{deal.item.brand.name} #{deal.item.item_name.name} #{deal.item.size.name}", item_path(deal.item), target: '_blank'
                   %td
