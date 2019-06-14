@@ -9,7 +9,7 @@
   .field
     = f.select :profile_id, Profile.order(:name).map { |p| [[p.name, p.surname, p.phone, p.email].join(' '), p.id] }, prompt: true, label: 'Профиль пользователя'
   .field
-    = f.select :item_id, Item.order(:name).map { |i| [[i.item_name.name, i.name, i.brand.name, i.color.name, i.size.name].join(' '), i.id] }, prompt: true, label: 'Лот'
+    = f.select :item_id, Item.order(:model_id).map { |i| [["##{i.id}", i.item_name.name, i.name, i.brand.name, i.color.name, i.size.name].join(' '), i.id] }, prompt: true, label: 'Лот'
   .field
     = f.number_field :bye, placeholder: '100 (EUR)', label: 'Купили за (Евро)'
   .field
