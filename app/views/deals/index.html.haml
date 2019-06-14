@@ -21,7 +21,7 @@
     %tbody
       - @deals.each do |deal|
         %tr
-          %td= link_to deal.profile.name, deal
+          %td= link_to "##{deal.id} #{deal.profile.name}", deal
           %td= deal.item.name
           %td= link_to deal.bye, deal
           %td= link_to deal.sell, deal
