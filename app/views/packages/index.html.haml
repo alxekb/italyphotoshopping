@@ -5,6 +5,7 @@
       .card.mt-4
         .card-header
           %lead
+            = "##{profile.id}"
             = profile.name
             = profile.second_name
             = profile.surname
@@ -28,7 +29,7 @@
                   %td
                     = image_tag deal.item.image.variant(resize: '120x120')
                   %td
-                    = link_to "Лот #{deal.item.name} #{deal.item.color.name} #{deal.item.brand.name} #{deal.item.item_name.name} #{deal.item.size.name}", item_path(deal.item), target: '_blank'
+                    = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}", item_path(deal.item), target: '_blank'
                   %td
                     = deal.status
                     = deal.comment
