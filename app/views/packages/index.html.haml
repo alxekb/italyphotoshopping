@@ -1,5 +1,22 @@
 .container
-  %h1 Listing packages
+  - @profiles.each do |profile|
+    - if profile_deals(profile.id).present?
+      .card.mt-4
+        %p.card-header
+          = profile.name
+          = profile.second_name
+          = profile.surname
+          = profile.phone
+          = profile.email
+        .card-body
+          -# - if profile_deals(profile.id).present?
+          - profile_deals(profile.id).each do |deal|
+            %p
+              = link_to "Сделка ##{deal.id} ", deal_path(deal), target: '_blank'
+              = link_to "Лот #{deal.item.name}", item_path(deal.item), target: '_blank'
+
+
+  %h2 Listing packages
 
   %table.table
     %thead

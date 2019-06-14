@@ -5,14 +5,13 @@ class PackagesController < ApplicationController
   # GET /packages.json
   def index
     @packages = Package.all
+    @profiles = Profile.all
   end
 
   # GET /packages/1
   # GET /packages/1.json
   def show
-    @item = Item.find(@package.item_id)
-    @user = User.find(@package.user_id)
-    @profile = Profile.find_by_user_id(@user.id)
+
   end
 
   # GET /packages/new
@@ -67,11 +66,11 @@ class PackagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_package
-      @package = Package.find(params[:id])
+      @package = Package.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active)
+      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id)
     end
 end

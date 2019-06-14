@@ -1,4 +1,4 @@
 class Package < ApplicationRecord
-  belongs_to :user
-  has_many :items
+  belongs_to :profile
+  has_many :deals
 end

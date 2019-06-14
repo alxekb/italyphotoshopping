@@ -7,7 +7,7 @@
           %li= message
 
   .field
-    = f.select :user_id, Profile.order(:name).map { |p| [p.name, p.id]}, prompt: true, label: 'Профиль пользователя'
+    = f.select :profile_id, Profile.order(:name).map { |p| [p.name, p.id]}, prompt: true, label: 'Профиль пользователя'
   .field
     = f.select :item_id, Deal.order(:id).map { |d| [[d.id, d.profile.name, d.item.name].join(' '), d.id] }, prompt: true, label: 'Лот'
   .field
