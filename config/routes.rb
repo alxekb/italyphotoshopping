@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
       root to: "brands#index"
     end
-  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals, :users
+  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals
 
   namespace :profile do
     resources :items, controller: 'item'
