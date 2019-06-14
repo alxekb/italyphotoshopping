@@ -1,0 +1,25 @@
+%table.table
+  %thead
+    %tr
+      %th Item
+      %th Brand
+      %th Model
+      %th Color
+      %th Size
+      %th RUB
+      %th EUR
+      %th ART
+      %th EAN
+
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.item_name.item
+        %td= item.brand.name
+        %td= item.model.name
+        %td= item.color.name
+        %td= item.size.name
+        %td= item.price
+        %td= item.eur_price
+        %td= item.art
+        %td= item.ean

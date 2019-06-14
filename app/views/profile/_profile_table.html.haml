@@ -1,0 +1,29 @@
+%table.table
+  %thead
+    %tr
+      %th Имя
+      %th Отч
+      %th Фам
+      %th Тел
+      %th email
+      %th country
+      %th паспорт
+      %th ИНН
+      %th Дата рождения
+      %th Boxberry
+  %tbody
+    %tr
+      %th= profile.name
+      %td= profile.second_name
+      %td= profile.surname
+      %td= profile.phone
+      %td= profile.email
+      %td= profile.country_code
+      %td
+        = profile.passport_code
+        = profile.passport_number
+        = profile.passport_issuer
+        = profile.passport_date_issue
+      %td= profile.inn
+      %td= profile.dob
+      %td= profile.boxberry_office_id

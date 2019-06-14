@@ -5,13 +5,15 @@
       %ul
         - @package.errors.full_messages.each do |message|
           %li= message
+  .field
+    = render 'profile/profile_table', profile: profile_for_partial(params[:package][:profile_id].to_i)
+  .field
+    -# = render 'items/items_table', items: items_for_partial(params[:package][:items_ids])
+    - params[:package][:item_ids].each do |i|
+      %p= items_for_package(i)
 
   .field
-    = f.select :profile_id, Profile.order(:name).map { |p| [p.name, p.id]}, prompt: true, label: 'Профиль пользователя'
-  .field
-    = f.select :item_id, Deal.order(:id).map { |d| [[d.id, d.profile.name, d.item.name].join(' '), d.id] }, prompt: true, label: 'Лот'
-  .field
-    = f.number_field :shipping_type, placeholder: 'boxberry', label: 'Тип отправления'
+    = f.number_field :shipping_type, placeholder: '1', label: 'Тип отправления'
   .field
     = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
   .field
@@ -25,8 +27,8 @@
   .field
     = f.text_field :tracking_code, label: 'Трек код', placeholder: '1234567890'
   .field
-    = f.text_field :shipping_status, label: 'Статус отправления', placeholder: 'Подготовка документов'
+    = f.text_field :shipping_status, label: 'Статус отправления', value: 'Подготовка документов'
   .field
-    = f.check_box :active, label: 'Статус'
+    = f.check_box :active, label: 'Активный', checked: true
   .actions
     = f.submit 'Save', class: 'button btn btn-outline-secondary btn-block'
