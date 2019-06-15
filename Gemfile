@@ -17,6 +17,7 @@ gem 'faraday', '~> 0.15.4'
 gem 'faraday_middleware', '~> 0.13.1'
 gem 'high_voltage', '~> 3.1'
 gem 'jquery-rails'
+gem 'json', '~> 2.2'
 gem 'mini_magick', '~> 4.3'
 gem 'popper_js', '~> 1.9', '>= 1.9.9'
 gem "pundit"

@@ -1,0 +1,5 @@
+.form
+  %p
+    Город
+  .form-group
+    = select("package", "pup_code", @cities.map { |city| [ city["Name"], city["Code"] ] }, { include_blank: true}, id: "city_code", class: 'form-control',)

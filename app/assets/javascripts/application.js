@@ -18,3 +18,7 @@
 //= require_tree .
 //= require datepicker
 //= require bootstrap-datepicker
+
+$(document).ready(function() {
+  $('select#simple-example').select2();
+});
