@@ -13,22 +13,24 @@
       %p= items_for_package(i)
 
   .field
-    = f.number_field :shipping_type, placeholder: '1', label: 'Тип отправления'
+    = f.number_field :shipping_type, value: '1', label: 'Тип отправления (1 для доставки до ПВЗ)'
   .field
     = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
   .field
-    = f.number_field :h, placeholder: '21 (cm)', label: 'Высота в см'
+    = f.number_field :h, value: '20', label: 'Высота в см'
   .field
-    = f.number_field :w, placeholder: '18 (cm)', label: 'Ширина в см'
+    = f.number_field :w, value: '15', label: 'Ширина в см'
   .field
-    = f.number_field :l, placeholder: '12 (cm)', label: 'Длина в см'
+    = f.number_field :l, value: '10', label: 'Длина в см'
   .field
-    = f.number_field :weight, placeholder: '1200 (gr)', label: 'Вес в гр'
+    = f.number_field :weight, value: '1500', label: 'Вес в гр'
   .field
-    = f.text_field :tracking_code, label: 'Трек код', placeholder: '1234567890'
+    = f.text_field :tracking_code, label: 'Трек код', disabled: true, placeholder: '1234567890'
   .field
-    = f.text_field :shipping_status, label: 'Статус отправления', value: 'Подготовка документов'
+    = f.text_field :shipping_status, label: 'Статус отправления', value: 'Подготовка документов', disabled: true
   .field
     = f.check_box :active, label: 'Активный', checked: true
+  .field
+    = render 'cities'
   .actions
     = f.submit 'Save', class: 'button btn btn-outline-secondary btn-block'

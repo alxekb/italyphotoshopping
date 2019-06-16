@@ -18,6 +18,7 @@ class PackagesController < ApplicationController
   def new
     @package = Package.new(package_params)
     @cities = list_cities
+    @points = list_points(16)
   end
 
   # GET /packages/1/edit
@@ -64,6 +65,17 @@ class PackagesController < ApplicationController
     end
   end
 
+  def list_points(city_code) # 68 is the Moscow code
+    url = "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=ListPoints&prepaid=1&CityCode=#{city_code}"
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.adapter Faraday.default_adapter
+      faraday.response :json
+      faraday.response :logger
+    end
+    response = conn.get
+    response.body
+  end
 
   def point_description
     code = []
@@ -206,7 +218,7 @@ class PackagesController < ApplicationController
         faraday.response :logger
       end
 
-      response = conn.get('', token: '86391.rfpqbbee', method: 'ListCities', CountryCode: '643')
+      response = conn.get('', CountryCode: '643', method: 'ListCities', token: '86391.rfpqbbee')
       response.body
 
 

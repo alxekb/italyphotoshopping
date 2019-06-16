@@ -11,7 +11,7 @@ class DealsController < ApplicationController
   # GET /deals/1
   # GET /deals/1.json
   def show
-    @cost = shipping_cost(@deal.profile.boxberry_office_id, 1000, 1, 0, @deal.sell)
+    @cost = shipping_cost(@deal.profile.boxberry_office_id, @deal.weight, 1, 0, @deal.sell)
   end
 
   # GET /deals/new

@@ -2,7 +2,7 @@
   %p
     Город
   .form-group
-    = select("package", "pup_code", @cities.map { |city| [ city["Name"], city["Code"] ] }, { include_blank: true}, id: "city_code", class: 'form-control',)
+    = select(@package, "pup_code", @cities.map { |city| [ [city["UniqName"], city["Region"], "Область"].join(" "), city["Code"] ] }, { include_blank: true}, id: "city_code", class: 'form-control',)
   .form-group
     .response
       Result:
@@ -13,8 +13,8 @@
     var input = $( "#city_code option:selected" ).val();
     console.log = input;
     $('#result').text(input);
-    $.ajax({type: "GET",
-            url: "/packages/pds",
-            data: input,
-            dataType: 'script'});
+    // $.ajax({type: "GET",
+    //         url: "/packages/pds",
+    //         data: input,
+    //         dataType: 'script'});
   });

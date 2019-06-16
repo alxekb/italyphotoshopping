@@ -1,4 +1,8 @@
-.card
-  .card-body
-    %h4 Point description
-      
+.form
+  .form-group
+    %h4 Точки выдачи
+    - @points.each do |point|
+      %p
+        = point["Address"]
+        , ПВЗ:
+        = point["Code"]
