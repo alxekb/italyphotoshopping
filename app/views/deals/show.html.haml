@@ -17,6 +17,10 @@
     %b Sell:
     = @deal.sell
   %p
+    %b Стоимость Доставки
+    = @cost["price"]
+    EUR
+  %p
     %b Status:
     = @deal.status
   %p
@@ -34,6 +38,8 @@
   %p
     %b Payment method:
     = @deal.payment_method
+
+  -# = shipping_cost
 
   = link_to 'Edit', edit_deal_path(@deal)
   \|

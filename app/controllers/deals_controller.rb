@@ -11,6 +11,7 @@ class DealsController < ApplicationController
   # GET /deals/1
   # GET /deals/1.json
   def show
+    @cost = shipping_cost(@deal.profile.boxberry_office_id, 1000, 1, 0, @deal.sell)
   end
 
   # GET /deals/new
@@ -60,6 +61,28 @@ class DealsController < ApplicationController
       format.html { redirect_to deals_url, notice: 'Deal was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def shipping_cost(code, weight, type, insurance, sum)
+    url = "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.adapter Faraday.default_adapter
+      faraday.response :json
+      faraday.response :logger
+    end
+
+    response = conn.get
+    response.body
+
+    # Входящие параметры:
+    # weight - вес посылки в граммах,
+    # type - тип доставки (1 - выдача в ПВЗ, 2 - Курьерская доставка (КД)),
+    # target - код ПВЗ или почтовый индекс для type=2,
+    # ordersum - cтоимость заказа в евро (0 если пустое),
+    # insurance - страховка, по желанию клиента (1 - да, 0 - нет (0 если пустое)).
+    # "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
   end
 
   private

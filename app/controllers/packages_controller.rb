@@ -1,6 +1,4 @@
 class PackagesController < ApplicationController
-  require 'faraday'
-  require 'faraday_middleware'
   before_action :set_package, only: [:show, :edit, :update, :destroy]
 
   # GET /packages
@@ -66,6 +64,100 @@ class PackagesController < ApplicationController
     end
   end
 
+
+  def point_description
+    code = []
+    url = 'http://api.boxberry.de/json.php'
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.adapter Faraday.default_adapter
+      faraday.response :json
+      faraday.response :logger
+      faraday.token_auth('86391.rfpqbbee')
+    end
+    response = conn.get('', method: 'PointsDescription', CountryCode: '643',
+                        code: code,
+                        photo: 0
+                        )
+    response.body
+    "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=PointsDescription&code=#{code}&photo=0"
+    # Array(
+    # [Name] => Наименование пункта выдачи,
+    # [Organization] => Организация,
+    # [ZipCode] => Индекс,
+    # [Country] => Страна,
+    # [Area] => Область/Край,
+    # [CityCode] => Код города,
+    # [CityName] => Город,
+    # [Settlement] => Населенный пункт,
+    # [Metro] => Станция метро,
+    # [Street] => Улица,
+    # [House] => Номер дома,
+    # [Structure] => Строение,
+    # [Housing] => Дом,
+    # [Apartment] => Квартира/офис,
+    # [Address] => Полный адрес,
+    # [AddressReduce] => Короткий адрес,
+    # [GPS] => Координаты,
+    # [TripDescription] => Общая информация о местоположении,
+    # [Phone] => Контактынй телефон,
+    # [ForeignOnlineStoresOnly] => Только для иностранных ИМ,
+    # [PrepaidOrdersOnly] => Выдача только предоплаченных заказов,
+    # [Acquiring] => Эквайринг (возможность приема банковских карт, наличие терминала),
+    # [DigitalSignature] => Цифровая подпись,
+    # [TypeOfOffice] => Тип пункта выдачи: 1-ПВЗ, 2-СПВЗ,
+    # [CourierDelivery] => Осуществляет курьерскую доставку,
+    # [ReceptionLaP] => Принимает письма,
+    # [DeliveryLaP] => Выдает письма,
+    # [LoadLimit] => Ограничение веса, кг,
+    # [VolumeLimit] => Ограничение объема,
+    # [EnablePartialDelivery] => Есть частичная выдача,
+    # [EnableFitting] => Есть примерка,
+    # [fittingType] => Тип примерки,
+    # [WorkShedule] => Расписание работы,
+    # [WorkMoBegin] => Понедельник, начало рабочего дня,
+    # [WorkMoEnd] => Понедельник, конец рабочего дня,
+    # [WorkTuBegin] => Вторник, начало рабочего дня,
+    # [WorkTuEnd] => Вторник, конец рабочего дня,
+    # [WorkWeBegin] => Среда, начало рабочего дня,
+    # [WorkWeEnd] => Среда, конец рабочего дня,
+    # [WorkThBegin] => Четверг, начало рабочего дня,
+    # [WorkThEnd] => Четверг, конец рабочего дня,
+    # [WorkFrBegin] => Пятница, начало рабочего дня,
+    # [WorkFrEnd] => Пятница, конец рабочего дня,
+    # [WorkSaBegin] => Суббота, начало рабочего дня,
+    # [WorkSaEnd] => Суббота, конец рабочего дня,
+    # [WorkSuBegin] => Воскресенье, начало рабочего дня,
+    # [WorkSuEnd] => Воскресенье, конец рабочего дня,
+    # [LunchMoBegin] => Понедельник, обед, начало,
+    # [LunchMoEnd] => Понедельник, обед, конец,
+    # [LunchTuBegin] => Вторник, обед, начало,
+    # [LunchTuEnd] => Вторник, обед, конец,
+    # [LunchWeBegin] => Среда, обед, начало,
+    # [LunchWeEnd] => Среда, обед, конец,
+    # [LunchThBegin] => Четверг, обед, начало,
+    # [LunchThEnd] => Четверг, обед, конец,
+    # [LunchFrBegin] => Пятница, обед, начало,
+    # [LunchFrEnd] => Пятница, обед, конец,
+    # [LunchSaBegin] => Суббота, обед, начало,
+    # [LunchSaEnd] => Суббота, обед, конец,
+    # [LunchSuBegin] => Воскресенье, обед, начало,
+    # [LunchSuEnd] => Воскресенье, обед, конец,
+    # [Photos] => Массив с фотографиями в base64,
+    # // Данные терминала, которому подчинено отделение. ,
+    # // Например для Каменск-Уральского - Это "Екатеринбург (терминал)",
+    # // Данные по аналогии с реквизитами самого ПВЗ: Code, Name... Префикс Terminal.
+    # [TerminalCode] =>
+    # [TerminalName] =>
+    # [TerminalOrganization] =>
+    # [TerminalCityCode] =>
+    # [TerminalCityName] =>
+    # [TerminalAddress] =>
+    # [TerminalPhone] =>
+    # [Reception] =>
+    # )
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_package
@@ -78,6 +170,15 @@ class PackagesController < ApplicationController
     end
 
     def shipping_cost(code, weight, type, insurance, sum)
+      url = 'http://api.boxberry.de/json.php'
+
+      conn = Faraday.new(url: url) do |faraday|
+        faraday.adapter Faraday.default_adapter
+        faraday.response :json
+        faraday.response :logger
+        faraday.token_auth('86391.rfpqbbee')
+      end
+
       # Входящие параметры:
       # weight - вес посылки в граммах,
       # type - тип доставки (1 - выдача в ПВЗ, 2 - Курьерская доставка (КД)),
@@ -85,7 +186,15 @@ class PackagesController < ApplicationController
       # ordersum - cтоимость заказа в евро (0 если пустое),
       # insurance - страховка, по желанию клиента (1 - да, 0 - нет (0 если пустое)).
 
-      response = Faraday.get "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
+      response = conn.get(
+        weight: weight,
+        type: type,
+        code: code,
+        sum: sum,
+        insurance: insurance
+      )
+      response.body
+      # "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
     end
 
     def list_cities
@@ -118,84 +227,7 @@ class PackagesController < ApplicationController
       # );
     end
 
-    def pionts_description(code)
-      "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=PointsDescription&code=#{code}&photo=1"
-      # Array(
-      # [Name] => Наименование пункта выдачи,
-      # [Organization] => Организация,
-      # [ZipCode] => Индекс,
-      # [Country] => Страна,
-      # [Area] => Область/Край,
-      # [CityCode] => Код города,
-      # [CityName] => Город,
-      # [Settlement] => Населенный пункт,
-      # [Metro] => Станция метро,
-      # [Street] => Улица,
-      # [House] => Номер дома,
-      # [Structure] => Строение,
-      # [Housing] => Дом,
-      # [Apartment] => Квартира/офис,
-      # [Address] => Полный адрес,
-      # [AddressReduce] => Короткий адрес,
-      # [GPS] => Координаты,
-      # [TripDescription] => Общая информация о местоположении,
-      # [Phone] => Контактынй телефон,
-      # [ForeignOnlineStoresOnly] => Только для иностранных ИМ,
-      # [PrepaidOrdersOnly] => Выдача только предоплаченных заказов,
-      # [Acquiring] => Эквайринг (возможность приема банковских карт, наличие терминала),
-      # [DigitalSignature] => Цифровая подпись,
-      # [TypeOfOffice] => Тип пункта выдачи: 1-ПВЗ, 2-СПВЗ,
-      # [CourierDelivery] => Осуществляет курьерскую доставку,
-      # [ReceptionLaP] => Принимает письма,
-      # [DeliveryLaP] => Выдает письма,
-      # [LoadLimit] => Ограничение веса, кг,
-      # [VolumeLimit] => Ограничение объема,
-      # [EnablePartialDelivery] => Есть частичная выдача,
-      # [EnableFitting] => Есть примерка,
-      # [fittingType] => Тип примерки,
-      # [WorkShedule] => Расписание работы,
-      # [WorkMoBegin] => Понедельник, начало рабочего дня,
-      # [WorkMoEnd] => Понедельник, конец рабочего дня,
-      # [WorkTuBegin] => Вторник, начало рабочего дня,
-      # [WorkTuEnd] => Вторник, конец рабочего дня,
-      # [WorkWeBegin] => Среда, начало рабочего дня,
-      # [WorkWeEnd] => Среда, конец рабочего дня,
-      # [WorkThBegin] => Четверг, начало рабочего дня,
-      # [WorkThEnd] => Четверг, конец рабочего дня,
-      # [WorkFrBegin] => Пятница, начало рабочего дня,
-      # [WorkFrEnd] => Пятница, конец рабочего дня,
-      # [WorkSaBegin] => Суббота, начало рабочего дня,
-      # [WorkSaEnd] => Суббота, конец рабочего дня,
-      # [WorkSuBegin] => Воскресенье, начало рабочего дня,
-      # [WorkSuEnd] => Воскресенье, конец рабочего дня,
-      # [LunchMoBegin] => Понедельник, обед, начало,
-      # [LunchMoEnd] => Понедельник, обед, конец,
-      # [LunchTuBegin] => Вторник, обед, начало,
-      # [LunchTuEnd] => Вторник, обед, конец,
-      # [LunchWeBegin] => Среда, обед, начало,
-      # [LunchWeEnd] => Среда, обед, конец,
-      # [LunchThBegin] => Четверг, обед, начало,
-      # [LunchThEnd] => Четверг, обед, конец,
-      # [LunchFrBegin] => Пятница, обед, начало,
-      # [LunchFrEnd] => Пятница, обед, конец,
-      # [LunchSaBegin] => Суббота, обед, начало,
-      # [LunchSaEnd] => Суббота, обед, конец,
-      # [LunchSuBegin] => Воскресенье, обед, начало,
-      # [LunchSuEnd] => Воскресенье, обед, конец,
-      # [Photos] => Массив с фотографиями в base64,
-      # // Данные терминала, которому подчинено отделение. ,
-      # // Например для Каменск-Уральского - Это "Екатеринбург (терминал)",
-      # // Данные по аналогии с реквизитами самого ПВЗ: Code, Name... Префикс Terminal.
-      # [TerminalCode] =>
-      # [TerminalName] =>
-      # [TerminalOrganization] =>
-      # [TerminalCityCode] =>
-      # [TerminalCityName] =>
-      # [TerminalAddress] =>
-      # [TerminalPhone] =>
-      # [Reception] =>
-      # )
-    end
+
 
     def parcel_create_foreign(parcel)
       url = 'http://api.boxberry.de/json.php'
@@ -207,55 +239,58 @@ class PackagesController < ApplicationController
         faraday.token_auth('86391.rfpqbbee')
       end
 
+      user = []
+      parcel = []
+      box = []
       items = []
 
-      req = conn.post('', method: 'ParcelCreateForeign',
-                          token: '86391.rfpqbbee',
-                          u_name: '',
-                          u_surname: '',
-                          u_middlename: '',
-                          u_email: '',
-                          u_phone: '',
-                          CountryCode: '643',
-                          u_pasport: '',
-                          u_passportIssued:
-                          u_passportIssuedBy:
-                          u_destination_country_code:
-                          u_city:
-                          u_take:
-                          u_post_code:
-                          u_street:
-                          Order:
-                          sender_tracking:
-                          barcode_pallets:
-                          barcode_bigbox:
-                          extraPassData:
-                          box: [  x:
-                                  y:
-                                  z:
-                                  weight_bruto:
-                                  add_tracking_code:
-                                  add_barcode128: ],
-                           items: [ articul:
-                                    Manufacturer:
-                                    model:
-                                    quantity:
-                                    bruto:
-                                    item_price:
-                                    currency_price:
-                                    web_address:
-                                    link_web:
-                                    link_foto:
-                                    country_of_origin:
-                                    invoice:
-                                    descr_rus:
-                                    descr_alt:
-                                    descr_alt_eng:
-                                    noti_num:
-                                    noti_date:
-                                    noti_code:
-                                    ]
-                          )
+      # req = conn.post('', method: 'ParcelCreateForeign',
+      #                     token: '86391.rfpqbbee',
+      #                     u_name: '',
+      #                     u_surname: '',
+      #                     u_middlename: '',
+      #                     u_email: '',
+      #                     u_phone: '',
+      #                     CountryCode: '643',
+      #                     u_pasport: '',
+      #                     u_passportIssued:
+      #                     u_passportIssuedBy:
+      #                     u_destination_country_code:
+      #                     u_city:
+      #                     u_take:
+      #                     u_post_code:
+      #                     u_street:
+      #                     Order:
+      #                     sender_tracking:
+      #                     barcode_pallets:
+      #                     barcode_bigbox:
+      #                     extraPassData:
+      #                     box: [  x:
+      #                             y:
+      #                             z:
+      #                             weight_bruto:
+      #                             add_tracking_code:
+      #                             add_barcode128: ],
+      #                      items: [ articul:
+      #                               Manufacturer:
+      #                               model:
+      #                               quantity:
+      #                               bruto:
+      #                               item_price:
+      #                               currency_price:
+      #                               web_address:
+      #                               link_web:
+      #                               link_foto:
+      #                               country_of_origin:
+      #                               invoice:
+      #                               descr_rus:
+      #                               descr_alt:
+      #                               descr_alt_eng:
+      #                               noti_num:
+      #                               noti_date:
+      #                               noti_code:
+      #                               ]
+      #                     )
 
         # 'method' => "ParcelCreateForeign",      // Название метода (Обязателен)
         # 'token' => '86391.rfpqbbee',            // Ваш API token (Обязателен)

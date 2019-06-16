@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     end
   resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals
 
+  get 'pds', to: 'packages#point_description'
+  get 'boxberry', to: 'boxberry#index'
+
   namespace :profile do
     resources :items, controller: 'item'
     resources :deals
