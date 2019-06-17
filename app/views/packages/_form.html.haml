@@ -6,31 +6,52 @@
         - @package.errors.full_messages.each do |message|
           %li= message
   .field
+    = hidden_field_tag(:profile_id, params[:package][:profile_id])
+    = hidden_field_tag(:country_code, 643)
+    = hidden_field_tag(:item_ids, params[:package][:item_ids])
     = render 'profile/profile_table', profile: profile_for_partial(params[:package][:profile_id].to_i)
   .field
-    -# = render 'items/items_table', items: items_for_partial(params[:package][:items_ids])
-    - params[:package][:item_ids].each do |i|
-      %p= items_for_package(i)
+    %table.table.table-hover.table-responsive-md
+      %thead
+        %tr
+          %th Item
+          %th Brand
+          %th Model
+          %th Color
+          %th Size
+          %th RUB
+          %th EUR
+          %th ART
+          %th EAN
 
-  .field
-    = f.number_field :shipping_type, value: '1', label: 'Тип отправления (1 для доставки до ПВЗ)'
-  .field
-    = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
-  .field
-    = f.number_field :h, value: '20', label: 'Высота в см'
-  .field
-    = f.number_field :w, value: '15', label: 'Ширина в см'
-  .field
-    = f.number_field :l, value: '10', label: 'Длина в см'
-  .field
-    = f.number_field :weight, value: '1500', label: 'Вес в гр'
-  .field
-    = f.text_field :tracking_code, label: 'Трек код', disabled: true, placeholder: '1234567890'
+      - params[:package][:item_ids].each do |i|
+        %tbody
+          = render 'items/item_table_body', item: items_for_package(i)
+
+  .row
+    .field.col
+      = f.number_field :shipping_type, value: '1', label: 'Тип отправления (1 для ПВЗ)'
+    .field.col
+      = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
+    .field.col
+      = f.text_field :tracking_code, label: 'Трек код', disabled: true, placeholder: '1234567890'
+  .row
+    .field.col
+      = f.number_field :h, value: '20', label: 'Высота в см'
+    .field.col
+      = f.number_field :w, value: '15', label: 'Ширина в см'
+    .field.col
+      = f.number_field :l, value: '10', label: 'Длина в см'
+    .field
+      = f.number_field :weight, value: '1500', label: 'Вес в гр'
   .field
     = f.text_field :shipping_status, label: 'Статус отправления', value: 'Подготовка документов', disabled: true
   .field
     = f.check_box :active, label: 'Активный', checked: true
-  .field
-    = render 'cities'
+  .row
+    .field.col
+      = f.number_field :city_code, value: '16', label: 'Код города', id: 'CityCode'
+    .field.col
+      = render 'cities'
   .actions
     = f.submit 'Save', class: 'button btn btn-outline-secondary btn-block'

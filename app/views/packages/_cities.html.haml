@@ -12,7 +12,8 @@
   $( '#city_code' ).change(function() {
     var input = $( "#city_code option:selected" ).val();
     console.log = input;
-    $('#result').text(input);
+    // $('#result').text(input);
+    $('#CityCode').val(input);
     // $.ajax({type: "GET",
     //         url: "/packages/pds",
     //         data: input,
