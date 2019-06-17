@@ -6,10 +6,10 @@
         - @package.errors.full_messages.each do |message|
           %li= message
   .field
-    = hidden_field_tag(:profile_id, params[:package][:profile_id])
-    = hidden_field_tag(:country_code, 643)
-    = hidden_field_tag(:item_ids, params[:package][:item_ids])
-    = render 'profile/profile_table', profile: profile_for_partial(params[:package][:profile_id].to_i)
+    = f.hidden_field(:profile_id, value: "#{params[:profile][:profile_id]}")
+    = f.hidden_field(:country_code, value: '643')
+    = hidden_field_tag(:deal_ids, params[:package][:deal_ids])
+    = render 'profile/profile_table', profile: profile_for_partial(params[:profile][:profile_id].to_i)
   .field
     %table.table.table-hover.table-responsive-md
       %thead
@@ -24,7 +24,7 @@
           %th ART
           %th EAN
 
-      - params[:package][:item_ids].each do |i|
+      - params[:package][:deal_ids].each do |i|
         %tbody
           = render 'items/item_table_body', item: items_for_package(i)
 

@@ -9,7 +9,7 @@ class Item < ApplicationRecord
 
   # extend FriendlyId
   # friendly_id :name, use: :slugged
-  has_many :profile_deals
+  has_many :deals
 
   def slug_items
     [

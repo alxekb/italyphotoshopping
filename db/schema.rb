@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_17_130321) do
+ActiveRecord::Schema.define(version: 2019_06_17_145653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2019_06_17_130321) do
 
   create_table "deals", force: :cascade do |t|
     t.bigint "profile_id"
-    t.bigint "item_id"
     t.decimal "bye"
     t.decimal "sell"
     t.string "status"
@@ -91,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_130321) do
     t.integer "l"
     t.integer "weight"
     t.bigint "package_id"
+    t.bigint "item_id"
     t.index ["item_id"], name: "index_deals_on_item_id"
     t.index ["package_id"], name: "index_deals_on_package_id"
     t.index ["profile_id"], name: "index_deals_on_profile_id"
@@ -163,7 +163,6 @@ ActiveRecord::Schema.define(version: 2019_06_17_130321) do
 
   create_table "packages", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "item_id"
     t.integer "shipping_type"
     t.integer "pup_code"
     t.datetime "created_at", null: false
@@ -178,7 +177,6 @@ ActiveRecord::Schema.define(version: 2019_06_17_130321) do
     t.boolean "active"
     t.bigint "profile_id"
     t.integer "city_code"
-    t.index ["item_id"], name: "index_packages_on_item_id"
     t.index ["package_id"], name: "index_packages_on_package_id"
     t.index ["profile_id"], name: "index_packages_on_profile_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
@@ -274,7 +272,6 @@ ActiveRecord::Schema.define(version: 2019_06_17_130321) do
   add_foreign_key "items", "colors"
   add_foreign_key "items", "item_names"
   add_foreign_key "items", "sizes"
-  add_foreign_key "packages", "items"
   add_foreign_key "packages", "packages"
   add_foreign_key "packages", "profiles"
 end

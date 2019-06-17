@@ -1,7 +1,9 @@
 .container
   %p#notice= notice
-
-  = @package.inspect
+  .card
+    .card-body
+      %p= @package.inspect
+      %p= @package.deals.each.inspect if @package.deals?
   -# %p
   -#   %b User:
   -#   -# = @package.user_id

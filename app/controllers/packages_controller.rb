@@ -18,7 +18,7 @@ class PackagesController < ApplicationController
   def new
     @package = Package.new(package_params)
     @cities = list_cities
-    @points = list_points(16)
+    # @points = list_points(16)
   end
 
   # GET /packages/1/edit
@@ -31,11 +31,19 @@ class PackagesController < ApplicationController
     @package = Package.new(package_params)
 
     respond_to do |format|
-      if @package.save
+      if @package.save!
+        @deals = params[:package][:deals_ids]
+        if !@deals.nil?
+          @deals.each do |deal|
+            deal.status = 'Boxberry'
+            deal.save!
+            flash[:notice] = "Статус сделки #{deal.id} обновлен на Boxberry."
+          end
+        end
         format.html { redirect_to @package, notice: 'Package was successfully created.' }
         format.json { render :show, status: :created, location: @package }
       else
-        format.html { render :new }
+        format.html { render :new, notice: 'Error' }
         format.json { render json: @package.errors, status: :unprocessable_entity }
       end
     end
@@ -178,7 +186,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id)
+      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code)
     end
 
     def shipping_cost(code, weight, type, insurance, sum)
