@@ -11,7 +11,7 @@ class PackagesController < ApplicationController
   # GET /packages/1
   # GET /packages/1.json
   def show
-
+    @deals = Deal.where('package_id = ?', @package.id)
   end
 
   # GET /packages/new
@@ -32,14 +32,18 @@ class PackagesController < ApplicationController
 
     respond_to do |format|
       if @package.save!
-        @deals = params[:package][:deals_ids]
-        if !@deals.nil?
-          @deals.each do |deal|
+        @package_deals_ids = params[:deal_ids].split(" ").map { |s| s.to_i }
+        if !@package_deals_ids.nil?
+          @package_deals_ids.each do |d|
+            deal = Deal.find_by(id: d)
             deal.status = 'Boxberry'
-            deal.save!
-            flash[:notice] = "Статус сделки #{deal.id} обновлен на Boxberry."
+            deal.package_id = @package.id
+            if deal.save!
+              flash[:notice] = "Статус сделки #{deal.id} обновлен на: Boxberry."
+            end
           end
         end
+        parcel_create_foreign
         format.html { redirect_to @package, notice: 'Package was successfully created.' }
         format.json { render :show, status: :created, location: @package }
       else
@@ -247,8 +251,6 @@ class PackagesController < ApplicationController
       # );
     end
 
-
-
     def parcel_create_foreign(parcel)
       url = 'http://api.boxberry.de/json.php'
 
@@ -256,61 +258,61 @@ class PackagesController < ApplicationController
         faraday.adapter Faraday.default_adapter
         faraday.response :json
         faraday.response :logger
-        faraday.token_auth('86391.rfpqbbee')
       end
 
+      buebug
       user = []
       parcel = []
       box = []
       items = []
 
-      # req = conn.post('', method: 'ParcelCreateForeign',
-      #                     token: '86391.rfpqbbee',
-      #                     u_name: '',
-      #                     u_surname: '',
-      #                     u_middlename: '',
-      #                     u_email: '',
-      #                     u_phone: '',
-      #                     CountryCode: '643',
-      #                     u_pasport: '',
-      #                     u_passportIssued:
-      #                     u_passportIssuedBy:
-      #                     u_destination_country_code:
-      #                     u_city:
-      #                     u_take:
-      #                     u_post_code:
-      #                     u_street:
-      #                     Order:
-      #                     sender_tracking:
-      #                     barcode_pallets:
-      #                     barcode_bigbox:
-      #                     extraPassData:
-      #                     box: [  x:
-      #                             y:
-      #                             z:
-      #                             weight_bruto:
-      #                             add_tracking_code:
-      #                             add_barcode128: ],
-      #                      items: [ articul:
-      #                               Manufacturer:
-      #                               model:
-      #                               quantity:
-      #                               bruto:
-      #                               item_price:
-      #                               currency_price:
-      #                               web_address:
-      #                               link_web:
-      #                               link_foto:
-      #                               country_of_origin:
-      #                               invoice:
-      #                               descr_rus:
-      #                               descr_alt:
-      #                               descr_alt_eng:
-      #                               noti_num:
-      #                               noti_date:
-      #                               noti_code:
-      #                               ]
-      #                     )
+      req = conn.post('', method: 'ParcelCreateForeign',
+                          token: '86391.rfpqbbee',
+                          u_name: '',
+                          u_surname: '',
+                          u_middlename: '',
+                          u_email: '',
+                          u_phone: '',
+                          CountryCode: '643',
+                          u_pasport: '',
+                          u_passportIssued:
+                          u_passportIssuedBy:
+                          u_destination_country_code:
+                          u_city:
+                          u_take:
+                          u_post_code:
+                          u_street:
+                          Order:
+                          sender_tracking:
+                          barcode_pallets:
+                          barcode_bigbox:
+                          extraPassData:
+                          box: [  x:
+                                  y:
+                                  z:
+                                  weight_bruto:
+                                  add_tracking_code:
+                                  add_barcode128: ],
+                           items: [ articul:
+                                    Manufacturer:
+                                    model:
+                                    quantity:
+                                    bruto:
+                                    item_price:
+                                    currency_price:
+                                    web_address:
+                                    link_web:
+                                    link_foto:
+                                    country_of_origin:
+                                    invoice:
+                                    descr_rus:
+                                    descr_alt:
+                                    descr_alt_eng:
+                                    noti_num:
+                                    noti_date:
+                                    noti_code:
+                                    ]
+                          )
 
         # 'method' => "ParcelCreateForeign",      // Название метода (Обязателен)
         # 'token' => '86391.rfpqbbee',            // Ваш API token (Обязателен)

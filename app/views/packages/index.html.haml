@@ -35,7 +35,10 @@
                     = deal.comment
                   %td
                     = link_to 'показать сделку', deal_path(deal), class: 'button btn btn-outline-secondary float-right'
-          = link_to 'создать посылку', new_package_path(params: { profile: {profile_id: profile.id}, package: { deal_ids: profile_deals(profile.id).ids } }), class: 'button btn btn-outline-primary'
+          = link_to 'создать посылку',
+            new_package_path(params: { profile: {profile_id: profile.id},
+                                       package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
+                                       class: 'button btn btn-outline-primary'
 
   %h2 Listing packages
 
@@ -54,7 +57,6 @@
       - @packages.each do |package|
         %tr
           %td= package.user_id
-          %td= package.item_id
           %td= package.shipping_type
           %td= package.pup_code
           %td= link_to 'Show', package

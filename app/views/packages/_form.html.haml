@@ -7,7 +7,6 @@
           %li= message
   .field
     = f.hidden_field(:profile_id, value: "#{params[:profile][:profile_id]}")
-    = f.hidden_field(:country_code, value: '643')
     = hidden_field_tag(:deal_ids, params[:package][:deal_ids])
     = render 'profile/profile_table', profile: profile_for_partial(params[:profile][:profile_id].to_i)
   .field
@@ -54,4 +53,4 @@
     .field.col
       = render 'cities'
   .actions
-    = f.submit 'Save', class: 'button btn btn-outline-secondary btn-block'
+    = f.submit('Save', params: { package: { deals_ids: [["deal"],[profile_deals(params[:profile][:profile_id]).ids]] }}, class: 'button btn btn-outline-secondary btn-block')
