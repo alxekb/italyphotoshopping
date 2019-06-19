@@ -40,7 +40,7 @@ class PackagesController < ApplicationController
             deal.status = 'Boxberry'
             deal.package_id = @package.id
             if deal.save!
-              puts "Статус сделки #{deal.id} обновлен на: Boxberry."
+              puts ">>>>>>>>>>>>        Статус сделки #{deal.id} обновлен на: Boxberry.        <<<<<<<<<<<"
             end
           end
         end
@@ -260,9 +260,6 @@ class PackagesController < ApplicationController
         faraday.response :json
         faraday.response :logger
         faraday.adapter Faraday.default_adapter
-        # faraday.auth_token '86391.rfpqbbee'
-        faraday.authorization :Token, "token" => '86391.rfpqbbee'
-
       end
 
       params = { "method" => "ParcelCreateForeign",
@@ -287,18 +284,19 @@ class PackagesController < ApplicationController
                   "barcode_bigbox" => "",
                   "extraPassData" => "#{@package.profile.inn}",
 
-                  "box" => [ "x" => "#{@package.h}",
-                        "y" => "#{@package.w}",
-                        "z" => "#{@package.l}",
-                        "weight_bruto" => "#{@package.weight}",
-                        "add_tracking_code" => "",
-                        "add_barcode128" => "",
-                        "items" => items_in_the_box(@package),
-                      ]
+                  "box" => { "x" => "#{@package.h}",
+                             "y" => "#{@package.w}",
+                             "z" => "#{@package.l}",
+                             "weight_bruto" => "#{@package.weight}",
+                             "add_tracking_code" => "",
+                             "add_barcode128" => "",
+                             "items" => items_in_the_box(@package),
+                           }
                 }
+      puts params
 
       request = conn.post do |req|
-
+        byebug
         req.headers['Content-Type'] = 'application/json'
         # req.respond_to?  = json
         # req.respond_to?  = logger
@@ -307,8 +305,8 @@ class PackagesController < ApplicationController
 
       puts request.body
       if request.body.has_key?("err")
-        package_rollback(parcel)
-        parcel.shipping_status = request.body["err"]
+        package_rollback(parcel, request.body)
+        parcel.shipping_status = request.body["err"] # TODO: This will not work
         parcel.save!
         puts "######## Parcel #{parcel.id} rollback. "
       elsif request.body.has_key?("result")
@@ -323,10 +321,14 @@ class PackagesController < ApplicationController
     end
 
     def items_in_the_box(package)
-      item = []
+      items = Array.new
+      # item = []
 
-      package.deals.each.with_index do |deal, index|
-        item[index] = {"quantity" => "1",
+      puts " >>>>>>>>>>>>>>    Сделок в посылке #{package.deals.count}      <<<<<<<<<<<<<<<<<<<<<<"
+
+      package.deals.each_with_index do |deal, index|
+        puts "Сделка #{deal.inspect}"
+        item = {"quantity" => "1",
                 "articul" => "#{deal.item.art}",
                 "Manufacturer" => "#{deal.item.brand.name}",
                 "model" => "#{deal.item.model.name}",
@@ -344,12 +346,11 @@ class PackagesController < ApplicationController
                 "noti_num" => '',
                 "noti_date" => '',
                 "noti_code" => '', }
+        items[index] = item #.to_a.concat(item.to_a)
         puts "############## Итем index##{index}: item ##{item}"
-        puts item.class
-        puts ' '
-        return item.to_a
-      end
 
+      end
+      return items.to_a
     end
 
     def item_full_name(item)
@@ -357,9 +358,9 @@ class PackagesController < ApplicationController
       return [@item.item_name.name, @item.brand.name, @item.model.name, @item.color.name, @item.size.name, '/',@item.eur_price,'EUR, EAN ', @item.ean,', ART'].join(' ')
     end
 
-    def package_rollback(parcel)
+    def package_rollback(parcel, request)
       parcel.deals.each do |deal|
-        deal.status = 'Sending error.'
+        deal.status = "Sending error. #{request[0]["err"]}"
         deal.package_id = nil
         puts "##### Сделка #{deal.id} убрана из посылки #{@package.id}" if deal.save!
       end
