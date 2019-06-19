@@ -4,7 +4,7 @@ class PackagesController < ApplicationController
   # GET /packages
   # GET /packages.json
   def index
-    @packages = Package.all
+    @packages = Package.where('active = ?', true)
     @profiles = Profile.all
   end
 
@@ -33,17 +33,19 @@ class PackagesController < ApplicationController
     respond_to do |format|
       if @package.save!
         @package_deals_ids = params[:deal_ids].split(" ").map { |s| s.to_i }
-        if !@package_deals_ids.nil?
+
+        if !@package_deals_ids.nil? &&
           @package_deals_ids.each do |d|
             deal = Deal.find_by(id: d)
             deal.status = 'Boxberry'
             deal.package_id = @package.id
             if deal.save!
-              flash[:notice] = "Статус сделки #{deal.id} обновлен на: Boxberry."
+              puts "Статус сделки #{deal.id} обновлен на: Boxberry."
             end
           end
         end
-        parcel_create_foreign
+        puts "Посылка #{@package.id} создана! Попробуем отправить данные в Боксберри..."
+        parcel_create_foreign(@package)
         format.html { redirect_to @package, notice: 'Package was successfully created.' }
         format.json { render :show, status: :created, location: @package }
       else
@@ -190,7 +192,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code)
+      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids)
     end
 
     def shipping_cost(code, weight, type, insurance, sum)
@@ -255,122 +257,118 @@ class PackagesController < ApplicationController
       url = 'http://api.boxberry.de/json.php'
 
       conn = Faraday.new(url: url) do |faraday|
-        faraday.adapter Faraday.default_adapter
         faraday.response :json
         faraday.response :logger
+        faraday.adapter Faraday.default_adapter
+        # faraday.auth_token '86391.rfpqbbee'
+        faraday.authorization :Token, "token" => '86391.rfpqbbee'
+
       end
 
-      buebug
-      user = []
-      parcel = []
-      box = []
-      items = []
+      params = { "method" => "ParcelCreateForeign",
+                  "token" => "86391.rfpqbbee",
+                  "u_name" => "#{@package.profile.name}",
+                  'u_surname' => "#{@package.profile.surname}",
+                  'u_middlename' => "#{@package.profile.second_name}",
+                  "u_email" => "#{@package.profile.email}",
+                  "u_phone" => "#{@package.profile.phone}",
+                  'CountryCode' => '643',
+                  'u_pasport' => "#{@package.profile.passport_number}",
+                  'u_passportIssued' => "#{@package.profile.passport_date_issue}",
+                  'u_passportIssuedBy' => "#{@package.profile.passport_issuer}",
+                  'u_destination_country_code' => "#{@package.profile.country_code}",
+                  'u_city' => "#{@package.city_code}",
+                  'u_take' => "#{@package.profile.boxberry_office_id}",
+                  'u_post_code' => "",
+                  'u_street' => "",
+                  'Order' => "ips#{@package.id}",
+                  'sender_tracking' => "",
+                  "barcode_pallets" => "",
+                  "barcode_bigbox" => "",
+                  "extraPassData" => "#{@package.profile.inn}",
 
-      req = conn.post('', method: 'ParcelCreateForeign',
-                          token: '86391.rfpqbbee',
-                          u_name: '',
-                          u_surname: '',
-                          u_middlename: '',
-                          u_email: '',
-                          u_phone: '',
-                          CountryCode: '643',
-                          u_pasport: '',
-                          u_passportIssued:
-                          u_passportIssuedBy:
-                          u_destination_country_code:
-                          u_city:
-                          u_take:
-                          u_post_code:
-                          u_street:
-                          Order:
-                          sender_tracking:
-                          barcode_pallets:
-                          barcode_bigbox:
-                          extraPassData:
-                          box: [  x:
-                                  y:
-                                  z:
-                                  weight_bruto:
-                                  add_tracking_code:
-                                  add_barcode128: ],
-                           items: [ articul:
-                                    Manufacturer:
-                                    model:
-                                    quantity:
-                                    bruto:
-                                    item_price:
-                                    currency_price:
-                                    web_address:
-                                    link_web:
-                                    link_foto:
-                                    country_of_origin:
-                                    invoice:
-                                    descr_rus:
-                                    descr_alt:
-                                    descr_alt_eng:
-                                    noti_num:
-                                    noti_date:
-                                    noti_code:
-                                    ]
-                          )
+                  "box" => [ "x" => "#{@package.h}",
+                        "y" => "#{@package.w}",
+                        "z" => "#{@package.l}",
+                        "weight_bruto" => "#{@package.weight}",
+                        "add_tracking_code" => "",
+                        "add_barcode128" => "",
+                        "items" => items_in_the_box(@package),
+                      ]
+                }
 
-        # 'method' => "ParcelCreateForeign",      // Название метода (Обязателен)
-        # 'token' => '86391.rfpqbbee',            // Ваш API token (Обязателен)
-        #
-        # 'u_name' => 'Иван',                     // Имя получателя (Обязателен)
-        # 'u_surname' => 'Иванов',                // Фамилия получателя (Обязателен)
-        # 'u_middlename' => 'Иванович',           // Отчество получателя (не обязателен)
-        # 'u_email' => 'air@email.com',           // Электронная почта (Обязателен)
-        # 'u_phone' => '+7 XXX XXX XX XX',        // Телефон получателя (Обязателен)
-        # 'u_country_code' => 643,                // Код страны паспорта получателя. По умолчанию 643 - Россия. (Обязателен)
-        # 'u_pasport' => 'XXXX XXXXXX',           // Номер удостоверения личности получателя (Обязателен)
-        # 'u_passportIssued'=>'2017-01-01',       // Дата выдачи удостоверения личности (Обязателен)
-        # 'u_passportIssuedBy'=>'',               // Кем выдано удостоверение личности (Обязателен)
-        # 'u_destination_country_code' => '',     // Код страны назначения (Обязателен)
-        # 'u_city' => "",                         // Город получателя (Обязателен)
-        # 'u_take' => 'kd',                       // kd если курьерская доставка, или код ПВЗ (Обязателен)
-        # 'u_post_code' => 'XXXXXX',              // XXXXXX - индекс города (не обязателен, если  вид доставки ПВЗ)
-        # 'u_street' => '5-я Курская, д.8 кв.16', // Адрес получателя (не обязателен, если  вид доставки ПВЗ)
-        # 'Order' => '123456789',                 // Номер заказа Интернет-магазина (не обязателен, в случае если не заполнено, присваивается Sender tracking)
-        # 'sender_tracking' => '',                // Номер для отслеживания Интернет-магазина (не обязателен, если не заполнено, присваивается Boxberry tracking)
-        # 'barcode_pallets' => 'XXXXXXXXXXX',     // Поле для передачи информации о штрихкоде паллеты (не обязателен)
-        # 'barcode_bigbox' => 'XXXXXXXXXXX',      // Поле для передачи информации о штрихкоде короба (большой коробки в кот будут складываться мелкие пакеты) (не обязателен)
-        # 'extraPassData' => 'XXXXXXXXXXX',       // Дополнительные данные (Для отправлений в Россию-обязательно указание ИНН для граждан РФ. Для отправлений в Казахстан-номера идентификационной карты) (не обязателен)
-        # 'box' => array(                         // Массив коробок с товарами
-        # array(                              // Массив одной коробки, может быть не более 5 коробок в одной посылке
-        # 'x' => '10',                    // Размеры коробки в см
-        # 'y' => '20',
-        # 'z' => '40',
-        # 'weight_bruto' => '515',        // Брутто вес коробки в граммах (Обязателен)
-        # 'add_tracking_code' => '',      // Дополнительный трекинг код для личных нужд отправителя (не обязателен)
-        # 'add_barcode128' => 'XXXXXXXXX',// Баркод Интернет-магазина для печати на этикетке (Вывод на этикетке – EAN, не обязателен)
-        #
-        # 'items' => array(                                  // Массив товаров в коробке
-        #     array(                                         // Массив одного товара, их может быть сколько угодно
-        #         'articul' => '1232212',                    // Артикул в магазине (Обязателен)
-        #         'Manufacturer' => 'Hitachi',               // Производитель (не обязателен, No name, если не заполнено)
-        #         'model' => 'DLS-118',                      // Наименование товара (Обязателен)
-        #         'quantity' => '1',                         // Количество (Обязателен)
-        #         'bruto' => '500',                          // Вес брутто (гр)  (Обязателен)
-        #         'item_price' => '200',                     // Цена в валюте поставщика (Обязателен)
-        #         'currency_price' => 'EUR',                 // Валюта поставщика EUR GBP USD RUB. При ошибочном написании или пустом поле считается EUR (Обязателен)
-        #         'web_address' => ''                        // Интернет-адрес производителя
-        #         'link_web' => '',                          // Ссылка на товар в интернет (Обязателен)
-        #         'link_foto' => '',                         // Ссылка на товар в интернет (не обязателен)
-        #         'country_of_origin' => '',                 // Страна происхождения товара (не обязателен)
-        #
-        #         'invoice' => 'XXXXXXXXXXXX',               // Номер заказа (Обязателен)
-        #         'descr_rus' => 'Портативный аудио плеер',  // Краткое описание товара на русском (не обязателен)
-        #         'descr_alt' => 'Funy audio',               // Краткое Описание товара на языке поставщика или на английском (Обязателен)
-        #         'descr_alt_eng' => true,                   // Если описание на английском языке необходимо передать true
-        #         'noti_num'  => 'RU0000005470',             // Номер нотификации (не обязателен)
-        #         'noti_date'  => '01.01.2017',              // Срок действия нотификации (не обязателен)
-        #         'noti_code'  => '01092',                   // Код нотификации (не обязателен)
-        #     ),
-        # ),
-        # ),
-        #
-        # ),
-        # );
+      request = conn.post do |req|
+
+        req.headers['Content-Type'] = 'application/json'
+        # req.respond_to?  = json
+        # req.respond_to?  = logger
+        req.body = params.to_json
+      end
+
+      puts request.body
+      if request.body.has_key?("err")
+        package_rollback(parcel)
+        parcel.shipping_status = request.body["err"]
+        parcel.save!
+        puts "######## Parcel #{parcel.id} rollback. "
+      elsif request.body.has_key?("result")
+        # package_success(parcel)
+        parcel.active = true
+        parcel.shipping_status = request.body["result"]["box"]
+        parcel.label = request.body["result"]["label"]
+        parcel.tracking_code = request.body["result"]["track"]
+        parcel.save!
+        puts "######## Parcel #{parcel.id} success!"
+      end
+    end
+
+    def items_in_the_box(package)
+      item = []
+
+      package.deals.each.with_index do |deal, index|
+        item[index] = {"quantity" => "1",
+                "articul" => "#{deal.item.art}",
+                "Manufacturer" => "#{deal.item.brand.name}",
+                "model" => "#{deal.item.model.name}",
+                "bruto" => "#{deal.weight}",
+                "item_price" => "#{deal.item.eur_price}",
+                "currency_price" => 'EUR',
+                "web_address" => 'http://shop.ekaterinaivanova.com',
+                "link_web" => "#{url_for(deal.item)}",
+                'link_foto' => "#{url_for(deal.item.image)}",
+                "country_of_origin" => '',
+                "invoice" => "ips#{deal.id}",
+                "descr_rus" => "#{item_full_name(deal.item.id)}",
+                "descr_alt" => "#{item_full_name(deal.item.id)}",
+                "descr_alt_eng" => 'true',
+                "noti_num" => '',
+                "noti_date" => '',
+                "noti_code" => '', }
+        puts "############## Итем index##{index}: item ##{item}"
+        puts item.class
+        puts ' '
+        return item.to_a
+      end
+
+    end
+
+    def item_full_name(item)
+      @item = Item.find_by(id: item)
+      return [@item.item_name.name, @item.brand.name, @item.model.name, @item.color.name, @item.size.name, '/',@item.eur_price,'EUR, EAN ', @item.ean,', ART'].join(' ')
+    end
+
+    def package_rollback(parcel)
+      parcel.deals.each do |deal|
+        deal.status = 'Sending error.'
+        deal.package_id = nil
+        puts "##### Сделка #{deal.id} убрана из посылки #{@package.id}" if deal.save!
+      end
+      parcel.shipping_status = 'Boxberry error'
+      parcel.active = false
+      parcel.save!
+    end
+
+    def package_success(parcel)
+
     end
 end

@@ -84,10 +84,6 @@ class BoxberryController < ApplicationController
     # */
   end
 
-  def parcel_create_foreign
-    response = Faraday.get ""
-  end
-
   def parcel_del(parcel_code)
     response = Faraday.get "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=ParcelDel&parcelId=#{parcel_code}"
   end

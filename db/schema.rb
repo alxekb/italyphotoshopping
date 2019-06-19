@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_17_145653) do
+ActiveRecord::Schema.define(version: 2019_06_19_161249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_145653) do
     t.boolean "active"
     t.bigint "profile_id"
     t.integer "city_code"
+    t.string "label"
     t.index ["package_id"], name: "index_packages_on_package_id"
     t.index ["profile_id"], name: "index_packages_on_profile_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
