@@ -45,23 +45,22 @@
   %table.table
     %thead
       %tr
-        %th User
+        %th Profile
         %th Item
-        %th Shipping type
-        %th Pup code
-        %th
-        %th
-        %th
+        %th Deals
+        %th Links
 
     %tbody
       - @packages.each do |package|
         %tr
-          %td= package.user_id
-          %td= package.shipping_type
+          %td= package.profile.full_name
+          %td
+            = package.deals.each { |deal| deal.item_id }
           %td= package.pup_code
-          %td= link_to 'Show', package
-          %td= link_to 'Edit', edit_package_path(package)
-          %td= link_to 'Destroy', package, method: :delete, remote: true #, data: { confirm: 'Are you sure?' }
+          %td
+            = link_to 'Show', package
+            -# = link_to 'Edit', edit_package_path(package)
+            -# = link_to 'Destroy', package, method: :delete, remote: true #, data: { confirm: 'Are you sure?' }
 
   %br
 

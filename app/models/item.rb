@@ -19,4 +19,9 @@ class Item < ApplicationRecord
       [:name, :color, :item, :brand]
     ]
   end
+
+  def item_full_name
+    self.id
+    # self.item_name.name + " " + self.brand.name + " " + self.model.name + " " self.color.name + " " + self.size.name
+  end
 end

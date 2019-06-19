@@ -1,13 +1,16 @@
 .container
   %p#notice= notice
   .card
+    .card-header
+      %a.badge.badge-primary{href: "#{@package.label}", target: "_blank"} Этикетка
+
     .card-body
       %p
-        id
+        id Посылки
         = @package.id
       %p
-        User
-        = @package.user_id
+        Profile
+        = @package.profile_id
       %p
         Shipping type
         = @package.shipping_type
@@ -15,28 +18,24 @@
         PUP
         = @package.pup_code
       %p
-        H
+        H:
         = @package.h
-      %p
-        W
+        W:
         = @package.w
-      %p
-        L
+        L:
         = @package.l
-      %p
-        Вес
+        Вес:
         = @package.weight
-        
-      %a.badge.badge-primary{href: "#{@package.label}", target: "_blank"} Этикетка
+
 
       %p
         N Посылки
         = @package.package_id
       %p
-        Тре-код
+        Трек-код
         = @package.tracking_code
       %p
-        Статус
+        Номер коробки
         = @package.shipping_status
       %p
         Активный?
@@ -50,8 +49,11 @@
       -# - if @deals.count.nil?
       -#   %p Нет сделок
       -# - else
+    .card-footer
       - @deals.each do |deal|
-        %p= deal.inspect
+        .label
+          = link_to "##{deal.item.id} #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.color.name}", item_path(deal.item), target: '_blank'
+          = deal.profile.full_name
   -# %p
   -#   %b User:
   -#   -# = @package.user_id
