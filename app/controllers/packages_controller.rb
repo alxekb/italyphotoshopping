@@ -296,14 +296,13 @@ class PackagesController < ApplicationController
       puts params
 
       request = conn.post do |req|
-        byebug
+
         req.headers['Content-Type'] = 'application/json'
         # req.respond_to?  = json
         # req.respond_to?  = logger
         req.body = params.to_json
       end
 
-      puts request.body
       if request.body.has_key?("err")
         package_rollback(parcel, request.body)
         parcel.shipping_status = request.body["err"] # TODO: This will not work
@@ -327,7 +326,7 @@ class PackagesController < ApplicationController
       puts " >>>>>>>>>>>>>>    Сделок в посылке #{package.deals.count}      <<<<<<<<<<<<<<<<<<<<<<"
 
       package.deals.each_with_index do |deal, index|
-        puts "Сделка #{deal.inspect}"
+
         item = {"quantity" => "1",
                 "articul" => "#{deal.item.art}",
                 "Manufacturer" => "#{deal.item.brand.name}",
