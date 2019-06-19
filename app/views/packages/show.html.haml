@@ -26,6 +26,9 @@
       %p
         Вес
         = @package.weight
+        
+      %a.badge.badge-primary{href: "#{@package.label}", target: "_blank"} Этикетка
+
       %p
         N Посылки
         = @package.package_id

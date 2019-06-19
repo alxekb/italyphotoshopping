@@ -10,6 +10,7 @@
     = hidden_field_tag(:deal_ids, params[:package][:deal_ids])
     = render 'profile/profile_table', profile: profile_for_partial(params[:profile][:profile_id].to_i)
   .field
+    %h4 deals
     %table.table.table-hover.table-responsive-md
       %thead
         %tr

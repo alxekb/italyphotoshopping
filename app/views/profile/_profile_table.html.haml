@@ -1,6 +1,7 @@
 %table.table.table-responsive-md.table-hover
   %thead
     %tr
+      %th #
       %th Имя
       %th Отч
       %th Фам
@@ -13,7 +14,8 @@
       %th Boxberry
   %tbody
     %tr
-      %th= profile.name
+      %th= profile.id
+      %td= profile.name
       %td= profile.second_name
       %td= profile.surname
       %td= profile.phone
