@@ -12,6 +12,10 @@
           .ml-auto
             = profile.phone
             = profile.email
+            = link_to 'создать посылку',
+              new_package_path(params: { profile: {profile_id: profile.id},
+                                         package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
+                                         class: 'button btn btn-outline-primary float-right'
         .card-body
           %table.table
             %thead
@@ -21,7 +25,9 @@
                 %td Лот
                 %td Статус
                 %td Ссылка
-            - profile_deals(profile.id).each do |deal|
+                - dsum = []
+
+            - profile_deals(profile.id).each_with_index do |deal|
               %tbody
                 %tr
                   %td
@@ -29,16 +35,14 @@
                   %td
                     = image_tag deal.item.image.variant(resize: '120x120')
                   %td
-                    = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}", item_path(deal.item), target: '_blank'
+                    = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}. EUR #{deal.sell}.", item_path(deal.item), target: '_blank'
                   %td
                     = deal.status
                     = deal.comment
                   %td
-                    = link_to 'показать сделку', deal_path(deal), class: 'button btn btn-outline-secondary float-right'
-          = link_to 'создать посылку',
-            new_package_path(params: { profile: {profile_id: profile.id},
-                                       package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
-                                       class: 'button btn btn-outline-primary'
+                    = link_to "показать сделку", deal_path(deal), class: 'button btn btn-outline-secondary float-right'
+        .card-footer
+
 
   %h2 Listing packages
 

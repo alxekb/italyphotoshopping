@@ -1,5 +1,8 @@
 .container
-  %h1 Listing deals
+  .my-2.form-inline
+    %h1 Listing deals
+    .mx-4
+      = link_to 'New Deal', new_deal_path, class: 'button btn btn-outline-primary'
 
   %table.table
     %thead
@@ -37,5 +40,3 @@
 
 
   %br
-
-  = link_to 'New Deal', new_deal_path
