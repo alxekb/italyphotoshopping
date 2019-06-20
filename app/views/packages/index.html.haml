@@ -27,7 +27,7 @@
                 %td Ссылка
                 - dsum = []
 
-            - profile_deals(profile.id).each_with_index do |deal|
+            - profile_deals(profile.id).each_with_index do |deal, index|
               %tbody
                 %tr
                   %td
@@ -39,6 +39,8 @@
                   %td
                     = deal.status
                     = deal.comment
+
+                    %p{id:"deal#{deal.id}price#{index}"}= deal.sell
                   %td
                     = link_to "показать сделку", deal_path(deal), class: 'button btn btn-outline-secondary float-right'
         .card-footer
@@ -57,7 +59,10 @@
     %tbody
       - @packages.each do |package|
         %tr
-          %td= package.profile.full_name
+          %td
+
+
+            = package.profile.full_name_with_id
           %td
             = package.deals.each { |deal| deal.item_id }
           %td= package.pup_code
