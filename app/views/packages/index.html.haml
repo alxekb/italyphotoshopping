@@ -17,7 +17,7 @@
                                          package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
                                          class: 'button btn btn-outline-primary float-right'
         .card-body
-          %table.table
+          %table.table.table-responsive.table-hover
             %thead
               %tr
                 %td Покупка
@@ -48,25 +48,33 @@
 
   %h2 Listing packages
 
-  %table.table
+  %table.table.table-responsive-md.table-hover
     %thead
       %tr
         %th Profile
-        %th Item
         %th Deals
+        %th Items
         %th Links
 
     %tbody
       - @packages.each do |package|
         %tr
           %td
-
-
-            = package.profile.full_name_with_id
             = package.profile.id
+            = package.profile.full_name_with_id
           %td
-            = package.deals.each { |deal| deal.item_id }
-          %td= package.pup_code
+            %p
+              tracking code
+              = package.tracking_code
+              status
+              = package.shipping_status
+            %p
+              city_code
+              = package.city_code
+              = package_items(package)
+              weight
+              = package.weight
+          %td= package.deals.count
           %td
             = link_to 'Show', package
             -# = link_to 'Edit', edit_package_path(package)

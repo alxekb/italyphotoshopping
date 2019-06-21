@@ -21,7 +21,10 @@ class Item < ApplicationRecord
   end
 
   def item_full_name
-    self.id
-    # self.item_name.name + " " + self.brand.name + " " + self.model.name + " " self.color.name + " " + self.size.name
+    [self.item_name.name, self.brand.name, self.model.name, self.color.name, self.size.name].join(" ")
+  end
+
+  def item_full_name_with_id
+    ["##{self.id}", self.item_name.name, self.brand.name, self.model.name, self.color.name, self.size.name].join(" ")
   end
 end
