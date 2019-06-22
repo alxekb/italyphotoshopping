@@ -1,85 +1,92 @@
 .container
-  - @profiles.each do |profile|
-    .mb-4
-    - if profile_deals(profile.id).present?
-      .card.mt-4
-        .card-header
-          %lead
-            = "##{profile.id}"
-            = profile.name
-            = profile.second_name
-            = profile.surname
-          .ml-auto
-            = profile.phone
-            = profile.email
+  .block
+    = link_to 'New Package', new_package_path
+    %h2 На упаковку
+    - @profiles.each do |profile|
+      .mb-4
+      - if profile_deals(profile.id).present?
+        .card.mt-4
+          .card-header
+            %lead
+              = "##{profile.id}"
+              = profile.name
+              = profile.second_name
+              = profile.surname
+            .ml-auto
+              = profile.phone
+              = profile.email
+
+          .card-body
+            %table.table.table-responsive.table-hover
+              %thead
+                %tr
+                  %td Покупка
+                  %td
+                  %td Лот
+                  %td Статус
+                  %td Ссылка
+                  - dsum = []
+
+              - profile_deals(profile.id).each_with_index do |deal, index|
+                %tbody
+                  %tr
+                    %td
+                      = link_to "##{deal.id} ", deal_path(deal), target: '_blank'
+                    %td
+                      = image_tag deal.item.image.variant(resize: '120x120')
+                    %td
+                      = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}. EUR #{deal.sell}.", item_path(deal.item), target: '_blank'
+                    %td
+                      = deal.status
+                      = deal.comment
+
+                      %p{id:"deal#{deal.id}price#{index}"}= deal.sell
+                    %td
+                      = link_to "показать сделку", deal_path(deal), class: 'button btn btn-outline-secondary float-right'
             = link_to 'создать посылку',
               new_package_path(params: { profile: {profile_id: profile.id},
                                          package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
-                                         class: 'button btn btn-outline-primary float-right'
-        .card-body
-          %table.table.table-responsive.table-hover
-            %thead
-              %tr
-                %td Покупка
-                %td
-                %td Лот
-                %td Статус
-                %td Ссылка
-                - dsum = []
+                                         class: 'button btn btn-outline-primary'
 
-            - profile_deals(profile.id).each_with_index do |deal, index|
-              %tbody
-                %tr
-                  %td
-                    = link_to "##{deal.id} ", deal_path(deal), target: '_blank'
-                  %td
-                    = image_tag deal.item.image.variant(resize: '120x120')
-                  %td
-                    = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}. EUR #{deal.sell}.", item_path(deal.item), target: '_blank'
-                  %td
-                    = deal.status
-                    = deal.comment
+  .block
+    %h2 На отправку
 
-                    %p{id:"deal#{deal.id}price#{index}"}= deal.sell
-                  %td
-                    = link_to "показать сделку", deal_path(deal), class: 'button btn btn-outline-secondary float-right'
-        .card-footer
-
-
-  %h2 Listing packages
-
-  %table.table.table-responsive-md.table-hover
-    %thead
-      %tr
-        %th Profile
-        %th Deals
-        %th Items
-        %th Links
-
-    %tbody
-      - @packages.each do |package|
+    %table.table.table-responsive-md.table-hover
+      %thead
         %tr
-          %td
-            = package.profile.id
-            = package.profile.full_name_with_id
-          %td
-            %p
-              tracking code
-              = package.tracking_code
-              status
-              = package.shipping_status
-            %p
-              city_code
-              = package.city_code
-              = package_items(package)
-              weight
-              = package.weight
-          %td= package.deals.count
-          %td
-            = link_to 'Show', package
-            -# = link_to 'Edit', edit_package_path(package)
-            -# = link_to 'Destroy', package, method: :delete, remote: true #, data: { confirm: 'Are you sure?' }
+          %th Profile
+          %th Deals
+          %th Items
+          %th Links
 
-  %br
+      %tbody
+        - @packages.each do |package|
+          %tr
+            %td
+              = package.profile.id
+              = package.profile.full_name_with_id
+            %td
+              %p
+                tracking code
+                = package.tracking_code
+                status
+                = package.shipping_status
+              %p
+                city_code
+                = package.city_code
+                = package_items(package)
+                weight
+                = package.weight
+            %td= package.deals.count
+            %td
+              = link_to 'Show', package
+              -# = link_to 'Edit', edit_package_path(package)
+              -# = link_to 'Destroy', package, method: :delete, remote: true #, data: { confirm: 'Are you sure?' }
 
-  = link_to 'New Package', new_package_path
+    %br
+
+  .block
+    %h2 Отправлено
+    - @boxberry.each do |box|
+      = box.profile.full_name
+      = package_items(box)

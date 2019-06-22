@@ -5,6 +5,7 @@ class PackagesController < ApplicationController
   # GET /packages.json
   def index
     @packages = Package.where('active = ?', true)
+    @boxberry = Package.all.select { |p| p.tracking_code != nil}
     @profiles = Profile.all
   end
 
