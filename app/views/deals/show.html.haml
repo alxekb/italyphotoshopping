@@ -3,13 +3,16 @@
 
   %p
     %b Profile:
-    = @deal.profile.name if @deal.profile.name?
-    = @deal.profile.surname if @deal.profile.surname?
+    = @deal.profile.full_name_with_id
     = @deal.profile.phone if @deal.profile.phone?
     = @deal.profile.email if @deal.profile.email?
   %p
-    %b Item:
-    = link_to @deal.item.name, item_path(@deal.item.id)
+    %b
+      Deal:
+      = @deal.id
+      Item:
+      = link_to @deal.item.item_full_name_with_id,
+      item_path(@deal.item.id)
   %p
     %b Bye:
     = @deal.bye
