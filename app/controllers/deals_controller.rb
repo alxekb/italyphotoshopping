@@ -1,4 +1,5 @@
 class DealsController < ApplicationController
+  respond_to :html, :json
   before_action :authenticate_user!
   before_action :set_deal, only: [:show, :edit, :update, :destroy]
 
@@ -12,12 +13,13 @@ class DealsController < ApplicationController
   # GET /deals/1
   # GET /deals/1.json
   def show
-    @cost = shipping_cost(@deal.profile.boxberry_office_id, @deal.weight, 1, 0, @deal.sell)
+    @cost = shipping_cost(@deal.profile.boxberry_office_id.to_i, @deal.weight.to_i, 1, 0, @deal.sell.to_i) if @deal.profile.boxberry_office_id.present? && @deal.weight.present? && @deal.sell.present?
   end
 
   # GET /deals/new
   def new
     @deal = Deal.new
+    @deal.item_id = params[:item]
   end
 
   # GET /deals/1/edit
@@ -30,7 +32,7 @@ class DealsController < ApplicationController
     @deal = Deal.new(deal_params)
 
     respond_to do |format|
-      if @deal.save
+      if @deal.save(validate: false)
         format.html { redirect_to @deal, notice: 'Deal was successfully created.' }
         format.json { render :show, status: :created, location: @deal }
       else
@@ -89,7 +91,7 @@ class DealsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_deal
-      @deal = Deal.find(params[:id])
+      @deal = Deal.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

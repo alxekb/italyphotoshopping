@@ -2,11 +2,11 @@ class Profile < ApplicationRecord
   belongs_to :user
 
   def full_name_with_id
-    self.name + " " + self.second_name + " " + self.surname
+    ["##{self.id}",self.name, self.second_name, self.surname].join(' ')
   end
 
 
   def full_name
-    self.name + " " + self.second_name + " " + self.surname
+    [self.name, self.second_name, self.surname].join(' ')
   end
 end

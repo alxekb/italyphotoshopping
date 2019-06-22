@@ -7,14 +7,18 @@
           %li= message
 
   .field
-    = f.select :profile_id, Profile.order(:name).map { |p| [[p.name, p.surname, p.phone, p.email].join(' '), p.id] }, prompt: true, label: 'Профиль пользователя'
+    = f.select :profile_id, Profile.order(:name).map { |p| [[p.name, p.surname, p.phone, p.email].join(' '), p.id] }, prompt: true, id: "profileSelector", label: 'Профиль пользователя'
+
   .field
     = f.select :item_id, Item.order(:model_id).map { |i| [["##{i.id}", i.item_name.name, i.name, i.brand.name, i.color.name, i.size.name].join(' '), i.id] }, prompt: true, label: 'Лот'
+
+  .field
+
   .form-row
     .col
-      = f.number_field :bye, placeholder: '100 (EUR)', label: 'Купили за (Евро)'
+      = f.number_field :bye, placeholder: '100', label: 'Купили за (Евро)'
     .col
-      = f.number_field :sell, placeholder: '200 (EUR)', label: 'Продали за (Евро)'
+      = f.number_field :sell, placeholder: '200', label: 'Продали за (Евро)'
   .form-row
     .col
       = f.text_field :status, value: 'выкуплен', label: 'Статус сделки'
@@ -32,11 +36,11 @@
       = f.check_box :ransom
   .form-row
     .col
-      = f.number_field :h, placeholder: '15 (cm)', label: 'Высота в сантиметрах'
+      = f.number_field :h, value: '15', label: 'Высота в сантиметрах'
     .col
-      = f.number_field :w, placeholder: '15 (cm)', label: 'Ширина в сантиметрах'
+      = f.number_field :w, value: '20', label: 'Ширина в сантиметрах'
     .col
-      = f.number_field :l, placeholder: '15 (cm)', label: 'Длина в сантиметрах'
+      = f.number_field :l, value: '15', label: 'Длина в сантиметрах'
   .field
     = f.number_field :weight, value: '1000', label: 'Вес в граммах'
   -# .field

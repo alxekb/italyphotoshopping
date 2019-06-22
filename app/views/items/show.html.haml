@@ -4,7 +4,7 @@
       .col-sm-3.order-2.m-4
         .form-inline.justify-content-between
           = link_to '< back', items_path, class: "btn btn-outline-primary"
-          = link_to "добавить к заказу >", new_order_path, class: "btn btn-outline-success" if user_signed_in? && current_user.admin?
+          = link_to "добавить к заказу >", new_deal_path(params: {item: @item.id}), class: "btn btn-outline-success" if user_signed_in? && current_user.admin?
 
         %h2
           = @item.item

@@ -21,6 +21,7 @@ gem 'json', '~> 2.2'
 gem 'mini_magick', '~> 4.3'
 gem 'popper_js', '~> 1.9', '>= 1.9.9'
 gem "pundit"
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
 gem 'tabler-rubygem'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 #
