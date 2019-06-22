@@ -13,7 +13,10 @@ class DealsController < ApplicationController
   # GET /deals/1
   # GET /deals/1.json
   def show
-    @cost = shipping_cost(@deal.profile.boxberry_office_id.to_i, @deal.weight.to_i, 1, 0, @deal.sell.to_i) if @deal.profile.boxberry_office_id.present? && @deal.weight.present? && @deal.sell.present?
+    if @deal.profile.boxberry_office_id.present? && @deal.weight.present? && @deal.sell.present?
+      @cost = shipping_cost(@deal.profile.boxberry_office_id.to_i, @deal.weight.to_i, 1, 0, @deal.sell.to_i)
+    else
+      @cost = ''
   end
 
   # GET /deals/new
