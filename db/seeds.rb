@@ -5,11 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.create!(id: 1, email: "01@test.com", password: 123123123)
-profile = Profile.create!(name: "Alex", user_id: 1)
+if User.find_by(email: '01@test.com').nil?
+  user = User.create!(email: "01@test.com", password: 123123123)
+  profile = user.profile.build!(name: "Alex")
+end
 
 # 20.times do
 #   Item.create(
 #
 #   )
 # end
+BatchStatus.create!(status: 'Собираем') if BatchStatus.find_by(status: "Собираем" ).nil?
+BatchStatus.create!(status: 'Отправляем') if BatchStatus.find_by(status: "Отправляем").nil?
+BatchStatus.create!(status: 'Отправили') if BatchStatus.find_by(status: "Отправили").nil?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_19_161249) do
+ActiveRecord::Schema.define(version: 2019_06_22_093529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 2019_06_19_161249) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "batch_statuses", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.bigint "batch_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_status_id"], name: "index_batches_on_batch_status_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -178,6 +191,8 @@ ActiveRecord::Schema.define(version: 2019_06_19_161249) do
     t.bigint "profile_id"
     t.integer "city_code"
     t.string "label"
+    t.bigint "batch_id"
+    t.index ["batch_id"], name: "index_packages_on_batch_id"
     t.index ["package_id"], name: "index_packages_on_package_id"
     t.index ["profile_id"], name: "index_packages_on_profile_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
@@ -266,6 +281,7 @@ ActiveRecord::Schema.define(version: 2019_06_19_161249) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "batches", "batch_statuses"
   add_foreign_key "deals", "items"
   add_foreign_key "deals", "packages"
   add_foreign_key "deals", "profiles"
@@ -273,6 +289,7 @@ ActiveRecord::Schema.define(version: 2019_06_19_161249) do
   add_foreign_key "items", "colors"
   add_foreign_key "items", "item_names"
   add_foreign_key "items", "sizes"
+  add_foreign_key "packages", "batches"
   add_foreign_key "packages", "packages"
   add_foreign_key "packages", "profiles"
 end

@@ -1,0 +1,11 @@
+.container
+  %h2 Batches#index
+  %p Find me in app/views/batches/index.html.haml
+  - @batches.each do |batch|
+    .card.mt-4
+      .card-body
+        = batch.id
+        %p
+          Посылок
+          = batch.packages.count
+        = link_to batch.batch_status.status, batch_path(batch)

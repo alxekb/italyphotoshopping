@@ -1,8 +1,9 @@
 .container
+
   .my-2.form-inline
-    %h1 Listing deals
+    %h1 New deals
     .mx-4
-      = link_to 'New Deal', new_deal_path, class: 'button btn btn-outline-primary'
+      = link_to 'Add', new_deal_path, class: 'button btn btn-outline-primary'
 
   %table.table
     %thead
@@ -40,3 +41,38 @@
 
 
   %br
+  .block
+    %h2 Boxberry
+    %table.table
+      %thead
+        %tr
+          %th Profile
+          %th Item
+          %th Bye
+          %th Sell
+          %th Status
+          %th Messenger
+          %th Paid
+          %th Ransom
+          %th Comment
+          %th Payment method
+          %th
+          %th
+          %th
+
+      %tbody
+        - @boxberry.each do |deal|
+          %tr
+            %td= link_to "##{deal.id} #{deal.profile.name} #{deal.profile.surname}", deal
+            %td= link_to "#{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.model.name} #{deal.item.color.name} #{deal.item.size.name}" , item_path(deal.item), target: '_blank'
+            %td= link_to deal.bye, deal
+            %td= link_to deal.sell, deal
+            %td= link_to deal.status, deal
+            %td= deal.messenger
+            %td= deal.paid
+            %td= deal.ransom
+            %td= deal.comment
+            %td= deal.payment_method
+            %td
+              -# = link_to 'Show', deal
+              = link_to 'Edit', edit_deal_path(deal)

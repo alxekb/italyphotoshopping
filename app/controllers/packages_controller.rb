@@ -1,12 +1,13 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /packages
   # GET /packages.json
   def index
     @packages = Package.where('active = ?', true)
     @boxberry = Package.all.select { |p| p.tracking_code != nil}
     @profiles = Profile.all
+    @batches = Batch.all
   end
 
   # GET /packages/1
@@ -193,7 +194,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids)
+      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids, :batch_id)
     end
 
     def shipping_cost(code, weight, type, insurance, sum)

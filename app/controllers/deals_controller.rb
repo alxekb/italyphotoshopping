@@ -5,7 +5,8 @@ class DealsController < ApplicationController
   # GET /deals
   # GET /deals.json
   def index
-    @deals = Deal.all
+    @deals = Deal.where(package_id: nil )
+    @boxberry = Deal.where.not(package_id: nil)
   end
 
   # GET /deals/1

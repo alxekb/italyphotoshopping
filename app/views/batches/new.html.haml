@@ -1,0 +1,10 @@
+.container
+  .block
+    %h2 Batches#new
+
+    = bootstrap_form_for @batch do |f|
+      = f.select :batch_status_id, BatchStatus.order(:id).map { |s| [s.status, s.id] }, prompt: true
+      = f.fields_for :packages do |builder|
+        %fieldset
+          = builder.text_field :package.id
+      = f.submit

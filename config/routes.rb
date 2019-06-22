@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'batches/index'
+  get 'batches/new'
+  get 'batches/create'
+  get 'batches/show'
+  get 'batches/update'
   namespace :admin do
       resources :users
       resources :profiles
@@ -19,7 +24,7 @@ Rails.application.routes.draw do
 
       root to: "brands#index"
     end
-  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals
+  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals, :batches
 
   get 'pds', to: 'packages#point_description'
   get 'boxberry', to: 'boxberry#index'

@@ -1,4 +1,5 @@
 class Package < ApplicationRecord
   belongs_to :profile
-  has_many :deals
+  belongs_to :batch
+  has_many :deals, dependent: :nullify
 end

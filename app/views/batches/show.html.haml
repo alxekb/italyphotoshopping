@@ -1,0 +1,9 @@
+.container
+  %h1 Batches#show
+  .block
+    = @batch.created_at
+    - @batch.packages.each do |package|
+      %p
+      = package.tracking_code
+  .block
+    = link_to 'Back', batches_index_path
