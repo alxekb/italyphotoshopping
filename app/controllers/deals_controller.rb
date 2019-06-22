@@ -17,6 +17,7 @@ class DealsController < ApplicationController
       @cost = shipping_cost(@deal.profile.boxberry_office_id.to_i, @deal.weight.to_i, 1, 0, @deal.sell.to_i)
     else
       @cost = ''
+    end
   end
 
   # GET /deals/new
