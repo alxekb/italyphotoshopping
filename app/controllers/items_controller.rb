@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   # validates :image, presence: true
 
   def index
-    @items = Item.all
+    @items = Item.order(:model_id)
   end
 
   def show
