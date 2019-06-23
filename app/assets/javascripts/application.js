@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
+//= require select2
 //= require bootstrap
 //= require rails-ujs
 //= require activestorage
@@ -18,4 +20,9 @@
 //= require_tree .
 //= require datepicker
 //= require bootstrap-datepicker
-//= require select2
+$(document).on('page:fetch', function() {
+  $(".loading-indicator").show();
+});
+$(document).on('page:change', function() {
+  $(".loading-indicator").hide();
+});

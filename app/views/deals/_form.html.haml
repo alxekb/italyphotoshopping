@@ -47,3 +47,15 @@
     -# = f.select :package_id, Package.order(:id).map { |p| [p.id, p.user_id]}, prompt: true, label: 'Посылка, в которой сделка поедет к клиенту'
   .actions.mt-4
     = f.submit 'Save', class: 'button btn btn-secondary btn-block'
+
+:javascript
+  $( '#city_code' ).change(function() {
+    var input = $( "#city_code option:selected" ).val();
+
+    // $('#result').text(input);
+    $('#CityCode').val(input);
+    // $.ajax({type: "GET",
+    //         url: "/packages/pds",
+    //         data: input,
+    //         dataType: 'script'});
+  });

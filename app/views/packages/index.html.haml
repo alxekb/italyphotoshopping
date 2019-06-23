@@ -13,8 +13,13 @@
               = profile.second_name
               = profile.surname
             .ml-auto
-              = profile.phone
+              %a{:href => "https://api.whatsapp.com/send?phone=#{profile.phone}&text=&source=&data=", :target => '_blank'} #{profile.phone}
+              email:
               = profile.email
+              city code:
+              = profile.city_code
+              boxberry office:
+              = profile.boxberry_office_id
 
           .card-body
             %table.table.table-responsive.table-hover

@@ -15,6 +15,7 @@ class Profile::DashboardController < ProfileController
   end
 
   def edit
+    @cities = list_cities
   end
 
   def update
@@ -38,7 +39,7 @@ class Profile::DashboardController < ProfileController
 
   def profile_params
     params.require(:profile).permit(
-      :name, :second_name, :surname, :country_code, :email, :passport_code, :passport_number, :passport_date_issue, :passport_issuer, :notification_number, :notification_code, :inn, :phone, :dob, :boxberry_office_id
+      :name, :second_name, :surname, :country_code, :email, :passport_code, :passport_number, :passport_date_issue, :passport_issuer, :notification_number, :notification_code, :inn, :phone, :dob, :boxberry_office_id, :city_code
     )
   end
 end

@@ -237,7 +237,6 @@ class PackagesController < ApplicationController
       response = conn.get('', CountryCode: '643', method: 'ListCities', token: '86391.rfpqbbee')
       response.body
 
-
       # $data[0...n]=array(
       # 'Name'=>'Наименование города',
       # 'Code'=>'Код города в boxberry'

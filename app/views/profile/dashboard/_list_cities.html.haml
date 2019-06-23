@@ -1,0 +1,46 @@
+.form
+  %p
+    Город
+  .form-group
+    = select(@profile, "city_code", @cities.map { |city| [ [city["UniqName"], city["Region"], "Область"].join(" "), city["Code"] ] }, { include_blank: true}, id: "city_code", class: 'form-control',)
+  .form-group
+    .response
+      #result
+
+:javascript
+
+  $(document).on('turbolinks:load', function() {
+    $( '#city_code' ).change(function() {
+      var input = $( "#city_code option:selected" ).val();
+      console.log = input;
+      // $('#result').text(input);
+      $('#CityCode').val(input);
+      return $('select#city_code').select2({
+        placeholder: 'Выберите город',
+        allowClear: true
+      });
+      // $.ajax({type: "GET",
+      //         url: "/packages/pds",
+      //         data: input,
+      //         dataType: 'script'});
+    });
+  })
+  // (function() {
+  //   $(document).on('ready page:load', function() {
+  //
+  //     return $('select#city_code').select2({
+  //       placeholder: 'Выберите город',
+  //       allowClear: true
+  //     });
+  //   });
+  //
+  //   return;
+  //
+  // }).call(this);
+
+
+  // $(document).on 'ready page:load', ->
+  //   $('select#city').select2
+  //     placeholder: 'Выберите профиль'
+  //     allowClear: true
+  // return
