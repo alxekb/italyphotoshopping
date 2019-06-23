@@ -16,21 +16,18 @@ class ApplicationController < ActionController::Base
 
     response = conn.get('', CountryCode: '643', method: 'ListCities', token: '86391.rfpqbbee')
     response.body
+  end
 
-    # $data[0...n]=array(
-    # 'Name'=>'Наименование города',
-    # 'Code'=>'Код города в boxberry'
-    # 'CountryCode' => 'Код страны',
-    # 'Prefix' => 'Префикс: г - Город, п - Поселок и т.д',
-    # 'ReceptionLaP' => 'Прием пип',
-    # 'DeliveryLaP' => 'Выдача пип',
-    # 'Reception' => 'Прием МиМ',
-    # 'ForeignReceptionReturns' => 'Прием международных возвратов',
-    # 'Terminal' => 'Наличие терминала',
-    # 'Kladr' => 'ИД КЛАДРа',
-    # 'Region' => 'Регион',
-    # 'UniqName' => 'Составное уникальное имя',
-    # 'District' => 'Район'
-    # );
+  def shipping_cost(code, weight, type, insurance, sum)
+    url = "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.response :json
+      faraday.response :logger
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get
+    response.body
   end
 end

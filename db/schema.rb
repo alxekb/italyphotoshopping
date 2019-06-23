@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_122917) do
+ActiveRecord::Schema.define(version: 2019_06_23_183942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 2019_06_23_122917) do
     t.integer "city_code"
     t.string "label"
     t.bigint "batch_id"
+    t.string "cost"
     t.index ["batch_id"], name: "index_packages_on_batch_id"
     t.index ["package_id"], name: "index_packages_on_package_id"
     t.index ["profile_id"], name: "index_packages_on_profile_id"

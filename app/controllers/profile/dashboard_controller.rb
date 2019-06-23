@@ -1,8 +1,10 @@
-class Profile::DashboardController < ProfileController
+class Profile::DashboardController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile
 
   def index
+    # byebug
+    @profile_deals = @profile.deals
   end
 
   def new
@@ -11,7 +13,6 @@ class Profile::DashboardController < ProfileController
 
 
   def show
-    set_profile
   end
 
   def edit

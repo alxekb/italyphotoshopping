@@ -2,13 +2,29 @@
   = render 'shared/profile/navbar'
 - else
   .section
+    .card
+
+      - if @profile_deals.present?
+        %h4.card-header Ваши посылки
+        %a.card-header{href: "https://boxberry.ru/tracking/", target: '_blank'}https://boxberry.ru/tracking/
+        .card-body
+          %h6 У вас #{@profile.packages.count} послылка.
+          - @profile.packages.each do |package|
+            %p Трек-код #{package.tracking_code}
+            %p Вес #{package.weight}г.
+            %p
+              Стоимость доставки #{package.cost}EUR
+        .card-body
+          - @profile.deals.each do |deal|
+            %p= deal.item.item_full_name
+
     %h2
       Hi
       = @profile.name if @profile.present?
       !
   .section
     %p Вы купили что-то в аккаунте @italyphotoshopping. Поздравляем, вы сделали правильный выбор! Будем рады, если после получения посылки вы пришлете нам фото, чтобы мы убедились, что с вашей посылкой все в порядке. Как вариант, вы можете сделать пост в инстаграм и отметить наш аккаунт.
-    %p Так ваши подруги узнают, что у вас новая итальянская сумка, ремень или шарф и они точно побелеют от зависти. (Это пока не точно, нужно будет проверить информацию).
+    %p Так ваши подруги узнают, что у вас новая итальянская сумка, ремень или шарф и они точно побелеют от зависти. (Но это не точно, нужно будет проверить информацию... :).
   .section
     .text-block
       %h2 Дальнейший порядок работы таков:

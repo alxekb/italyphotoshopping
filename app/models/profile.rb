@@ -1,4 +1,6 @@
 class Profile < ApplicationRecord
+  has_many :deals
+  has_many :packages
   belongs_to :user
 
   def full_name_with_id

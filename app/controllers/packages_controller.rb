@@ -32,6 +32,12 @@ class PackagesController < ApplicationController
   def create
     @package = Package.new(package_params)
 
+    if current_user.profile.boxberry_office_id.present? && @package.weight.present?
+      @package.cost = shipping_cost(current_user.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 0, 500)["price"]
+    else
+      @package.cost = 'nil'
+    end
+
     respond_to do |format|
       if @package.save!
         @package_deals_ids = params[:deal_ids].split(" ").map { |s| s.to_i }
@@ -197,33 +203,7 @@ class PackagesController < ApplicationController
       params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids, :batch_id)
     end
 
-    def shipping_cost(code, weight, type, insurance, sum)
-      url = 'http://api.boxberry.de/json.php'
 
-      conn = Faraday.new(url: url) do |faraday|
-        faraday.adapter Faraday.default_adapter
-        faraday.response :json
-        faraday.response :logger
-        faraday.token_auth('86391.rfpqbbee')
-      end
-
-      # Входящие параметры:
-      # weight - вес посылки в граммах,
-      # type - тип доставки (1 - выдача в ПВЗ, 2 - Курьерская доставка (КД)),
-      # target - код ПВЗ или почтовый индекс для type=2,
-      # ordersum - cтоимость заказа в евро (0 если пустое),
-      # insurance - страховка, по желанию клиента (1 - да, 0 - нет (0 если пустое)).
-
-      response = conn.get(
-        weight: weight,
-        type: type,
-        code: code,
-        sum: sum,
-        insurance: insurance
-      )
-      response.body
-      # "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
-    end
 
     def list_cities
       url = 'http://api.boxberry.de/json.php'
