@@ -13,7 +13,7 @@
               = profile.second_name
               = profile.surname
             .ml-auto
-              %a{:href => "https://api.whatsapp.com/send?phone=#{profile.phone}&text=&source=&data=", :target => '_blank'} #{profile.phone}
+              %a{:href => "https://api.whatsapp.com/send?phone=#{profile.phone}&text=#{profile.name},%20добрый%20день!&source=&data=", :target => '_blank'} #{profile.phone}
               email:
               = profile.email
               city code:
