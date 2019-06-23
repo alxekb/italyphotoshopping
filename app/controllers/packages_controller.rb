@@ -31,10 +31,9 @@ class PackagesController < ApplicationController
   # POST /packages.json
   def create
     @package = Package.new(package_params)
-    @package.package_cost = @package.deals.sum(:sell)
 
     if current_user.profile.boxberry_office_id.present? && @package.weight.present?
-      @package.cost = shipping_cost(current_user.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 1, @package.package_cost.to_i)["price"]
+      @package.cost = shipping_cost(@package.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 1, 500)["price"]
     else
       @package.cost = 'nil'
     end
@@ -42,6 +41,9 @@ class PackagesController < ApplicationController
     respond_to do |format|
       if @package.save!
         @package_deals_ids = params[:deal_ids].split(" ").map { |s| s.to_i }
+
+        @package.package_cost = @package.deals.sum(:sell)
+        update_batch_cost(@package)
 
         if !@package_deals_ids.nil? &&
           @package_deals_ids.each do |d|
@@ -352,5 +354,12 @@ class PackagesController < ApplicationController
 
     def package_success(parcel)
 
+    end
+
+    def update_batch_cost(package)
+      @package = Package.find_by(id: package.id)
+      @batch = Batch.find_by(id: @package.batch.id)
+      @batch.cost +=  @package.cost.to_i
+      @batch.save
     end
 end
