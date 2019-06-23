@@ -31,9 +31,10 @@ class PackagesController < ApplicationController
   # POST /packages.json
   def create
     @package = Package.new(package_params)
+    @package.package_cost = @package.deals.sum(:sell)
 
     if current_user.profile.boxberry_office_id.present? && @package.weight.present?
-      @package.cost = shipping_cost(current_user.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 0, 500)["price"]
+      @package.cost = shipping_cost(current_user.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 1, @package.package_cost.to_i)["price"]
     else
       @package.cost = 'nil'
     end
@@ -200,7 +201,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids, :batch_id)
+      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids, :batch_id, :package_cost)
     end
 
 
