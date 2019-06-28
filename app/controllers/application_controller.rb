@@ -30,4 +30,17 @@ class ApplicationController < ActionController::Base
     response = conn.get
     response.body
   end
+
+  def tracking_status(tracking_code)
+    url = "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=ListStatuses&ImId=#{tracking_code}"
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.response :json
+      faraday.response :logger
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get
+    response.body
+  end
 end

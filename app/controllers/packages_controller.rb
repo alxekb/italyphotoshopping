@@ -14,6 +14,7 @@ class PackagesController < ApplicationController
   # GET /packages/1.json
   def show
     @deals = Deal.where('package_id = ?', @package.id)
+    @status = tracking_status(@package.tracking_code)
   end
 
   # GET /packages/new

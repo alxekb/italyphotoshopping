@@ -34,6 +34,13 @@
       %p
         Трек-код
         = @package.tracking_code
+      - @status.each do |s|
+        = s["Date"]
+        = s["Name"]
+        = s["Comment"]
+        %br
+      %a{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@package.package_cost} EUR. Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?") } WA
+      %p= "#{@package.package_cost} EUR"
       %p
         Номер коробки
         = @package.shipping_status

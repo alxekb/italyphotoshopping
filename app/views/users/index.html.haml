@@ -1,6 +1,19 @@
 .container
   %h2 Users#index
-  %p Find me in app/views/users/index.html.haml
-  - @users.try(:each) do |user|
-    %p user.full_name
-    %br
+  %p
+  - @users.each do |user|
+
+    - if !user.profile.name.nil?
+      .card.card-body
+        %h5
+          профиль
+          = user.profile.full_name_with_id
+          = user.profile.phone
+        - user.profile.packages.each do |package|
+          %lead= link_to "Посылка ##{package.id}, EUR #{package.package_cost}, #{package.tracking_code}", package_path(package)
+          .block
+            - @tracking_status[0].each do |s|
+              %small= s[1]
+              -# %p= tracking_status(package.tracking_code)
+              %br
+      %br

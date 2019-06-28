@@ -16,6 +16,8 @@
           = link_to 'Посылки', packages_path, class: 'nav-link'
         %li.nav-item
           = link_to 'Партии', batches_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Users', users_path, class: 'nav-link'
     %ul.navbar-nav.ml-auto
       %li.nav-item
         - if user_signed_in?
