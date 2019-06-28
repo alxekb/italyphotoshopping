@@ -39,8 +39,11 @@
         = s["Name"]
         = s["Comment"]
         %br
-      %a{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@package.package_cost} EUR. Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?") } WA
+      %a{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR. Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?") } WA
       %p= "#{@package.package_cost} EUR"
+      %p
+        Boxberry API
+        = @cost
       %p
         Номер коробки
         = @package.shipping_status
