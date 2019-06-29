@@ -27,10 +27,6 @@
         Вес:
         = @package.weight
 
-
-      %p
-        N Посылки
-        = @package.package_id
       %p
         Трек-код
         = @package.tracking_code
@@ -39,7 +35,7 @@
         = s["Name"]
         = s["Comment"]
         %br
-      %a{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR (зона #{@cost["tariff_zone"]}). Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?"), target: "_blank" } WA
+      %a.badge.badge-success{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR (зона #{@cost["tariff_zone"]}). Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?"), target: "_blank" } WA стоимость отправки #{@cost["price"]}
       %p= "#{@package.package_cost} EUR"
       %p
         Boxberry API
@@ -63,7 +59,8 @@
       - @deals.each do |deal|
         .label
           = link_to "##{deal.item.id} #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.color.name}", item_path(deal.item), target: '_blank'
-          = deal.profile.full_name
+          = link_to deal.profile.full_name, user_path(deal.profile)
+          = link_to deal.id, deal_path(deal)
   -# %p
   -#   %b User:
   -#   -# = @package.user_id
