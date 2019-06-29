@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
       root to: "brands#index"
     end
-  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals, :batches, :users
+  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals, :batches, :profiles
 
   get 'pds', to: 'packages#point_description'
   get 'boxberry', to: 'boxberry#index'
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { confirmations: 'confirmations' }
     as :user do
       get '/users/sign_out' => 'devise/sessions#destroy'
+      get '/users/sign_in' => 'devise/sessions#create'
     end
 
   scope module: :profile, as: :profile, path: 'profile' do

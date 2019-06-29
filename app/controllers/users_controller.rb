@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @tracking_status = tracking_status("AFLT16341508")
+    
   end
 
   def show

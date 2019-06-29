@@ -7,7 +7,7 @@
       .card.card-body
         %h5
           профиль
-          = link_to user.profile.full_name_with_id, user_path(user)
+          = link_to user.profile.full_name_with_id, profile_path(user)
           %a{:href => "#{wa_message(user.profile.phone, "Добрый день, #{user.profile.name}!")}", target: '_blank'} #{user.profile.phone}
         - user.profile.packages.each do |package|
           %lead= link_to "Посылка ##{package.id}, EUR #{package.package_cost}, #{package.tracking_code}", package_path(package)
