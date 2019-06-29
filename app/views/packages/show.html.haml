@@ -59,7 +59,7 @@
       - @deals.each do |deal|
         .label
           = link_to "##{deal.item.id} #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.color.name}", item_path(deal.item), target: '_blank'
-          = link_to deal.profile.full_name, user_path(deal.profile)
+          = link_to deal.profile.full_name, profile_path(deal.profile)
           = link_to deal.id, deal_path(deal)
   -# %p
   -#   %b User:
