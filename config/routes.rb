@@ -24,7 +24,8 @@ Rails.application.routes.draw do
 
       root to: "brands#index"
     end
-  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals, :batches, :profiles
+  resources :packages, :bulletins, :items, :shop, :reviews, :orders, :deals, :batches
+  resources :profiles, controller: 'users'
 
   get 'pds', to: 'packages#point_description'
   get 'boxberry', to: 'boxberry#index'
