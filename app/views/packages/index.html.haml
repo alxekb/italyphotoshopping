@@ -8,10 +8,10 @@
         .card.mt-4
           .card-header
             %lead
-              = "##{profile.id}"
-              = profile.name
-              = profile.second_name
-              = profile.surname
+              -# = "##{profile.id}"
+              = link_to profile.full_name_with_id, profile_path(profile)
+              -# = profile.second_name
+              -# = profile.surname
             .ml-auto
               %a{:href => "https://api.whatsapp.com/send?phone=#{profile.phone}&text=#{profile.name},%20добрый%20день!&source=&data=", :target => '_blank'} #{profile.phone}
               email:
