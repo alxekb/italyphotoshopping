@@ -3,9 +3,12 @@ class UsersController < ApplicationController
   before_action :user_is_admin
 
   def index
-    @users = User.all
-    @tracking_status = tracking_status("AFLT16341508")
-    
+    @tracking_status = 0
+    if params[:search]
+      @users = Profile.where('name LIKE ?', "%#{params[:search]}%")
+    else
+      @users = Profile.all
+    end
   end
 
   def show
@@ -24,5 +27,9 @@ class UsersController < ApplicationController
     # else
     #   redirect_to root_path
     # end
+  end
+
+  def user_params
+    params.require(:user).permit(:search)
   end
 end

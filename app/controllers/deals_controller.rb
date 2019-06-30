@@ -16,7 +16,7 @@ class DealsController < ApplicationController
     if @deal.profile.boxberry_office_id.present? && @deal.weight.present? && @deal.sell.present?
       @cost = shipping_cost(@deal.profile.boxberry_office_id.to_i, @deal.weight.to_i, 1, 0, @deal.sell.to_i)
     else
-      @cost = ''
+      @cost = 0
     end
   end
 
