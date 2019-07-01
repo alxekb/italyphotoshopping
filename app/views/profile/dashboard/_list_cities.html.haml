@@ -7,24 +7,7 @@
     .response
       #result
 
-:javascript
 
-  $(document).on('turbolinks:load', function() {
-    $( '#city_code' ).change(function() {
-      var input = $( "#city_code option:selected" ).val();
-      console.log = input;
-      // $('#result').text(input);
-      $('#CityCode').val(input);
-      return $('select#city_code').select2({
-        placeholder: 'Выберите город',
-        allowClear: true
-      });
-      // $.ajax({type: "GET",
-      //         url: "/packages/pds",
-      //         data: input,
-      //         dataType: 'script'});
-    });
-  })
   // (function() {
   //   $(document).on('ready page:load', function() {
   //

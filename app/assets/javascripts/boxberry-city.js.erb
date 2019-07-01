@@ -1,0 +1,22 @@
+$(document).on('turbolinks:load', function() {
+  $( 'select#city_code' ).select2({
+    placeholder: 'Выберите город',
+    allowClear: true
+  })
+  $( '#city_code' ).change(function() {
+    var input = $( "#city_code option:selected" ).val();
+    console.log = input;
+    // $.ajax({type: "GET",
+    // url: "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=ListPoints&prepaid=1&CityCode=86",
+    // data: input,
+    // dataType: 'script'});
+
+    // $('#result').text(input);
+    $('#CityCode').val(input);
+    return $('select#city_code').select2({
+      placeholder: 'Выберите город',
+      allowClear: true
+    });
+
+  });
+})

@@ -17,6 +17,7 @@ class Profile::DashboardController < ApplicationController
 
   def edit
     @cities = list_cities
+    @points = list_points(68)
   end
 
   def update

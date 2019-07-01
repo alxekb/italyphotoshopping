@@ -1,1 +1,9 @@
 %h2#cityPoints List points
+.form
+  %p
+    Пункты выдачи заказа Boxberry
+  .form-group
+    -# = select(@profile, "point_code", @points.map { |point| [ [point["AddressReduce"], point["Code"] ].join(" "), point["Code"] ] }, { include_blank: true}, id: "pointCode", class: 'form-control',)
+  .form-group
+    .response
+      #boxberryPoints

@@ -40,22 +40,23 @@
     .form-row
       .col
         = render 'list_cities'
-        = f.number_field :city_code, label: 'Код города', id: 'CityCode'
+        = f.number_field :city_code, label: 'Код города в системе Boxberry', id: 'CityCode'
         -# %p адрес отделения выберите на сайте
         -# %a= link_to 'boxberry.ru', 'https://boxberry.ru/find_an_office/', target: '_blank', class: 'btn btn-outline-primary'
         -# %span.p  номер отделения, что-то вроде "99631"
     .form-row
       .col
+        #listPoints
         %a.button.btn.button-primary{:href => "#"} Показать отделения
 
-        = render 'list_points'
+
         = f.text_field :boxberry_office_id, class: 'form-control', label: 'Отделение Boxberry, куда доставить посылку'
 
     .form-row
       .col
         %h4.mt-4 Паспорт
-        = f.text_field :passport_number, class: 'form-control', label: 'Номер паспорта'
-        = f.text_area :passport_issuer, class: 'form-control', label: 'паспорт выдан'
+        = f.text_field :passport_number, class: 'form-control', label: 'Серия и номер паспорта'
+        = f.text_area :passport_issuer, class: 'form-control', label: 'Паспорт выдан'
         = f.date_field :passport_date_issue, class: 'form-control', label: 'Дата выдачи паспорта  ГГГГ-ММ-ДД'
       -# .form-group.col-md-4
       -#   = f.label :'номер извещения (не заполнять)'
