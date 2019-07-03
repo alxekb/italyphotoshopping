@@ -15,6 +15,7 @@
           %a{:href => "#{wa_message(user.phone, "Добрый день, #{user.name}!")}", target: '_blank'} #{user.phone}
         - user.packages.each do |package|
           %lead= link_to "Посылка ##{package.id}, EUR #{package.package_cost}, #{package.tracking_code}", package_path(package)
+          %p Оплата доставки: #{human_boolean(package.delivery_paid)}
           -# .block
           -#   - @tracking_status[0].each do |s|
           -#     %small= s[1]

@@ -57,7 +57,7 @@
     %h2 На отправку
     = link_to 'Добавить партию', new_batch_path
     - @batches.each do |batch|
-
+      %h2= "##{batch.id} #{batch.created_at.to_date}"
       %table.table.table-responsive-md.table-hover
         %thead
           %tr
