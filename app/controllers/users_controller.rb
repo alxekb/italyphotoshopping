@@ -4,11 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @tracking_status = 0
-    if params[:search]
-      @users = Profile.where('surname LIKE ?', "%#{params[:search]}%")
-    else
-      @users = Profile.all
-    end
+    params[:search] ? @users = Profile.where('surname LIKE ?', "%#{params[:search]}%") : @users = Profile.all
   end
 
   def show

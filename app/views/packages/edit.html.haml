@@ -1,7 +1,62 @@
 .container
   %h1 Editing package
+  = bootstrap_form_for @package do |f|
+    - if @package.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@package.errors.count, "error")} prohibited this package from being saved:"
+        %ul
+          - @package.errors.full_messages.each do |message|
+            %li= message
+    .row
+      .field
+        %h6
+          Партия ##{@package.batch_id} #{@package.batch.batch_status.status}
+    .field
+      %p
+        Статус отправления
+        = @package.shipping_status
+    .field
+      Активный
+      = human_boolean(@package.active)
+    .row
+      .field.col
+        Код города
+        = @package.city_code
 
-  = render 'form'
+    .row
+      .field.col
+        = f.check_box :delivery_paid, label: 'Доставка оплачена'
+
+    .field
+      = render 'profile/profile_table', profile: @package.profile
+    .field
+      %h4 deals
+      %table.table.table-hover.table-responsive-lg
+        %thead
+          %tr
+            %th Item
+            %th Brand
+            %th Model
+            %th Color
+            %th Size
+            %th RUB
+            %th EUR
+            %th ART
+            %th EAN
+
+
+        - @package.deals.each do |i|
+          %tbody
+            = render 'items/item_table_body', item: items_for_package(i)
+
+    .actions
+
+      = f.submit 'Update', action: 'update', method: :patch, class: 'button btn btn-secondary btn-block'
+
+
+
+
+
 
   = link_to 'Show', @package
   \|

@@ -94,6 +94,7 @@
 
   .block
     %h2 Отправлено
+    = @sent.inspect
     - @boxberry.each do |box|
       = box.profile.full_name
       = package_items(box)

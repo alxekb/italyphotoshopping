@@ -8,6 +8,7 @@ class PackagesController < ApplicationController
     @boxberry = Package.all.select { |p| p.tracking_code != nil}
     @profiles = Profile.all
     @batches = Batch.all
+    @sent = Batch.where('batch_status.status = ?', 'Отправили')
   end
 
   # GET /packages/1
@@ -18,6 +19,7 @@ class PackagesController < ApplicationController
     @cost = shipping_cost(@package.profile.boxberry_office_id, @package.weight, 1, 1, @package.deals.sum(:sell))
   end
 
+
   # GET /packages/new
   def new
     @package = Package.new(package_params)
@@ -27,6 +29,7 @@ class PackagesController < ApplicationController
 
   # GET /packages/1/edit
   def edit
+    @cities = list_cities
   end
 
   # POST /packages
@@ -37,7 +40,7 @@ class PackagesController < ApplicationController
     if current_user.profile.boxberry_office_id.present? && @package.weight.present?
       @package.cost = shipping_cost(@package.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 1, 500)["price"]
     else
-      @package.cost = 'nil'
+      @package.cost = 0
     end
 
     respond_to do |format|
@@ -120,81 +123,6 @@ class PackagesController < ApplicationController
                         )
     response.body
     "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=PointsDescription&code=#{code}&photo=0"
-    # Array(
-    # [Name] => Наименование пункта выдачи,
-    # [Organization] => Организация,
-    # [ZipCode] => Индекс,
-    # [Country] => Страна,
-    # [Area] => Область/Край,
-    # [CityCode] => Код города,
-    # [CityName] => Город,
-    # [Settlement] => Населенный пункт,
-    # [Metro] => Станция метро,
-    # [Street] => Улица,
-    # [House] => Номер дома,
-    # [Structure] => Строение,
-    # [Housing] => Дом,
-    # [Apartment] => Квартира/офис,
-    # [Address] => Полный адрес,
-    # [AddressReduce] => Короткий адрес,
-    # [GPS] => Координаты,
-    # [TripDescription] => Общая информация о местоположении,
-    # [Phone] => Контактынй телефон,
-    # [ForeignOnlineStoresOnly] => Только для иностранных ИМ,
-    # [PrepaidOrdersOnly] => Выдача только предоплаченных заказов,
-    # [Acquiring] => Эквайринг (возможность приема банковских карт, наличие терминала),
-    # [DigitalSignature] => Цифровая подпись,
-    # [TypeOfOffice] => Тип пункта выдачи: 1-ПВЗ, 2-СПВЗ,
-    # [CourierDelivery] => Осуществляет курьерскую доставку,
-    # [ReceptionLaP] => Принимает письма,
-    # [DeliveryLaP] => Выдает письма,
-    # [LoadLimit] => Ограничение веса, кг,
-    # [VolumeLimit] => Ограничение объема,
-    # [EnablePartialDelivery] => Есть частичная выдача,
-    # [EnableFitting] => Есть примерка,
-    # [fittingType] => Тип примерки,
-    # [WorkShedule] => Расписание работы,
-    # [WorkMoBegin] => Понедельник, начало рабочего дня,
-    # [WorkMoEnd] => Понедельник, конец рабочего дня,
-    # [WorkTuBegin] => Вторник, начало рабочего дня,
-    # [WorkTuEnd] => Вторник, конец рабочего дня,
-    # [WorkWeBegin] => Среда, начало рабочего дня,
-    # [WorkWeEnd] => Среда, конец рабочего дня,
-    # [WorkThBegin] => Четверг, начало рабочего дня,
-    # [WorkThEnd] => Четверг, конец рабочего дня,
-    # [WorkFrBegin] => Пятница, начало рабочего дня,
-    # [WorkFrEnd] => Пятница, конец рабочего дня,
-    # [WorkSaBegin] => Суббота, начало рабочего дня,
-    # [WorkSaEnd] => Суббота, конец рабочего дня,
-    # [WorkSuBegin] => Воскресенье, начало рабочего дня,
-    # [WorkSuEnd] => Воскресенье, конец рабочего дня,
-    # [LunchMoBegin] => Понедельник, обед, начало,
-    # [LunchMoEnd] => Понедельник, обед, конец,
-    # [LunchTuBegin] => Вторник, обед, начало,
-    # [LunchTuEnd] => Вторник, обед, конец,
-    # [LunchWeBegin] => Среда, обед, начало,
-    # [LunchWeEnd] => Среда, обед, конец,
-    # [LunchThBegin] => Четверг, обед, начало,
-    # [LunchThEnd] => Четверг, обед, конец,
-    # [LunchFrBegin] => Пятница, обед, начало,
-    # [LunchFrEnd] => Пятница, обед, конец,
-    # [LunchSaBegin] => Суббота, обед, начало,
-    # [LunchSaEnd] => Суббота, обед, конец,
-    # [LunchSuBegin] => Воскресенье, обед, начало,
-    # [LunchSuEnd] => Воскресенье, обед, конец,
-    # [Photos] => Массив с фотографиями в base64,
-    # // Данные терминала, которому подчинено отделение. ,
-    # // Например для Каменск-Уральского - Это "Екатеринбург (терминал)",
-    # // Данные по аналогии с реквизитами самого ПВЗ: Code, Name... Префикс Terminal.
-    # [TerminalCode] =>
-    # [TerminalName] =>
-    # [TerminalOrganization] =>
-    # [TerminalCityCode] =>
-    # [TerminalCityName] =>
-    # [TerminalAddress] =>
-    # [TerminalPhone] =>
-    # [Reception] =>
-    # )
   end
 
   private
@@ -205,7 +133,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids, :batch_id, :package_cost)
+      params.require(:package).permit(:user_id, :item_id, :shipping_type, :pup_code, :h, :w, :l, :weight, :tracking_code, :shipping_status, :active, :profile_id, :city_code, :deal_ids, :batch_id, :package_cost, :delivery_paid)
     end
 
 
@@ -222,21 +150,6 @@ class PackagesController < ApplicationController
       response = conn.get('', CountryCode: '643', method: 'ListCities', token: '86391.rfpqbbee')
       response.body
 
-      # $data[0...n]=array(
-      # 'Name'=>'Наименование города',
-      # 'Code'=>'Код города в boxberry'
-      # 'CountryCode' => 'Код страны',
-      # 'Prefix' => 'Префикс: г - Город, п - Поселок и т.д',
-      # 'ReceptionLaP' => 'Прием пип',
-      # 'DeliveryLaP' => 'Выдача пип',
-      # 'Reception' => 'Прием МиМ',
-      # 'ForeignReceptionReturns' => 'Прием международных возвратов',
-      # 'Terminal' => 'Наличие терминала',
-      # 'Kladr' => 'ИД КЛАДРа',
-      # 'Region' => 'Регион',
-      # 'UniqName' => 'Составное уникальное имя',
-      # 'District' => 'Район'
-      # );
     end
 
     def parcel_create_foreign(parcel)

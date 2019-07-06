@@ -44,8 +44,9 @@
         Номер коробки
         = @package.shipping_status
       %p
-        Активный?
-        = @package.active
+        Активный? #{human_boolean(@package.active)}
+      %p
+        Оплата доставки #{human_boolean(@package.delivery_paid)}
       %p
         N Профиля
         = @package.profile_id
