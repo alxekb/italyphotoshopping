@@ -95,5 +95,6 @@
   .block
     %h2 Отправлено
     - @boxberry.each do |box|
-      = box.profile.full_name
-      = package_items(box)
+      .mt-1
+        %lead= box.profile.full_name
+        %p= package_items(box)
