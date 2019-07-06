@@ -3,7 +3,8 @@
   .block
     = @batch.created_at
     - @batch.packages.each do |package|
-      %p
-      = package.tracking_code
+      = link_to package.tracking_code, package_path(package)
+
+      %p Доставка оплачена #{human_boolean(package.delivery_paid)}
   .block
     = link_to 'Back', batches_index_path
