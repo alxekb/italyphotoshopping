@@ -1,8 +1,8 @@
 class ApplicationPolicy
   attr_reader :user, :record
 
-  def initialize(user, record)
-    @user = user
+  def initialize(current_user, record)
+    @user = current_user
     @record = record
   end
 
@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    @user.admin?
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    @user.admin?
   end
 
   def edit?

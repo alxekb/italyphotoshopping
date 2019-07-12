@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe ConfirmaionsController, type: :controller do
+RSpec.describe ConfirmaionsController < Devise::ConfirmationsController, type: :controller do
 
 end

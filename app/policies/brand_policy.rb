@@ -1,7 +1,16 @@
 class BrandPolicy < ApplicationPolicy
+
+  def show?
+    @user.admin?
+  end
+
   class Scope < Scope
     def resolve
-      scope.all
+      if @user.admin?
+        scope.all
+      else
+        false
+      end
     end
   end
 end

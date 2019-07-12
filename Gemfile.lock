@@ -251,6 +251,8 @@ GEM
     puma (3.12.1)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.6.0)
+      rspec-rails (>= 3.0.0)
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
@@ -441,6 +443,7 @@ DEPENDENCIES
   popper_js (~> 1.9, >= 1.9.9)
   puma (~> 3.11)
   pundit
+  pundit-matchers (~> 1.6.0)
   rails (= 5.2.2.rc1)
   rest-client (~> 2.0, >= 2.0.2)
   rspec-rails (~> 3.8)

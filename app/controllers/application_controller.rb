@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   protect_from_forgery with: :exception
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def list_cities
     url = 'http://api.boxberry.de/json.php'
@@ -55,5 +56,14 @@ class ApplicationController < ActionController::Base
 
     response = conn.get
     response.body
+  end
+
+  private
+
+  def user_not_authorized(exception)
+    policy_name = exception.policy.class.to_s.underscore
+
+    redirect_to(request.referrer || root_path)
+    flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
   end
 end

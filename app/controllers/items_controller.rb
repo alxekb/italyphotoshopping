@@ -48,10 +48,12 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find_by(id: params[:id])
+    authorize @item, :update?
   end
 
   def update
     @item = Item.find(params[:id])
+    authorize @item, :update?
     if @item.update_attributes(params[:item])
       format.html  { redirect_to(@item,
                     :notice => 'Item was successfully updated.') }

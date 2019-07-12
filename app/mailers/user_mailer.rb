@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
   end
 
   def sengrid_template
-    from = Email.new(email: 'test@example.com')
+    from = Email.new(email: 'robot@ekaterinaivanova.com')
     to = Email.new(email: 'test@example.com')
     subject = 'Sending with SendGrid is Fun'
     content = Content.new(type: 'text/plain', value: 'and easy to do anywhere, even with Ruby')
