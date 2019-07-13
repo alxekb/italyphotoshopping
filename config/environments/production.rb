@@ -83,14 +83,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'ekaterinaivanova.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    tls: true,
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true,
     openssl_verify_mode: 'none',
-    address: 'mail.ekaterinaivanova.com',
-    port: 25,
-    domain: 'ekaterinaivanova.com',
-    authentication: 'plain',
-    user_name: Rails.application.credentials.dig(:email, :mailbox),
-    password: Rails.application.credentials.dig(:email, :password),
-    enable_starttls_auto: true
+    user_name: 'apikey',
+    password: Rails.application.credentials.dig(:sendgrid, :smtp_sendgrid),
   }
 end

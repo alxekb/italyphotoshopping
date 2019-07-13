@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   default  from: 'robot@ekaterinaivanova.com'
-  require 'sendgrid-ruby'
-  include SendGrid
+  # require 'sendgrid-ruby'
+  # include SendGrid
 
   def test_email
     @user = params[:user]
@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
 
   def sengrid_template
     from = Email.new(email: 'robot@ekaterinaivanova.com')
-    to = Email.new(email: 'test@example.com')
+    to = Email.new(email: 'alx.ekb@gmail.com')
     subject = 'Sending with SendGrid is Fun'
     content = Content.new(type: 'text/plain', value: 'and easy to do anywhere, even with Ruby')
     mail = Mail.new(from, subject, to, content)

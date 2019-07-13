@@ -10,7 +10,7 @@ gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.4.1'
 gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.5'
-# gem 'devise_invitable', '~> 2.0.0'
+gem 'devise_invitable', '~> 2.0.0'
 gem "factory_bot_rails", "~> 4.0"
 gem 'friendly_id', '~> 5.2.4'
 gem 'faraday', '~> 0.15.4'
