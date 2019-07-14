@@ -52,4 +52,9 @@ Rails.application.routes.draw do
   end
 
   root 'welcome#index'
+  namespace :api, defaults: { format: 'json' } do
+    get 'points', to: 'boxberry#list_points'
+    get 'point', to: 'boxberry#point'
+    get 'city', to: 'boxberry#city'
+  end
 end

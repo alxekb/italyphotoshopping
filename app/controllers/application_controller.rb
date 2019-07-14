@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       faraday.response :logger
     end
 
-    response = conn.get('', CountryCode: '643', method: 'ListCities', token: '86391.rfpqbbee')
+    response = conn.get('', CountryCode: '643', method: 'ListCities', token: Rails.application.credentials.dig(:boxberry, :token))
     response.body
   end
 

@@ -5,25 +5,8 @@
     = select(@profile, "city_code", @cities.map { |city| [ [city["UniqName"], city["Region"], "Область"].join(" "), city["Code"] ] }, { include_blank: true}, id: "city_code", class: 'form-control',)
   .form-group
     .response
-      #result
-
-
-  // (function() {
-  //   $(document).on('ready page:load', function() {
-  //
-  //     return $('select#city_code').select2({
-  //       placeholder: 'Выберите город',
-  //       allowClear: true
-  //     });
-  //   });
-  //
-  //   return;
-  //
-  // }).call(this);
-
-
-  // $(document).on 'ready page:load', ->
-  //   $('select#city').select2
-  //     placeholder: 'Выберите профиль'
-  //     allowClear: true
-  // return
+      %span  Код города:
+      %span#result ???
+      %span Код ПВЗ:
+      %span#boxberryPointCode ???
+      #down

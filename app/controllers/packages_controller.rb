@@ -115,7 +115,7 @@ class PackagesController < ApplicationController
       faraday.adapter Faraday.default_adapter
       faraday.response :json
       faraday.response :logger
-      faraday.token_auth('86391.rfpqbbee')
+      faraday.token_auth(Rails.application.credentials.dig(:boxberry, :token))
     end
     response = conn.get('', method: 'PointsDescription', CountryCode: '643',
                         code: code,
@@ -147,7 +147,7 @@ class PackagesController < ApplicationController
         faraday.response :logger
       end
 
-      response = conn.get('', CountryCode: '643', method: 'ListCities', token: '86391.rfpqbbee')
+      response = conn.get('', CountryCode: '643', method: 'ListCities', token: Rails.application.credentials.dig(:boxberry, :token))
       response.body
 
     end

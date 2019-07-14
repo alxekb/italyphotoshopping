@@ -1,5 +1,6 @@
 .container
-  %p Заполняем русскими буквами (кириллицей).
+  %p Заполняем русскими буквами (кириллицей) данные получателя посылки.
+  %small Это может быть любой человек, который может получить посылку, не обязательно вы.
   = bootstrap_form_for profile, url: profile_dashboard_path, method: :patch, html: { role: 'form' } do |f|
     - if profile.errors.any?
       #errors_explaination
@@ -32,25 +33,27 @@
       = link_to 'nalog.ru', 'https://service.nalog.ru/inn.do', target: '_blank', class: 'btn btn-outline-primary float-right'
 
     .form-row
+      %h4.mt-4 Boxberry
+      %p Пункт выдачи заказа #{profile.boxberry_office_id}
+      %p Код города #{profile.city_code}
+    .form-row
       .col
-        %h4.mt-4 Boxberry
         = f.select :country_code, set_iso_code, {}, class: 'form-control', label: 'Код страны доставки'
+      .col
         = f.select :passport_code, set_iso_code, {}, class: 'form-control', label: 'код страны выдавшей паспорт'
 
     .form-row
       .col
         = render 'list_cities'
-        = f.number_field :city_code, label: 'Код города в системе Boxberry', id: 'CityCode'
-        -# %p адрес отделения выберите на сайте
-        -# %a= link_to 'boxberry.ru', 'https://boxberry.ru/find_an_office/', target: '_blank', class: 'btn btn-outline-primary'
-        -# %span.p  номер отделения, что-то вроде "99631"
+        = f.hidden_field :city_code, label: 'Код города в системе Boxberry', id: 'CityCode'
+
     .form-row
       .col
         #listPoints
-        %a.button.btn.button-primary{:href => "#"} Показать отделения
+        -# %a.button.btn.button-primary{:href => "#"} Показать отделения
 
+        = f.hidden_field :boxberry_office_id, class: 'form-control', label: 'Отделение Boxberry, куда доставить посылку', id: 'boxberryPoint'
 
-        = f.text_field :boxberry_office_id, class: 'form-control', label: 'Отделение Boxberry, куда доставить посылку'
 
     .form-row
       .col

@@ -5,13 +5,33 @@ $(document).on('turbolinks:load', function() {
   })
   $( '#city_code' ).change(function() {
     var input = $( "#city_code option:selected" ).val();
-    console.log = input;
-    // $.ajax({type: "GET",
-    // url: "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=ListPoints&prepaid=1&CityCode=86",
-    // data: input,
-    // dataType: 'script'});
+    $('#down').html('');
+    $('#boxberryPointCode').html('???');
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/api/points",
+      data: {
+        city_code: input,
+      },
+      dataType: 'json',
+      success: function(result) {
+        var city_points = '';
+        var $select = $('#down');
+        $.each(result.points, function(key, point){
+          city_points += '<option value=' + point['Code'] + '>' + point['Address'] + '</option>';
+        });
+        $('<select class="custom-select">' + city_points + '</select>').appendTo('#down').select2({
+          placheholder: 'Выберите пункт выдачи',
+          allowClear: true,
+        });
+        var boxberry_point = $( "#down option:selected" ).val();
+        $('#boxberryPoint').val(boxberry_point);
+        $('#boxberryPointCode').html(boxberry_point);
+      }
 
-    // $('#result').text(input);
+    });
+
+    $('#result').text(input);
     $('#CityCode').val(input);
     return $('select#city_code').select2({
       placeholder: 'Выберите город',
@@ -19,4 +39,10 @@ $(document).on('turbolinks:load', function() {
     });
 
   });
+  $('#down').change(function(){
+    var boxberry_point = $( "#down option:selected" ).val();
+    $('#boxberryPoint').val(boxberry_point);
+    $('#boxberryPointCode').html(boxberry_point);
+    console.log(boxberry_point + ' Boxberry selected point.');
+  })
 })

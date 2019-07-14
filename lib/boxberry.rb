@@ -9,7 +9,7 @@ module Boxberry
       faraday.adapter Faraday.default_adapter
       faraday.response :json
       faraday.response :logger
-      faraday.token_auth('86391.rfpqbbee')
+      faraday.token_auth(Rails.application.credentials.dig(:boxberry, :token))
     end
 
     # Входящие параметры:
