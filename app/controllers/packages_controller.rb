@@ -16,7 +16,7 @@ class PackagesController < ApplicationController
   def show
     @deals = Deal.where('package_id = ?', @package.id)
     @status = tracking_status(@package.tracking_code)
-    @cost = shipping_cost(@package.profile.boxberry_office_id, @package.weight, 1, 1, @package.deals.sum(:sell))
+    @cost = shipping_cost(@package.profile.boxberry_office_id.to_i, @package.weight, 1, 1, @package.deals.sum(:sell))
   end
 
 
