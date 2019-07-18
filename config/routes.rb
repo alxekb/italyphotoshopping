@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   scope module: :profile, as: :profile, path: 'profile' do
     get 'dashboard', to: 'dashboard#index', as: :dashboard
     get 'dashboard/edit', to: 'dashboard#edit'
+    get 'dashboard/status', to: 'dashboard#status'
     patch 'dashboard', to: 'dashboard#update'
     resources :admin
     # resources :dashboard

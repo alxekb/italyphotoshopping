@@ -1,0 +1,3 @@
+.container
+  %h2 Status
+  %p= @status.each { |status| [status['Date'], status['Name']] }

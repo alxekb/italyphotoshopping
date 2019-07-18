@@ -10,13 +10,16 @@
         .card-body
           %h6 У вас #{@profile.packages.count} послылка.
           - @profile.packages.each do |package|
-            %p Трек-код #{package.tracking_code}
+            %p
+              Трек-код #{package.tracking_code}
+            = link_to 'Узнать статус', profile_dashboard_status_path(id: package.id)
             %p Вес #{package.weight}г.
             %p
               Стоимость доставки #{package.cost}EUR
         .card-body
           - @profile.deals.each do |deal|
-            %p= deal.item.item_full_name
+            = image_tag deal.item.image.variant(resize: '128x128')
+            %p= link_to deal.item.item_full_name, item_path(deal.item)
 
     %h2
       Hi

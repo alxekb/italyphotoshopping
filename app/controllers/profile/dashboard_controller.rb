@@ -15,6 +15,11 @@ class Profile::DashboardController < ApplicationController
   def show
   end
 
+  def status
+    package = Package.find_by(id: params[:id])
+    @status = tracking_status(package.tracking_code)
+  end
+
   def edit
     @cities = list_cities
     @points = list_points(68)
