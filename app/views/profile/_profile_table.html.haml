@@ -2,25 +2,24 @@
   %thead
     %tr
       %th #
-      %th Имя
-      %th Отч
-      %th Фам
-      %th Тел
-      %th email
-      %th country
+      %th ФИО
+      -# %th Отч
+      -# %th Фам
+      %th Тел, email
+      -# %th country
       %th паспорт
       %th ИНН
       %th Дата рождения
       %th Boxberry
+      %th City code
   %tbody
     %tr
       %th= profile.id
-      %td= profile.name
-      %td= profile.second_name
-      %td= profile.surname
-      %td= profile.phone
-      %td= profile.email
-      %td= profile.country_code
+      %td= link_to profile.full_name, profile
+      -# %td= profile.second_name
+      -# %td= profile.surname
+      %td= "#{profile.phone} #{profile.email}"
+      -# %td= profile.country_code
       %td
         = profile.passport_code
         = profile.passport_number
@@ -29,3 +28,4 @@
       %td= profile.inn
       %td= profile.dob
       %td= profile.boxberry_office_id
+      %td= profile.city_code

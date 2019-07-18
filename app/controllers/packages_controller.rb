@@ -227,7 +227,7 @@ class PackagesController < ApplicationController
       package.deals.each_with_index do |deal, index|
 
         item = {"quantity" => "1",
-                "articul" => "#{deal.item.art}",
+                "articul" => "#{deal.id}",
                 "Manufacturer" => "#{deal.item.brand.name}",
                 "model" => "#{deal.item.model.name}",
                 "bruto" => "#{deal.weight}",
@@ -258,7 +258,7 @@ class PackagesController < ApplicationController
 
     def package_rollback(parcel, request)
       parcel.deals.each do |deal|
-        deal.status = "Sending error. #{request[0]["err"]}"
+        deal.status = "Sending error." # {request[0]["err"]}
         deal.package_id = nil
         puts "##### Сделка #{deal.id} убрана из посылки #{@package.id}" if deal.save!
       end

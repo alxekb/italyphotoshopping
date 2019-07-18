@@ -6,11 +6,12 @@
         - @package.errors.full_messages.each do |message|
           %li= message
   .field
+    %h4 User
     = f.hidden_field(:profile_id, value: "#{params[:profile][:profile_id]}")
     = hidden_field_tag(:deal_ids, params[:package][:deal_ids])
     = render 'profile/profile_table', profile: profile_for_partial(params[:profile][:profile_id].to_i)
   .field
-    %h4 deals
+    %h4 Deals
     %table.table.table-hover.table-responsive-md
       %thead
         %tr
@@ -22,7 +23,7 @@
           %th RUB
           %th EUR
           %th ART
-          %th EAN
+          -# %th EAN
 
       - params[:package][:deal_ids].each do |i|
         %tbody
@@ -30,31 +31,32 @@
 
   .row
     .field.col
-      = f.number_field :shipping_type, value: '1', label: 'Тип отправления (1 для ПВЗ)'
-    .field.col
-      = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
-    .field.col
-      = f.text_field :tracking_code, label: 'Трек код', disabled: true, placeholder: '1234567890'
+      = f.hidden_field :shipping_type, value: '1', label: 'Тип отправления (1 для ПВЗ)'
+    -# .field.col
+      -# = f.number_field :pup_code, label: 'Какой-то PUP...', placeholder: 'pup_code'
+    -# .field.col
+      -# = f.text_field :tracking_code, label: 'Трек код', disabled: true, placeholder: '1234567890'
+  %h4 Box params
   .row
     .field.col
-      = f.number_field :h, value: '20', label: 'Высота в см'
+      = f.number_field :h, value: '23', label: 'Высота в см'
     .field.col
       = f.number_field :w, value: '15', label: 'Ширина в см'
     .field.col
-      = f.number_field :l, value: '10', label: 'Длина в см'
+      = f.number_field :l, value: '13', label: 'Длина в см'
     .field
       = f.number_field :weight, value: '800', label: 'Вес в гр'
   .row
-    .field
-      = f.select :batch_id, Batch.order(:id).map { |b| [["##{b.id}", b.batch_status.status].join(' '), b.id] }
-  .field
-    = f.text_field :shipping_status, label: 'Статус отправления', value: 'Подготовка документов', disabled: true
-  .field
-    = f.check_box :active, label: 'Активный', checked: true
-  .row
     .field.col
-      = f.number_field :city_code, label: 'Код города', id: 'CityCode'
+      = f.select :batch_id, Batch.order(:id).map { |b| [["##{b.id}", b.batch_status.status].join(' '), b.id] }, prompt: true
     .field.col
-      = render 'cities'
+      = f.check_box :active, label: 'Активный', checked: true
+    .field.col
+      = f.hidden_field :shipping_status, label: 'Статус отправления', value: 'Подготовка документов', disabled: true
+  -# .row
+  -#   .field.col
+  -#     = f.number_field :city_code, label: 'Код города', id: 'CityCode'
+  -#   .field.col
+  -#     = render 'cities'
   .actions
     = f.submit('Save', params: { package: { deals_ids: [["deal"],[profile_deals(params[:profile][:profile_id]).ids]] }}, class: 'button btn btn-outline-secondary btn-block')
