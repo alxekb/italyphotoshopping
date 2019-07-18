@@ -2,9 +2,16 @@
   %h1 Batches#show
   .block
     = @batch.created_at
+    %h4 Batches
     - @batch.packages.each do |package|
-      = link_to package.tracking_code, package_path(package)
+      %row
+        %a.badge.badge-success{:href => wa_message(package.profile.phone, "Привет!"), target: "_blank" } #{package.profile.full_name}
+        %p
+          Status: #{package.shipping_status}
+          Трек:
+          = link_to package.tracking_code, package_path(package)
+          Доставка оплачена #{human_boolean(package.delivery_paid)}
+          (#{package.package_cost} EUR)
 
-      %p Доставка оплачена #{human_boolean(package.delivery_paid)}
   .block
     = link_to 'Back', batches_index_path
