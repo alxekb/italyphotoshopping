@@ -7,6 +7,7 @@
       %row
         %a.badge.badge-success{:href => wa_message(package.profile.phone, "Привет!"), target: "_blank" } #{package.profile.full_name}
         %p
+          id: #{package.id}
           Status: #{package.shipping_status}
           Трек:
           = link_to package.tracking_code, package_path(package)
