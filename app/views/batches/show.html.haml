@@ -11,7 +11,7 @@
           Трек:
           = link_to package.tracking_code, package_path(package)
           Доставка оплачена #{human_boolean(package.delivery_paid)}
-          (#{package.package_cost} EUR)
+          (#{package.cost} EUR)
 
   .block
     = link_to 'Back', batches_index_path
