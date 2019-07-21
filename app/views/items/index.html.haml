@@ -4,23 +4,22 @@
   %h5
     Товары
   .block
-    .card-columns
+    .row
       - @items.each do |item|
-        -# .col-sm-6.col-md-4.col-lg-3.mt-4
+        .col-sm-6.col-md-4.col-lg-3.mt-4
 
-
-        .card.bg-light.text-white.card-items
-          - if item.image.attachment.nil?
-            = image_tag('/ek.jpg', size: "170x230")
-          - else
-            = image_tag(item.image.variant(resize:"170x230"), class: 'card-img')
-            -# .card-body
-          .card-img-overlay
-            %h5
-              = item.item_full_name_with_id
-              %span= item.brand.name if item.brand_id?
-              %span= item.name if item.name?
-            -# %h3
-            -#   = item.price if item.price?
-            -#   %span РУБ.
-            = link_to 'Show >', item_path(item), class: "btn btn-outline-success"
+          .card.bg-light.text-white.card-items
+            - if item.image.attachment.nil?
+              = image_tag('/ek.jpg', size: "170x230")
+            - else
+              = image_tag(item.image.variant(resize:"170x230"), class: 'card-img')
+              -# .card-body
+            .card-img-overlay
+              %h5
+                = item.item_full_name_with_id
+                %span= item.brand.name if item.brand_id?
+                %span= item.name if item.name?
+              -# %h3
+              -#   = item.price if item.price?
+              -#   %span РУБ.
+              = link_to 'Show >', item_path(item), class: "btn btn-outline-success"
