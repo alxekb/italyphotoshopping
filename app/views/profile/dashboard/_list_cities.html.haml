@@ -1,12 +1,12 @@
 .form
   %p
-    Город
+
   .form-group
     = select(@profile, "city_code", @cities.map { |city| [ [city["UniqName"], city["Region"], "Область"].join(" "), city["Code"] ] }, { include_blank: true}, id: "city_code", class: 'form-control',)
   .form-group
     .response
-      %span  Код города:
-      %span#result ???
-      %span Код ПВЗ:
-      %span#boxberryPointCode ???
+      %span
+      %span#result
+      %span
+      %span#boxberryPointCode
       #down

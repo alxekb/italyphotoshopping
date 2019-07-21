@@ -8,15 +8,17 @@
         %h4.card-header Ваши посылки
         %a.card-header{href: "https://boxberry.ru/tracking/", target: '_blank'}https://boxberry.ru/tracking/
         .card-body
-          %h6 У вас #{@profile.packages.count} послылка.
+          %h6 У вас #{@profile.packages.count} послылок.
           - @profile.packages.each do |package|
-            %p
-              Трек-код #{package.tracking_code}
-            = link_to 'Узнать статус', profile_dashboard_status_path(id: package.id)
-            %p Вес #{package.weight}г.
-            %p
-              Стоимость доставки #{package.cost}EUR
+            .block.mt-2
+              %p
+                Трек-код
+                = link_to package.tracking_code, profile_dashboard_status_path(id: package.id)
+
+                Вес #{package.weight}г.
+                Стоимость доставки #{package.cost}EUR
         .card-body
+          %h4 Лоты
           - @profile.deals.each do |deal|
             = image_tag deal.item.image.variant(resize: '128x128')
             %p= link_to deal.item.item_full_name, item_path(deal.item)

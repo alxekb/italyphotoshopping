@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', function() {
   $( '#city_code' ).change(function() {
     var input = $( "#city_code option:selected" ).val();
     $('#down').html('');
-    $('#boxberryPointCode').html('???');
+    $('#boxberryPointCode').html('');
     $.ajax({
       type: "GET",
       url: "http://shop.ekaterinaivanova.com/api/points",

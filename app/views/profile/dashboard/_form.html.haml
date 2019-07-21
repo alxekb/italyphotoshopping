@@ -11,41 +11,42 @@
               *
               = message
     .form-row.align-items-center.form-group
-      .col
+      .col-md-4
         = f.text_field :name, class: 'form-control', placeholder: 'Имя', label: 'Имя'
-      .col
+      .col-md-4
         = f.text_field :second_name, class: 'form-control', placeholder: 'Отчество', label: 'Отчество'
-      .col
+      .col-md-4
         = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия', label: 'Фамилия'
 
     .form-row.align-items-center.form-group
-      .col
+      .col-md-4
         = f.phone_field :phone, class: 'form-control', placeholder: 'телефон'
-      .col
-
+      .col-md-4
         = f.email_field :email, class: 'form-control', placeholder: 'email'
-      .col
+      .col.md-4
         = f.date_field :dob, class: 'form-control', placeholder: 'ГГГГ-ММ-ДД', label: 'дата рождения ГГГГ-ММ-ДД'
     .form-row.mt-2
       = f.text_field :inn, class: 'form-control', placeholder: 'ИНН', label: 'ИНН'
-      %p Информацию о вашем ИНН вы сможете найти на сайте
-      .col
-      = link_to 'nalog.ru', 'https://service.nalog.ru/inn.do', target: '_blank', class: 'btn btn-outline-primary float-right'
+      %p
+        Информацию о вашем ИНН вы сможете найти на сайте
+        = link_to 'nalog.ru', 'https://service.nalog.ru/inn.do', target: '_blank'
 
-    .form-row
-      %h4.mt-4 Boxberry
-      %p Пункт выдачи заказа #{profile.boxberry_office_id}
-      %p Код города #{profile.city_code}
-    .form-row
-      .col
-        = f.select :country_code, set_iso_code, {}, class: 'form-control', label: 'Код страны доставки'
-      .col
-        = f.select :passport_code, set_iso_code, {}, class: 'form-control', label: 'код страны выдавшей паспорт'
+    %h4.mt-4 Boxberry
+
+    %p Пункт выдачи заказа: #{profile.boxberry_office_id}
+    %p Код города: #{profile.city_code}
+    -# = link_to 'выбрать пункт выдачи заказа', root_path, remote: true, class: 'button btn btn-outline-secondary' if !profile.boxberry_office_id.nil?
 
     .form-row
       .col
         = render 'list_cities'
         = f.hidden_field :city_code, label: 'Код города в системе Boxberry', id: 'CityCode'
+
+    .form-row
+      .col
+        = f.select :country_code, set_iso_code, {}, class: 'form-control', label: 'Код страны доставки'
+      .col
+        = f.select :passport_code, set_iso_code, {}, class: 'form-control', label: 'код страны выдавшей паспорт'
 
     .form-row
       .col

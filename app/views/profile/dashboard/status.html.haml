@@ -1,3 +1,17 @@
 .container
   %h2 Status
-  %p= @status.each { |status| [status['Date'], status['Name']] }
+  %table.table.table-sm
+    %thead
+      %tr
+        %th Дата
+        %th Статус
+        %th Комметарий
+
+    - @status.each do |status|
+      %tbody.table-hover
+        %tr
+          %td= status['Date']
+          %td= status['Name']
+          %td= status['Comment']
+          
+  = link_to 'Назад', request.referrer || profile_dashboard_path, class: 'button btn btn-outline-secondary'
