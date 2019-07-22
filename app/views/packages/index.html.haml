@@ -5,11 +5,13 @@
     - @profiles.each do |profile|
       .mb-4
       - if profile_deals(profile.id).present?
-        .card.mt-4
+
+        .card.mt-4[profile, :card]
           .card-header
             %lead
               -# = "##{profile.id}"
               = link_to profile.full_name_with_id, profile_path(profile)
+
               -# = profile.second_name
               -# = profile.surname
             .ml-auto
@@ -20,38 +22,40 @@
               = profile.city_code
               boxberry office:
               = profile.boxberry_office_id
+          .accordion
+            %button.btn.btn-link.collapsed{"aria-controls" => "#deal_profile_#{profile.id}", "aria-expanded" => "false", "data-target" => "#deal_profile_#{profile.id}", "data-toggle" => "collapse", :type => "button"}  Show
 
-          .card-body
-            %table.table.table-responsive.table-hover
-              %thead
-                %tr
-                  %td Покупка
-                  %td
-                  %td Лот
-                  %td Статус
-                  %td Ссылка
-                  - dsum = []
-
-              - profile_deals(profile.id).each_with_index do |deal, index|
-                %tbody
+            .card-body.collapse[profile, :deal]{ "aria-labelledby" => "headingOne", "data-parent" => "#card_profile_#{profile.id}" }
+              %table.table.table-responsive.table-hover
+                %thead
                   %tr
+                    %td Покупка
                     %td
-                      = link_to "##{deal.id} ", deal_path(deal), target: '_blank'
-                    %td
-                      = image_tag deal.item.image.variant(resize: '120x120')
-                    %td
-                      = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}. EUR #{deal.sell}.", item_path(deal.item), target: '_blank'
-                    %td
-                      = deal.status
-                      = deal.comment
+                    %td Лот
+                    %td Статус
+                    %td Ссылка
+                    - dsum = []
 
-                      %p{id:"deal#{deal.id}price#{index}"}= deal.sell
-                    %td
-                      = link_to "показать сделку", deal_path(deal), class: 'button btn btn-outline-secondary float-right'
-            = link_to 'создать посылку',
-              new_package_path(params: { profile: {profile_id: profile.id},
-                                         package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
-                                         class: 'button btn btn-outline-primary'
+                - profile_deals(profile.id).each_with_index do |deal, index|
+                  %tbody
+                    %tr
+                      %td
+                        = link_to "##{deal.id} ", deal_path(deal), target: '_blank'
+                      %td
+                        = image_tag deal.item.image.variant(resize: '120x120')
+                      %td
+                        = link_to "Лот #{deal.item.item_name.name} #{deal.item.brand.name} #{deal.item.name} #{deal.item.color.name} #{deal.item.size.name}. EUR #{deal.sell}.", item_path(deal.item), target: '_blank'
+                      %td
+                        = deal.status
+                        = deal.comment
+
+                        %p{id:"deal#{deal.id}price#{index}"}= deal.sell
+                      %td
+                        = link_to "показать сделку", deal_path(deal), class: 'button btn btn-outline-secondary float-right'
+              = link_to 'создать посылку',
+                new_package_path(params: { profile: {profile_id: profile.id},
+                                           package: { deal_ids:  [profile_deals(profile.id).ids]  } }),
+                                           class: 'button btn btn-outline-primary'
 
   .block
     %h2 На отправку
