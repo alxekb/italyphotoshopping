@@ -19,7 +19,7 @@ gem 'high_voltage', '~> 3.1'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'json', '~> 2.2'
-gem 'mini_magick', '~> 4.3'
+gem "mini_magick", ">= 4.9.4"
 gem 'popper_js', '~> 1.9', '>= 1.9.9'
 gem "pundit"
 gem 'select2-rails', '~> 4.0', '>= 4.0.3'
