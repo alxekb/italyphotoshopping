@@ -39,16 +39,16 @@
   %h4 Box params
   .row
     .field.col
+      = f.number_field :weight, value: '800', label: 'Вес в гр'
+    .field.col
       = f.number_field :h, value: '23', label: 'Высота в см'
     .field.col
       = f.number_field :w, value: '15', label: 'Ширина в см'
     .field.col
       = f.number_field :l, value: '13', label: 'Длина в см'
-    .field
-      = f.number_field :weight, value: '800', label: 'Вес в гр'
-  .row
     .field.col
       = f.select :batch_id, Batch.order(:id).map { |b| [["##{b.id}", b.batch_status.status].join(' '), b.id] }, prompt: true
+  .row
     .field.col
       = f.check_box :active, label: 'Активный', checked: true
     .field.col

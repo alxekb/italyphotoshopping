@@ -38,7 +38,7 @@ class PackagesController < ApplicationController
     @package = Package.new(package_params)
 
     if current_user.profile.boxberry_office_id.present? && @package.weight.present?
-      @package.cost = shipping_cost(@package.profile.boxberry_office_id.to_i, @package.weight.to_i, 1, 1, 500)["price"]
+      @package.cost = shipping_cost(@package.profile.boxberry_office_id, @package.weight, 1, 1, 500)["price"]
     else
       @package.cost = 0
     end

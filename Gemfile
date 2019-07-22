@@ -23,6 +23,7 @@ gem "mini_magick", ">= 4.9.4"
 gem 'popper_js', '~> 1.9', '>= 1.9.9'
 gem "pundit"
 gem 'select2-rails', '~> 4.0', '>= 4.0.3'
+gem 'searchkick'
 gem 'sendgrid-ruby'
 gem 'tabler-rubygem'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
