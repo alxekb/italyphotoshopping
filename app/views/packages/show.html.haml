@@ -3,7 +3,7 @@
   .card
     .card-header
       %a.badge.badge-primary{href: "#{@package.label}", target: "_blank"} Этикетка
-      %a.badge.badge-success{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR (зона #{@cost["tariff_zone"]}). Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?"), target: "_blank" } WA стоимость отправки #{@cost["price"]}
+      %a.badge.badge-success{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR (тарифная зона #{@cost["tariff_zone"]}). Ссылка на оплату придет по смс, отслеживание - в личном кабинете."), target: "_blank" } WA стоимость отправки #{@cost["price"]}
       Оплата доставки: #{human_boolean(@package.delivery_paid)}
 
     .card-body
