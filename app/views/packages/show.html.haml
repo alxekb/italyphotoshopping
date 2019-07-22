@@ -3,26 +3,25 @@
   .card
     .card-header
       %a.badge.badge-primary{href: "#{@package.label}", target: "_blank"} Этикетка
+      %a.badge.badge-success{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR (зона #{@cost["tariff_zone"]}). Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?"), target: "_blank" } WA стоимость отправки #{@cost["price"]}
+      Оплата доставки: #{human_boolean(@package.delivery_paid)}
 
     .card-body
       %p
-        id Посылки
+        id Посылки:
         = @package.id
-      %p
-        Profile
-        = @package.profile_id
-      %p
-        Shipping type
+        Profile:
+        = @package.profile.full_name_with_id
+        Shipping type:
         = @package.shipping_type
+        Shipping price:
+        = "#{@package.package_cost} EUR"
+
       %p
-        PUP
-        = @package.pup_code
-      %p
-        H:
         = @package.h
-        W:
+        x
         = @package.w
-        L:
+        x
         = @package.l
         Вес:
         = @package.weight
@@ -30,32 +29,31 @@
       %p
         Трек-код
         = @package.tracking_code
+        Номер коробки
+        = @package.shipping_status
+
       - @status.each do |s|
         = s["Date"]
         = s["Name"]
         = s["Comment"]
         %br
-      %a.badge.badge-success{:href => wa_message(@package.profile.phone, "#{@package.profile.name}, добрый день! Стоимость доставки посылки №#{@package.tracking_code} - #{@cost["price"]} EUR (зона #{@cost["tariff_zone"]}). Подскажите, пожалуйста, Вы сможете сделать перевод Екатерине как обычно?"), target: "_blank" } WA стоимость отправки #{@cost["price"]}
-      %p= "#{@package.package_cost} EUR"
+
+
       %p
         Boxberry API
         = @cost
       %p
-        Номер коробки
-        = @package.shipping_status
+
       %p
         Активный? #{human_boolean(@package.active)}
-      %p
-        Оплата доставки #{human_boolean(@package.delivery_paid)}
-      %p
-        N Профиля
-        = @package.profile_id
+
+
       %p
         City code
         = @package.city_code
-      -# - if @deals.count.nil?
-      -#   %p Нет сделок
-      -# - else
+        Boxberry office
+        = @package.profile.boxberry_office_id
+
     .card-footer
       - @deals.each do |deal|
         .label
