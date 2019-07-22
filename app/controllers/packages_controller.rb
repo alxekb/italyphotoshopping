@@ -37,7 +37,7 @@ class PackagesController < ApplicationController
   def create
     @package = Package.new(package_params)
 
-    if current_user.profile.boxberry_office_id.present? && @package.weight.present?
+    if @package.profile.boxberry_office_id.present? && @package.weight.present?
       @package.cost = shipping_cost(@package.profile.boxberry_office_id, @package.weight, 1, 1, 500)["price"]
     else
       @package.cost = 0
