@@ -24,7 +24,9 @@ class PackagesController < ApplicationController
   def new
     @package = Package.new(package_params)
     @cities = list_cities
-    @cost = params[:package][:deal_ids].flatten.map(&:to_i).sum
+    @cost = 0
+    params[:package][:deal_ids].flatten.map(&:to_i).each { |deal| @cost += Deal.find_by(id: deal).sell }
+    # byebug
     # @points = list_points(16)
   end
 
