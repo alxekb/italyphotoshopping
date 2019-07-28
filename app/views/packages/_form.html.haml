@@ -28,6 +28,8 @@
       - params[:package][:deal_ids].each do |i|
         %tbody
           = render 'items/item_table_body', item: items_for_package(i)
+      %tr
+        %td total cost:  #{@cost} EUR
 
   .row
     .field.col
