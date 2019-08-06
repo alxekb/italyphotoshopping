@@ -1,9 +1,11 @@
 .container
-  %h1 Batches#show
   .block
     = @batch.created_at
-    %h4 Batches
-    - @batch.packages.each do |package|
+    %h4
+      Batch ##{@batch.id}
+      = @batch.batch_status.status
+
+    - @batch.packages.order(id: :asc).each do |package|
       %row
         %a.badge.badge-success{:href => wa_message(package.profile.phone, "Привет!"), target: "_blank" } #{package.profile.full_name}
         %p
