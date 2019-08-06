@@ -5,7 +5,7 @@
       Batch ##{@batch.id}
       = @batch.batch_status.status
 
-    - @batch.packages.order(id: :asc).each do |package|
+    - @batch.packages.order(delivery_paid: :asc).each do |package|
       %row
         %a.badge.badge-success{:href => wa_message(package.profile.phone, "Привет!"), target: "_blank" } #{package.profile.full_name}
         %p
