@@ -15,6 +15,15 @@
           = link_to package.tracking_code, package_path(package)
           Доставка оплачена #{human_boolean(package.delivery_paid)}
           (#{package.cost} EUR)
+          .form-inline
+            = bootstrap_form_for :package,
+                        url: { controller: "packages", action: "update_package",
+                          params: { package_id: package.id } },
+                        method: :patch, remote: true do |f|
+              .form-inline
+                = f.check_box :delivery_paid, { checked: package.delivery_paid }
+                = f.submit data: { disable_with: "updating package status..." }, class: 'btn btn-link'
+
 
   .block
     = link_to 'Back', batches_index_path

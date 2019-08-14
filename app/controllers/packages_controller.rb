@@ -74,18 +74,36 @@ class PackagesController < ApplicationController
     end
   end
 
+  def update_package
+    @package = Package.find_by(id: params[:package_id])
+    respond_to do |format|
+      if @package.update(package_params)
+        format.js { render :json => {
+          # Returns an empty object without errors
+          :html => {} },
+          # Returns the status to AJAX
+          :status => :ok }
+        format.html {
+          redirect_to batches_path(params: id)
+          flash[:notice] = "Package #{@package.id} has been updated!"  }
+      else
+        format.js {  }
+        format.html {  }
+      end
+    end
+  end
   # PATCH/PUT /packages/1
   # PATCH/PUT /packages/1.json
   def update
-    respond_to do |format|
-      if @package.update(package_params)
-        format.html { redirect_to @package, notice: 'Package was successfully updated.' }
-        format.json { render :show, status: :ok, location: @package }
-      else
-        format.html { render :edit }
-        format.json { render json: @package.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @package.update(package_params)
+          format.html { redirect_to @package, notice: 'Package was successfully updated.' }
+          format.json { render :show, status: :ok, location: @package }
+        else
+          format.html { render :edit }
+          format.json { render json: @package.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # DELETE /packages/1

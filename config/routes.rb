@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   get 'pds', to: 'packages#point_description'
   get 'boxberry', to: 'boxberry#index'
+  patch 'packages', to: 'packages#update_package'
 
   namespace :profile do
     resources :items, controller: 'item'
