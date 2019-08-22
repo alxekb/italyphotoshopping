@@ -1,5 +1,6 @@
-module ProfileHelper
+# frozen_string_literal: true
 
+module ProfileHelper
   def contacts
     @profile.phone + ' ' + @profile.email
   end

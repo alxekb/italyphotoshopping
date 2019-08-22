@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "profile/items/show", type: :view do
+RSpec.describe 'profile/items/show', type: :view do
   before(:each) do
     @profile_item = assign(:profile_item, Profile::Item.create!(
-      :item => "Item",
-      :brand => "Brand",
-      :color => "Color",
-      :price => 2,
-      :cost => 3
-    ))
+                                            item: 'Item',
+                                            brand: 'Brand',
+                                            color: 'Color',
+                                            price: 2,
+                                            cost: 3
+                                          ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Item/)
     expect(rendered).to match(/Brand/)

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class BulletinsController < ApplicationController
-  before_action :set_bulletin, only: [:show, :edit, :update, :destroy]
+  before_action :set_bulletin, only: %i[show edit update destroy]
 
   # GET /bulletins
   # GET /bulletins.json
@@ -9,8 +11,7 @@ class BulletinsController < ApplicationController
 
   # GET /bulletins/1
   # GET /bulletins/1.json
-  def show
-  end
+  def show; end
 
   # GET /bulletins/new
   def new
@@ -18,8 +19,7 @@ class BulletinsController < ApplicationController
   end
 
   # GET /bulletins/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /bulletins
   # POST /bulletins.json
@@ -62,13 +62,14 @@ class BulletinsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bulletin
-      @bulletin = Bulletin.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def bulletin_params
-      params.fetch(:bulletin, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bulletin
+    @bulletin = Bulletin.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def bulletin_params
+    params.fetch(:bulletin, {})
+  end
 end

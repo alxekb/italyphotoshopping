@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   require 'faraday'
   require 'faraday_middleware'
@@ -31,7 +33,6 @@ class ApplicationController < ActionController::Base
     response.body
   end
 
-
   def shipping_cost(code, weight, type, insurance, sum)
     url = "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
 
@@ -64,6 +65,6 @@ class ApplicationController < ActionController::Base
     policy_name = exception.policy.class.to_s.underscore
 
     redirect_to(request.referrer || root_path)
-    flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
+    flash[:error] = t "#{policy_name}.#{exception.query}", scope: 'pundit', default: :default
   end
 end

@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "deals/show", type: :view do
+RSpec.describe 'deals/show', type: :view do
   before(:each) do
     @deal = assign(:deal, Deal.create!(
-      :profile => nil,
-      :item => nil,
-      :bye => "9.99",
-      :sell => "9.99",
-      :status => "Status",
-      :messenger => "Messenger",
-      :paid => false,
-      :ransom => "",
-      :comment => "MyText",
-      :payment_method => "Payment Method"
-    ))
+                            profile: nil,
+                            item: nil,
+                            bye: '9.99',
+                            sell: '9.99',
+                            status: 'Status',
+                            messenger: 'Messenger',
+                            paid: false,
+                            ransom: '',
+                            comment: 'MyText',
+                            payment_method: 'Payment Method'
+                          ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(//)
     expect(rendered).to match(//)

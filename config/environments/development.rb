@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -30,21 +32,20 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true,
     openssl_verify_mode: 'none',
     # domain: 'ekaterinaivanova.com',
     user_name: 'apikey',
     # Rails.application.credentials.dig(:email, :mailbox),
-    password: Rails.application.credentials.dig(:sendgrid, :smtp_sendgrid),
+    password: Rails.application.credentials.dig(:sendgrid, :smtp_sendgrid)
   }
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon

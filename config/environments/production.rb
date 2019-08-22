@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -13,7 +15,6 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -83,12 +84,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'shop.ekaterinaivanova.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true,
     openssl_verify_mode: 'none',
     user_name: 'apikey',
-    password: Rails.application.credentials.dig(:sendgrid, :smtp_sendgrid),
+    password: Rails.application.credentials.dig(:sendgrid, :smtp_sendgrid)
   }
 end

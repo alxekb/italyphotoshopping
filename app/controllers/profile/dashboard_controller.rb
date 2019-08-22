@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::DashboardController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile
@@ -11,9 +13,7 @@ class Profile::DashboardController < ApplicationController
     @profile = current_user.build_profile
   end
 
-
-  def show
-  end
+  def show; end
 
   def status
     package = Package.find_by(id: params[:id])
@@ -29,10 +29,10 @@ class Profile::DashboardController < ApplicationController
     @profile.update(profile_params)
     respond_to do |format|
       if @profile.save
-        flash[:success] = "Profile Saved"
+        flash[:success] = 'Profile Saved'
         format.html { redirect_to profile_dashboard_path }
       else
-        flash[:error] = "Error saving profile!"
+        flash[:error] = 'Error saving profile!'
         format.html { render :show }
       end
     end

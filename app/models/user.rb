@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -12,6 +14,6 @@ class User < ApplicationRecord
   after_create :init_profile
 
   def init_profile
-    self.create_profile! unless profile
+    create_profile! unless profile
   end
 end

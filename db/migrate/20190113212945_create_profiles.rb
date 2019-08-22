@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProfiles < ActiveRecord::Migration[5.2]
   def change
     create_table :profiles do |t|
@@ -16,7 +18,6 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.integer :notification_code
       t.integer :inn
       t.date :dob
-
 
       t.timestamps
     end

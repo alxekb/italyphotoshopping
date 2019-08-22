@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangePhoneToBeBigintInProfiles < ActiveRecord::Migration[5.2]
   # def change_table :profiles do |t|
   #   t.change :phone, :bigint
@@ -13,5 +15,4 @@ class ChangePhoneToBeBigintInProfiles < ActiveRecord::Migration[5.2]
     change_column :profiles, :phone, :integer
     change_column :profiles, :passport_number, :integer
   end
-
 end

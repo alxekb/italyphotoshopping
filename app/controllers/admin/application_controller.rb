@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # All Administrate controllers inherit from this `Admin::ApplicationController`,
 # making it the ideal place to put authentication logic or other
 # before_actions.
@@ -11,7 +13,7 @@ module Admin
 
     def authenticate_admin
       authenticate_user!
-      redirect_to root_path if !current_user.admin?
+      redirect_to root_path unless current_user.admin?
     end
 
     # Override this value to specify the number of elements to display at a time

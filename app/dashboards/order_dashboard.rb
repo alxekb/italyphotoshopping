@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class OrderDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -16,7 +18,7 @@ class OrderDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     payment_status: Field::String,
-    tracking_number: Field::String,
+    tracking_number: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,37 +26,37 @@ class OrderDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :user,
-    :items,
-    :id,
-    :item_id,
+  COLLECTION_ATTRIBUTES = %i[
+    user
+    items
+    id
+    item_id
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :user,
-    :items,
-    :id,
-    :item_id,
-    :status,
-    :created_at,
-    :updated_at,
-    :payment_status,
-    :tracking_number,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    user
+    items
+    id
+    item_id
+    status
+    created_at
+    updated_at
+    payment_status
+    tracking_number
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :user,
-    :items,
-    :item_id,
-    :status,
-    :payment_status,
-    :tracking_number,
+  FORM_ATTRIBUTES = %i[
+    user
+    items
+    item_id
+    status
+    payment_status
+    tracking_number
   ].freeze
 
   # Overwrite this method to customize how orders are displayed

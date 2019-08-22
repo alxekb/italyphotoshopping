@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::ClientsController < ProfileController
   def index
     @clients = User.all

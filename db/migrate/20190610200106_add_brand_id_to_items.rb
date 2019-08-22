@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddBrandIdToItems < ActiveRecord::Migration[5.2]
   def change
     add_reference :items, :brand, foreign_key: true

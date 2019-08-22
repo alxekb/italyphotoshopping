@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Profile::DealsController < ProfileController
-  before_action :set_profile_deal, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile_deal, only: %i[show edit update destroy]
 
   # GET /profile/deals
   # GET /profile/deals.json
@@ -9,8 +11,7 @@ class Profile::DealsController < ProfileController
 
   # GET /profile/deals/1
   # GET /profile/deals/1.json
-  def show
-  end
+  def show; end
 
   # GET /profile/deals/new
   def new
@@ -18,8 +19,7 @@ class Profile::DealsController < ProfileController
   end
 
   # GET /profile/deals/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /profile/deals
   # POST /profile/deals.json
@@ -62,14 +62,15 @@ class Profile::DealsController < ProfileController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile_deal
-      @profile_deal = Profile::Deal.find_by(id: params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def profile_deal_params
-      params.fetch(:profile_deal, {}).permit(:paid, :byed, :messenger, :buy,
-                                             :sell, :profile_id, :item_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile_deal
+    @profile_deal = Profile::Deal.find_by(id: params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_deal_params
+    params.fetch(:profile_deal, {}).permit(:paid, :byed, :messenger, :buy,
+                                           :sell, :profile_id, :item_id)
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UserMailer < ApplicationMailer
-  default  from: 'robot@ekaterinaivanova.com'
+  default from: 'robot@ekaterinaivanova.com'
   # require 'sendgrid-ruby'
   # include SendGrid
 

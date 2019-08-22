@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: %i[show edit update destroy]
 
   def index
     @orders = Order.where('status = ?', 'active')
@@ -25,16 +27,15 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @user = User.find_by(id: @order.user_id)
-    @profile = Profile.find_by(id:[@user.id])
+    @profile = Profile.find_by(id: [@user.id])
     @item = Item.find_by(id: @order.item_id)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @order.update(order_params)
-      redirect_to @order, notice: "Order was successfully updated"
+      redirect_to @order, notice: 'Order was successfully updated'
     else
       render :edit
     end
@@ -44,7 +45,6 @@ class OrdersController < ApplicationController
     @order.destroy
     redirect_to orders_url, notice: 'Order was successfully destroyed.'
   end
-
 
   private
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # -- Table Definition ----------------------------------------------
 
 # CREATE TABLE items (
@@ -22,7 +24,7 @@
 #
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: %i[show index]
   # validates :image, presence: true
 
   def index
@@ -55,12 +57,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     authorize @item, :update?
     if @item.update_attributes(params[:item])
-      format.html  { redirect_to(@item,
-                    :notice => 'Item was successfully updated.') }
+      format.html do
+        redirect_to(@item,
+                    notice: 'Item was successfully updated.')
+      end
     else
-      render :action => "edit"
+      render action: 'edit'
     end
-
   end
 
   def new
@@ -69,7 +72,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params:[:id])
+    @item = Item.find(params: [:id])
     @item.destroy
     redirect_to item_path(@item)
   end
@@ -78,9 +81,8 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:item, :brand_id, :model_id, :item_name_id,
-                                 :color_id, :size_id, :name, :color,:size,
+                                 :color_id, :size_id, :name, :color, :size,
                                  :art, :ean, :price, :eur_price, :string,
                                  :image)
   end
-
 end

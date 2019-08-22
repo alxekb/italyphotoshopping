@@ -1,5 +1,6 @@
-class BrandPolicy < ApplicationPolicy
+# frozen_string_literal: true
 
+class BrandPolicy < ApplicationPolicy
   def show?
     @user.admin?
   end

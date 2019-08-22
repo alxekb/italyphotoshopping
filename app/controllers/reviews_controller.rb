@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_review, only: %i[show edit update destroy]
 
   # GET /reviews
   # GET /reviews.json
@@ -9,8 +11,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1
   # GET /reviews/1.json
-  def show
-  end
+  def show; end
 
   # GET /reviews/new
   def new
@@ -18,8 +19,7 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reviews
   # POST /reviews.json
@@ -62,13 +62,14 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def review_params
-      params.require(:review).permit(:index, :new, :edit, :show)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def review_params
+    params.require(:review).permit(:index, :new, :edit, :show)
+  end
 end

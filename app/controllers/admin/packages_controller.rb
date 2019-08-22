@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class PackagesController < Admin::ApplicationController
     # To customize the behavior of this controller,

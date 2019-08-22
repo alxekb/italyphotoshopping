@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class ItemDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -30,7 +32,7 @@ class ItemDashboard < Administrate::BaseDashboard
     model_id: Field::Number,
     user_id: Field::Number,
     slug: Field::String,
-    eur_price: Field::Number,
+    eur_price: Field::Number
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,65 +40,65 @@ class ItemDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :image_attachment,
-    :image_blob,
-    :order,
-    :profile_deals,
+  COLLECTION_ATTRIBUTES = %i[
+    image_attachment
+    image_blob
+    order
+    profile_deals
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :image_attachment,
-    :image_blob,
-    :order,
-    :profile_deals,
-    :id,
-    :item,
-    :brand,
-    :name,
-    :color,
-    :size,
-    :ean,
-    :art,
-    :price,
-    :discount,
-    :available,
-    :created_at,
-    :updated_at,
-    :photo,
-    :photos,
-    :model_id,
-    :user_id,
-    :slug,
-    :eur_price,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    image_attachment
+    image_blob
+    order
+    profile_deals
+    id
+    item
+    brand
+    name
+    color
+    size
+    ean
+    art
+    price
+    discount
+    available
+    created_at
+    updated_at
+    photo
+    photos
+    model_id
+    user_id
+    slug
+    eur_price
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :image_attachment,
-    :image_blob,
-    :order,
-    :profile_deals,
-    :item,
-    :brand,
-    :name,
-    :color,
-    :size,
-    :ean,
-    :art,
-    :price,
-    :discount,
-    :available,
-    :photo,
-    :photos,
-    :model_id,
-    :user_id,
-    :slug,
-    :eur_price,
+  FORM_ATTRIBUTES = %i[
+    image_attachment
+    image_blob
+    order
+    profile_deals
+    item
+    brand
+    name
+    color
+    size
+    ean
+    art
+    price
+    discount
+    available
+    photo
+    photos
+    model_id
+    user_id
+    slug
+    eur_price
   ].freeze
 
   # Overwrite this method to customize how items are displayed

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Profile::ItemsController < ApplicationController
-  before_action :set_profile_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile_item, only: %i[show edit update destroy]
 
   # GET /profile/items
   # GET /profile/items.json
@@ -10,8 +12,7 @@ class Profile::ItemsController < ApplicationController
 
   # GET /profile/items/1
   # GET /profile/items/1.json
-  def show
-  end
+  def show; end
 
   # GET /profile/items/new
   def new
@@ -20,8 +21,7 @@ class Profile::ItemsController < ApplicationController
   end
 
   # GET /profile/items/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /profile/items
   # POST /profile/items.json
@@ -65,14 +65,15 @@ class Profile::ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile_item
-      # @profile_item = Profile::Item.find(params[:id])
-      @profile_item = Item.find_by(id: params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def profile_item_params
-      params.require(:profile_item).permit(:item, :brand, :color, :price, :cost)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile_item
+    # @profile_item = Profile::Item.find(params[:id])
+    @profile_item = Item.find_by(id: params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_item_params
+    params.require(:profile_item).permit(:item, :brand, :color, :price, :cost)
+  end
 end

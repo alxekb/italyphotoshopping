@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::AdminController < ProfileController
   before_action :authenticate_user!
 

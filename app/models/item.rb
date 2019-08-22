@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   belongs_to :brand
   belongs_to :item_name
@@ -15,17 +17,17 @@ class Item < ApplicationRecord
   def slug_items
     [
       :name,
-      [:name, :brand],
-      [:name, :item, :brand],
-      [:name, :color, :item, :brand]
+      %i[name brand],
+      %i[name item brand],
+      %i[name color item brand]
     ]
   end
 
   def item_full_name
-    [self.item_name.name, self.brand.name, self.model.name, self.color.name, self.size.name].join(" ")
+    [item_name.name, brand.name, model.name, color.name, size.name].join(' ')
   end
 
   def item_full_name_with_id
-    ["##{self.id}", self.item_name.name, self.brand.name, self.model.name, self.color.name, self.size.name].join(" ")
+    ["##{id}", item_name.name, brand.name, model.name, color.name, size.name].join(' ')
   end
 end

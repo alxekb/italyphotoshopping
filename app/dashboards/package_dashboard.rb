@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class PackageDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -15,7 +17,7 @@ class PackageDashboard < Administrate::BaseDashboard
     shipping_type: Field::Number,
     pup_code: Field::Number,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,7 +28,7 @@ class PackageDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :user,
     # :items,
-    :id,
+    :id
     # :item_id,
   ].freeze
 
@@ -40,7 +42,7 @@ class PackageDashboard < Administrate::BaseDashboard
     :shipping_type,
     :pup_code,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -51,7 +53,7 @@ class PackageDashboard < Administrate::BaseDashboard
     :items,
     # :item_id,
     :shipping_type,
-    :pup_code,
+    :pup_code
   ].freeze
 
   # Overwrite this method to customize how packages are displayed

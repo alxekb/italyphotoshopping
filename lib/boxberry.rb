@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'faraday'
 require 'faraday_middleware'
 
 module Boxberry
-  def shipping_cost #(code, weight, type, insurance, sum)
+  def shipping_cost # (code, weight, type, insurance, sum)
     url = 'http://api.boxberry.de/json.php'
 
     conn = Faraday.new(url: url) do |faraday|

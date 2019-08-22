@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class BatchesController < ApplicationController
-  before_action :batch, only: [:show, :update]
+  before_action :batch, only: %i[show update]
 
   def index
     @batches = Batch.all
@@ -20,11 +22,9 @@ class BatchesController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def update
-  end
+  def update; end
 
   private
 

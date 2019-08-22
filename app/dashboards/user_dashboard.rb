@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -29,7 +31,7 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
-    confirmation_sent_at: Field::DateTime,
+    confirmation_sent_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -40,60 +42,60 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :items,
     :packages,
-    :orders,
+    :orders
     # :review,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :items,
-    :packages,
-    :orders,
-    :review,
-    :profile,
-    :id,
-    :email,
-    :encrypted_password,
-    :reset_password_token,
-    :reset_password_sent_at,
-    :remember_created_at,
-    :sign_in_count,
-    :current_sign_in_at,
-    :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
-    :created_at,
-    :updated_at,
-    :admin,
-    :confirmation_token,
-    :confirmed_at,
-    :confirmation_sent_at,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    items
+    packages
+    orders
+    review
+    profile
+    id
+    email
+    encrypted_password
+    reset_password_token
+    reset_password_sent_at
+    remember_created_at
+    sign_in_count
+    current_sign_in_at
+    last_sign_in_at
+    current_sign_in_ip
+    last_sign_in_ip
+    created_at
+    updated_at
+    admin
+    confirmation_token
+    confirmed_at
+    confirmation_sent_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :items,
-    :packages,
-    :orders,
-    :review,
-    :profile,
-    :email,
-    :encrypted_password,
-    :reset_password_token,
-    :reset_password_sent_at,
-    :remember_created_at,
-    :sign_in_count,
-    :current_sign_in_at,
-    :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
-    :admin,
-    :confirmation_token,
-    :confirmed_at,
-    :confirmation_sent_at,
+  FORM_ATTRIBUTES = %i[
+    items
+    packages
+    orders
+    review
+    profile
+    email
+    encrypted_password
+    reset_password_token
+    reset_password_sent_at
+    remember_created_at
+    sign_in_count
+    current_sign_in_at
+    last_sign_in_at
+    current_sign_in_ip
+    last_sign_in_ip
+    admin
+    confirmation_token
+    confirmed_at
+    confirmation_sent_at
   ].freeze
 
   # Overwrite this method to customize how users are displayed

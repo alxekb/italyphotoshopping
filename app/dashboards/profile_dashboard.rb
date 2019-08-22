@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class ProfileDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -26,7 +28,7 @@ class ProfileDashboard < Administrate::BaseDashboard
     dob: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    boxberry_office_id: Field::String,
+    boxberry_office_id: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -34,57 +36,57 @@ class ProfileDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :user,
-    :id,
-    :name,
-    :second_name,
+  COLLECTION_ATTRIBUTES = %i[
+    user
+    id
+    name
+    second_name
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :user,
-    :id,
-    :name,
-    :second_name,
-    :surname,
-    :phone,
-    :country_code,
-    :email,
-    :passport_code,
-    :passport_number,
-    :passport_date_issue,
-    :passport_issuer,
-    :notification_number,
-    :notification_code,
-    :inn,
-    :dob,
-    :created_at,
-    :updated_at,
-    :boxberry_office_id,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    user
+    id
+    name
+    second_name
+    surname
+    phone
+    country_code
+    email
+    passport_code
+    passport_number
+    passport_date_issue
+    passport_issuer
+    notification_number
+    notification_code
+    inn
+    dob
+    created_at
+    updated_at
+    boxberry_office_id
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :user,
-    :name,
-    :second_name,
-    :surname,
-    :phone,
-    :country_code,
-    :email,
-    :passport_code,
-    :passport_number,
-    :passport_date_issue,
-    :passport_issuer,
-    :notification_number,
-    :notification_code,
-    :inn,
-    :dob,
-    :boxberry_office_id,
+  FORM_ATTRIBUTES = %i[
+    user
+    name
+    second_name
+    surname
+    phone
+    country_code
+    email
+    passport_code
+    passport_number
+    passport_date_issue
+    passport_issuer
+    notification_number
+    notification_code
+    inn
+    dob
+    boxberry_office_id
   ].freeze
 
   # Overwrite this method to customize how profiles are displayed

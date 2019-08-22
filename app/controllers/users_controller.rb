@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :user_is_admin
@@ -11,8 +13,7 @@ class UsersController < ApplicationController
     @user = Profile.find_by(id: params[:id])
   end
 
-  def edit
-  end
+  def edit; end
 
   private
 

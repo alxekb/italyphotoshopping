@@ -1,9 +1,11 @@
-class BoxberryController < ApplicationController
+# frozen_string_literal: true
 
+class BoxberryController < ApplicationController
   def index
     @cost = shipping_cost
   end
-  def shipping_cost #(code, weight, type, insurance, sum)
+
+  def shipping_cost # (code, weight, type, insurance, sum)
     # Входящие параметры:
     # weight - вес посылки в граммах,
     # type - тип доставки (1 - выдача в ПВЗ, 2 - Курьерская доставка (КД)),
@@ -11,7 +13,7 @@ class BoxberryController < ApplicationController
     # ordersum - cтоимость заказа в евро (0 если пустое),
     # insurance - страховка, по желанию клиента (1 - да, 0 - нет (0 если пустое)).
 
-    response = Faraday.get "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=1000&type=1&target=96431&ordersum=100&insurance=1"
+    response = Faraday.get 'http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=1000&type=1&target=96431&ordersum=100&insurance=1'
     # response = Faraday.get "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
   end
 
@@ -93,7 +95,7 @@ class BoxberryController < ApplicationController
   end
 
   def parcel_send(parcel_data)
-    conn = Faraday.new "http://api.boxberry.de"
+    conn = Faraday.new 'http://api.boxberry.de'
     conn.post do |req|
       req.url '/json.php'
       req.headers['Content-Type'] = 'application/json'
@@ -101,11 +103,7 @@ class BoxberryController < ApplicationController
     end
   end
 
-  def parcel_data(parcel)
+  def parcel_data(parcel); end
 
-  end
-
-  def paracel_readiness
-
-  end
+  def paracel_readiness; end
 end

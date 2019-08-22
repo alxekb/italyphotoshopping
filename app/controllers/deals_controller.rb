@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class DealsController < ApplicationController
   respond_to :html, :json
   before_action :authenticate_user!
-  before_action :set_deal, only: [:show, :edit, :update, :destroy]
+  before_action :set_deal, only: %i[show edit update destroy]
 
   # GET /deals
   # GET /deals.json
   def index
-    @deals = Deal.where(package_id: nil )
+    @deals = Deal.where(package_id: nil)
     @boxberry = Deal.where.not(package_id: nil)
   end
 
@@ -27,8 +29,7 @@ class DealsController < ApplicationController
   end
 
   # GET /deals/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /deals
   # POST /deals.json
@@ -70,7 +71,6 @@ class DealsController < ApplicationController
     end
   end
 
-
   def shipping_cost(code, weight, type, insurance, sum)
     url = "http://api.boxberry.de/json.php?token=86391.rfpqbbee&method=DeliveryCostsF&weight=#{weight}&type=#{type}&target=#{code}&ordersum=#{sum}&insurance=#{insurance}"
 
@@ -93,13 +93,14 @@ class DealsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_deal
-      @deal = Deal.find_by(id: params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def deal_params
-      params.require(:deal).permit(:profile_id, :item_id, :bye, :sell, :status, :messenger, :paid, :ransom, :comment, :payment_method, :h, :w, :l, :weight)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_deal
+    @deal = Deal.find_by(id: params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def deal_params
+    params.require(:deal).permit(:profile_id, :item_id, :bye, :sell, :status, :messenger, :paid, :ransom, :comment, :payment_method, :h, :w, :l, :weight)
+  end
 end
