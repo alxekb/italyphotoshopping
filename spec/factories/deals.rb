@@ -2,15 +2,16 @@
 
 FactoryBot.define do
   factory :deal do
-    profile { nil }
-    item { nil }
+    profile
+    item
     bye { '9.99' }
     sell { '9.99' }
-    status { 'MyString' }
-    messenger { 'MyString' }
+    status { 'okay' }
+    messenger { 'wa' }
     paid { false }
     ransom { '' }
     comment { 'MyText' }
-    payment_method { 'MyString' }
+    payment_method { 'Stripe' }
+    package
   end
 end

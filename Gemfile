@@ -12,7 +12,6 @@ gem 'bootstrap_form'
 gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.5'
 gem 'devise_invitable', '~> 2.0.0'
-gem 'factory_bot_rails', '~> 4.0'
 gem 'faraday', '~> 0.15.4'
 gem 'faraday_middleware', '~> 0.13.1'
 gem 'friendly_id', '~> 5.2.4'
@@ -45,7 +44,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 # https://www.rubydoc.info/github/stympy/faker#installing
-gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
+# gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -66,11 +65,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
-end
 
 group :development do
   gem 'better_errors'
@@ -94,17 +88,19 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
-end
-
 group :development, :test do
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara', '>= 2.15'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem 'pundit-matchers', '~> 1.6.0'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'rspec-rails', '~> 3.8'
+  gem 'spring-commands-rspec'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'faker'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
