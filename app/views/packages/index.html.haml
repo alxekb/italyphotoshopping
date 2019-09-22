@@ -1,7 +1,7 @@
 .container
   .block
-    = link_to 'New Package', new_package_path
-    %h2 На упаковку
+    = link_to (t '.new_package'), new_package_path, class: 'button btn btn-outline-primary'
+    %h2.mt-3= t('.prepare_for_shipping')
     - @profiles.each do |profile|
       .mb-4
       - if profile_deals(profile.id).present?
@@ -23,17 +23,17 @@
               boxberry office:
               = profile.boxberry_office_id
           .accordion
-            %button.btn.btn-link.collapsed{"aria-controls" => "#deal_profile_#{profile.id}", "aria-expanded" => "false", "data-target" => "#deal_profile_#{profile.id}", "data-toggle" => "collapse", :type => "button"}  Show
+            %button.btn.btn-link.collapsed{"aria-controls" => "#deal_profile_#{profile.id}", "aria-expanded" => "false", "data-target" => "#deal_profile_#{profile.id}", "data-toggle" => "collapse", :type => "button"}  #{t '.show'}
 
             .card-body.collapse[profile, :deal]{ "aria-labelledby" => "headingOne", "data-parent" => "#card_profile_#{profile.id}" }
               %table.table.table-responsive.table-hover
                 %thead
                   %tr
-                    %td Покупка
+                    %td= t '.deal'
                     %td
-                    %td Лот
-                    %td Статус
-                    %td Ссылка
+                    %td= t '.item'
+                    %td= t '.status'
+                    %td= t '.link'
                     - dsum = []
 
                 - profile_deals(profile.id).each_with_index do |deal, index|
@@ -90,7 +90,7 @@
                   = package.weight
               %td= package.deals.count
               %td
-                = link_to 'Show', package
+                = link_to (t '.show'), package
                 -# = link_to 'Edit', edit_package_path(package)
                 -# = link_to 'Destroy', package, method: :delete, remote: true #, data: { confirm: 'Are you sure?' }
 
