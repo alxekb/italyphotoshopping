@@ -8,7 +8,7 @@ class DealsController < ApplicationController
   # GET /deals
   # GET /deals.json
   def index
-    @pagy, @deals = pagy(Deal.where(package_id: nil), items: 1)
+    @pagy, @deals = pagy(Deal.where(package_id: nil), items: 12)
   end
 
   # GET /deals/1
