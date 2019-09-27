@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   require 'faraday'
   require 'faraday_middleware'
   include Pundit
+  include Pagy::Backend
 
   around_action :switch_locale
 

@@ -20,3 +20,4 @@
 //= require_tree .
 //= require datepicker
 //= require bootstrap-datepicker
+//= require pagy

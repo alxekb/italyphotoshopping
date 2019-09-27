@@ -29,3 +29,5 @@
 sendgrid.env
 
 spec/examples.txt
+.idea
+.generators

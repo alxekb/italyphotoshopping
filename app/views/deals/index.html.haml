@@ -3,9 +3,10 @@
   .my-2.form-inline
     %h1 New deals
     .mx-4
-      = link_to 'Add', new_deal_path, class: 'button btn btn-outline-primary'
+    = link_to 'Add', new_deal_path, class: 'button btn btn-outline-primary'
 
   %table.table
+    = pagy_bootstrap_nav(@pagy).html_safe
     %thead
       %tr
         %th Profile
