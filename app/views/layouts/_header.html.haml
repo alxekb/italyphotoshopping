@@ -6,21 +6,21 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item
-        = link_to "Товары", items_path, class: 'nav-link'
+        = link_to (t 'layouts.items'), items_path, class: 'nav-link'
       %li.nav-item
-        = link_to "Информация", page_path('terms'), class: 'nav-link'
+        = link_to (t 'layouts.terms'), page_path('terms'), class: 'nav-link'
       - if user_signed_in? && current_user.admin?
         %li.nav-item
-          = link_to 'Сделки', deals_path, class: 'nav-link'
+          = link_to (t 'layouts.deals'), deals_path, class: 'nav-link'
         %li.nav-item
-          = link_to 'Посылки', packages_path, class: 'nav-link'
+          = link_to (t 'layouts.packages'), packages_path, class: 'nav-link'
         %li.nav-item
-          = link_to 'Партии', batches_path, class: 'nav-link'
+          = link_to (t 'layouts.batches'), batches_path, class: 'nav-link'
         %li.nav-item
-          = link_to 'Users', profiles_path, class: 'nav-link'
+          = link_to (t 'layouts.users'), profiles_path, class: 'nav-link'
     %ul.navbar-nav.ml-auto
       %li.nav-item
         - if user_signed_in?
-          = link_to "Кабинет", profile_dashboard_path, class: 'nav-link'
+          = link_to (t 'layouts.cabinet'), profile_dashboard_path, class: 'nav-link'
         - else
-          = link_to "Войти", new_user_session_path, class: 'nav-link'
+          = link_to (t 'layouts.sign_in'), new_user_session_path, class: 'nav-link'

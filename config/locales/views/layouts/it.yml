@@ -1,0 +1,10 @@
+it:
+  layouts:
+    items: Articoli
+    terms: termine
+    deals: parte
+    packages: pacco
+    batches: lotto
+    users: utenti
+    cabinet:
+    sign_in: login

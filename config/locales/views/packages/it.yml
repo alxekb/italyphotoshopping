@@ -1,6 +1,6 @@
 it:
   packages:
     index:
-      prepare_for_shipping: 'Preparare le scatole per spedire'
-      new_package: 'Crea nuova'
-      show: 'mostrare'
+      prepare_for_shipping: Preparare le scatole per spedire
+      new_package: Crea nuovo pacco
+      show: Mostrare
